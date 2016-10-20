@@ -3,10 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mirhoseini.marvel">
 
-    <uses-sdk tools:overrideLibrary="timber.log, com.jakewharton.rxbinding" />
     //fixes Jake Wharton Libraries min sdk issue!
+    <uses-sdk tools:overrideLibrary="timber.log, com.jakewharton.rxbinding" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".MarvelApplicationImpl"

@@ -17,6 +17,7 @@ ext {
     gmsVersion = "9.6.0"
     rxbindingVersion = "0.4.0"
     ormLiteVersion = "5.0"
+    firebaseVersion = "9.6.1"
 
     //Java
     rxjavaVersion = "1.1.9"
@@ -54,6 +55,7 @@ ext {
             rxbinding        : "com.jakewharton.rxbinding:rxbinding:${rxbindingVersion}",
             ormLite          : "com.j256.ormlite:ormlite-android:${ormLiteVersion}",
             ormLiteCore      : "com.j256.ormlite:ormlite-core:${ormLiteVersion}",
+            firebaseCore     : "com.google.firebase:firebase-core:${firebaseVersion}",
     ]
 
     aptLibraries = [
