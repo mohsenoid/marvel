@@ -70,7 +70,7 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
 
     @OnEditorAction(R.id.character)
     boolean onEditorAction(EditText v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_SEARCH || event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH || (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
             onShowClick(v);
             return true;
         }
