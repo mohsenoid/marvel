@@ -56,6 +56,7 @@ ext {
             ormLite          : "com.j256.ormlite:ormlite-android:${ormLiteVersion}",
             ormLiteCore      : "com.j256.ormlite:ormlite-core:${ormLiteVersion}",
             firebaseCore     : "com.google.firebase:firebase-core:${firebaseVersion}",
+            firebaseCrash    : "com.google.firebase:firebase-crash:${firebaseVersion}",
     ]
 
     aptLibraries = [

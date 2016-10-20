@@ -95,7 +95,9 @@ dependencies {
     compile rootProject.ext.libraries.timber
 
     compile rootProject.ext.libraries.ormLite
+
     compile rootProject.ext.libraries.firebaseCore
+    compile rootProject.ext.libraries.firebaseCrash
 }
 
 apply plugin: 'com.google.gms.google-services'
