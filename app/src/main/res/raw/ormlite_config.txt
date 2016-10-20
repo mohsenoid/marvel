@@ -16,6 +16,9 @@ fieldName=description
 # --field-start--
 fieldName=thumbnail
 # --field-end--
+# --field-start--
+fieldName=image
+# --field-end--
 # --table-fields-end--
 # --table-end--
 #################################

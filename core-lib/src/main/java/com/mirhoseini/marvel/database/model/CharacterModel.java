@@ -16,6 +16,8 @@ public class CharacterModel implements Serializable {
     public static final String FIELD_CHARACTER_NAME = "name";
     public static final String FIELD_CHARACTER_DESCRIPTION = "description";
     public static final String FIELD_CHARACTER_THUMBNAIL = "thumbnail";
+    public static final String FIELD_CHARACTER_IMAGE = "image";
+
 
     @DatabaseField(generatedId = true, columnName = FIELD_CHARACTER_ID)
     private int id;
@@ -25,6 +27,8 @@ public class CharacterModel implements Serializable {
     private String description;
     @DatabaseField(columnName = FIELD_CHARACTER_THUMBNAIL)
     private String thumbnail;
+    @DatabaseField(columnName = FIELD_CHARACTER_IMAGE)
+    private String image;
 
     public CharacterModel() {
     }
@@ -68,8 +72,17 @@ public class CharacterModel implements Serializable {
         this.thumbnail = thumbnail;
     }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
     @Override
     public String toString() {
         return name;
     }
+
 }

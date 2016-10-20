@@ -2,6 +2,7 @@ package com.mirhoseini.marvel.database.mapper;
 
 import com.mirhoseini.marvel.database.model.CharacterModel;
 import com.mirhoseini.marvel.domain.model.CharactersResponse;
+import com.mirhoseini.marvel.util.Constants;
 
 /**
  * Created by Mohsen on 20/10/2016.
@@ -14,8 +15,13 @@ public class Mapper {
 
         character.setName(charactersResponse.getData().getResults()[0].getName());
         character.setDescription(charactersResponse.getData().getResults()[0].getDescription());
-        character.setThumbnail(String.format("%s.%s",
+        character.setThumbnail(String.format("%s/%s.%s",
                 charactersResponse.getData().getResults()[0].getThumbnail().getPath(),
+                Constants.STANDARD_XLARGE,
+                charactersResponse.getData().getResults()[0].getThumbnail().getExtension()));
+        character.setImage(String.format("%s/%s.%s",
+                charactersResponse.getData().getResults()[0].getThumbnail().getPath(),
+                Constants.PORTRAIT_XLARGE,
                 charactersResponse.getData().getResults()[0].getThumbnail().getExtension()));
 
         return character;

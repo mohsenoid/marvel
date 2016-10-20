@@ -169,14 +169,9 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
 
     @Override
     public void showRetryMessage(Throwable throwable) {
-        String errorMessage;
+        Timber.e(throwable, "Retry error!");
 
-        if (null != throwable)
-            errorMessage = throwable.getMessage();
-        else
-            errorMessage = resources.getString(R.string.retry_message);
-
-        Snackbar.make(character, errorMessage, Snackbar.LENGTH_LONG)
+        Snackbar.make(character, resources.getString(R.string.retry_message), Snackbar.LENGTH_LONG)
                 .setAction(R.string.retry, this::onShowClick)
                 .show();
     }
