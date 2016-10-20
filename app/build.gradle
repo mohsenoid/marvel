@@ -1,0 +1,98 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.mirhoseini.marvel"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.compileSdkVersion
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+
+        dataBinding {
+            enabled = true
+        }
+
+        /* replaced with custom MockTestRunner */
+        // testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.mirhoseini.marvel.test.dagger.MockMarvelTestRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    /* allow using java 8 lambda */
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+    /* fixes espresso conflict with supportAnnotation and androidSupport new versions */
+    configurations.all {
+        resolutionStrategy {
+            force rootProject.ext.testLibraries.supportAnnotations
+            force rootProject.ext.libraries.androidSupport
+            force rootProject.ext.libraries.appCompat
+            force rootProject.ext.libraries.designSupport
+            force rootProject.ext.libraries.recyclerView
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':marvel-core')
+
+    testCompile rootProject.ext.testLibraries.junit
+    testCompile rootProject.ext.testLibraries.robolectric
+
+    androidTestCompile rootProject.ext.testLibraries.mockito
+    androidTestCompile rootProject.ext.testLibraries.dexmaker
+    androidTestCompile rootProject.ext.testLibraries.dexmakerMockito
+    androidTestCompile rootProject.ext.testLibraries.supportTestRunner
+    androidTestCompile rootProject.ext.testLibraries.supportAnnotations
+    androidTestCompile rootProject.ext.testLibraries.espresso
+    androidTestCompile rootProject.ext.testLibraries.espressoContrib
+
+    compile rootProject.ext.libraries.appCompat
+    compile rootProject.ext.libraries.androidSupport
+    compile rootProject.ext.libraries.designSupport
+    compile rootProject.ext.libraries.vectorSupport
+    compile rootProject.ext.libraries.recyclerView
+    compile rootProject.ext.libraries.cardView
+    compile rootProject.ext.libraries.palette
+
+    compile rootProject.ext.libraries.gmsAds
+
+    compile rootProject.ext.libraries.rxandroid
+    compile rootProject.ext.libraries.rxbinding
+
+    compile rootProject.ext.libraries.utils
+    compile rootProject.ext.libraries.appSettings
+
+    compile rootProject.ext.libraries.picasso
+
+    compile rootProject.ext.libraries.butterknife
+    apt rootProject.ext.aptLibraries.butterknifeCompiler
+
+    compile rootProject.ext.libraries.dagger
+    apt rootProject.ext.aptLibraries.daggerCompiler
+    androidTestApt rootProject.ext.aptLibraries.daggerCompiler
+
+    compile rootProject.ext.libraries.timber
+
+    compile rootProject.ext.libraries.ormLite
+}

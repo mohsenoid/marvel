@@ -1,0 +1,3 @@
+include ':marvel-app', ':marvel-core'
+project(':marvel-app').projectDir = new File('app')
+project(':marvel-core').projectDir = new File('core-lib')

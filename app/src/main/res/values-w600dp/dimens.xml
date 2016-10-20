@@ -1,0 +1,6 @@
+<resources>
+
+    <dimen name="keyLine1">24dp</dimen>
+    <dimen name="keyLine2">80dp</dimen>
+
+</resources>

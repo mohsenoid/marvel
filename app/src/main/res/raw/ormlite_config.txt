@@ -1,0 +1,21 @@
+# --table-start--
+dataClass=com.mirhoseini.marvel.database.model.CharacterModel
+tableName=character
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=_id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=name
+# --field-end--
+# --field-start--
+fieldName=description
+# --field-end--
+# --field-start--
+fieldName=thumbnail
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
