@@ -36,9 +36,9 @@
                 android:layout_below="@+id/image"
                 android:padding="8dp"
                 android:text="@{character.name}"
+                android:textAlignment="center"
                 android:textAppearance="@style/textAppearanceListItemTitle"
-                tools:text="Character name"
-                android:textAlignment="center" />
+                tools:text="Character name" />
 
         </RelativeLayout>
 

@@ -1,12 +1,8 @@
 package com.mirhoseini.marvel.di.module;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 
 import com.mirhoseini.marvel.BuildConfig;
-import com.mirhoseini.marvel.database.DatabaseHelper;
-import com.mirhoseini.marvel.database.DatabaseHelperImpl;
 import com.mirhoseini.marvel.util.AppSchedulerProvider;
 import com.mirhoseini.marvel.util.Constants;
 import com.mirhoseini.marvel.util.SchedulerProvider;
@@ -20,8 +16,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.HttpUrl;
-
-import static android.R.attr.columnCount;
 
 /**
  * Created by Mohsen on 20/10/2016.

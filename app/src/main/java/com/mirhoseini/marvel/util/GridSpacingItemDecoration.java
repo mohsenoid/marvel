@@ -22,7 +22,7 @@ import android.view.View;
 import java.util.Locale;
 
 /**
- * Created by Mohsen on 17/10/2016.
+ * Created by Mohsen on 20/10/2016.
  */
 
 public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {

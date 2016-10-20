@@ -1,7 +1,7 @@
 package com.mirhoseini.marvel.domain.interactor;
 
 
-import com.mirhoseini.marvel.di.scope.MainScope;
+import com.mirhoseini.marvel.di.scope.Search;
 import com.mirhoseini.marvel.domain.client.MarvelApi;
 import com.mirhoseini.marvel.domain.model.CharactersResponse;
 import com.mirhoseini.marvel.util.HashGenerator;
@@ -17,8 +17,8 @@ import rx.subjects.ReplaySubject;
  * Created by Mohsen on 20/10/2016.
  */
 
-@MainScope
-public class MainInteractorImpl implements CharactersInteractor {
+@Search
+public class SearchInteractorImpl implements SearchInteractor {
 
     private MarvelApi api;
     private SchedulerProvider scheduler;
@@ -27,7 +27,7 @@ public class MainInteractorImpl implements CharactersInteractor {
     private Subscription offersSubscription;
 
     @Inject
-    public MainInteractorImpl(MarvelApi api, SchedulerProvider scheduler) {
+    public SearchInteractorImpl(MarvelApi api, SchedulerProvider scheduler) {
         this.api = api;
         this.scheduler = scheduler;
     }

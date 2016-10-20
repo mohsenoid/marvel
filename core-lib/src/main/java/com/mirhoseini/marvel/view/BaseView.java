@@ -10,6 +10,4 @@ public interface BaseView {
 
     void showOfflineMessage();
 
-    void showNetworkConnectionError(boolean isForce);
-
 }

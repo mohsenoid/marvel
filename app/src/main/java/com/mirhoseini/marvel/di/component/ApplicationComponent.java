@@ -2,11 +2,13 @@ package com.mirhoseini.marvel.di.component;
 
 import com.mirhoseini.marvel.di.module.AndroidModule;
 import com.mirhoseini.marvel.di.module.ApiModule;
+import com.mirhoseini.marvel.di.module.AppCacheModule;
+import com.mirhoseini.marvel.di.module.AppSearchModule;
 import com.mirhoseini.marvel.di.module.ApplicationModule;
 import com.mirhoseini.marvel.di.module.ClientModule;
 import com.mirhoseini.marvel.di.module.DatabaseModule;
-import com.mirhoseini.marvel.di.module.MainModule;
 import com.mirhoseini.marvel.view.activity.CharacterActivity;
+import com.mirhoseini.marvel.view.activity.MainActivity;
 import com.mirhoseini.marvel.view.activity.SplashActivity;
 
 import javax.inject.Singleton;
@@ -29,8 +31,12 @@ public interface ApplicationComponent {
 
     void inject(SplashActivity activity);
 
+    void inject(MainActivity activity);
+
     void inject(CharacterActivity characterActivity);
 
-    MainSubComponent plus(MainModule module);
+    SearchSubComponent plus(AppSearchModule module);
+
+    CacheSubComponent plus(AppCacheModule module);
 
 }

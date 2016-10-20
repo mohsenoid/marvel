@@ -3,9 +3,9 @@ package com.mirhoseini.marvel.Presentation;
 import com.mirhoseini.marvel.database.DatabaseHelper;
 import com.mirhoseini.marvel.database.mapper.Mapper;
 import com.mirhoseini.marvel.database.model.CharacterModel;
-import com.mirhoseini.marvel.domain.interactor.CharactersInteractor;
+import com.mirhoseini.marvel.domain.interactor.SearchInteractor;
 import com.mirhoseini.marvel.util.Constants;
-import com.mirhoseini.marvel.view.MainView;
+import com.mirhoseini.marvel.view.SearchView;
 
 import java.sql.SQLException;
 
@@ -18,22 +18,22 @@ import rx.subscriptions.Subscriptions;
  * Created by Mohsen on 20/10/2016.
  */
 
-public class MainPresenterImpl implements MainPresenter {
+public class SearchPresenterImpl implements SearchPresenter {
 
     @Inject
-    CharactersInteractor interactor;
+    SearchInteractor interactor;
     @Inject
     DatabaseHelper databaseHelper;
 
-    private MainView view;
+    private SearchView view;
     private Subscription subscription = Subscriptions.empty();
 
     @Inject
-    public MainPresenterImpl() {
+    public SearchPresenterImpl() {
     }
 
     @Override
-    public void setView(MainView view) {
+    public void setView(SearchView view) {
         this.view = view;
     }
 
@@ -58,7 +58,7 @@ public class MainPresenterImpl implements MainPresenter {
                                     } catch (SQLException e) {
                                         if (null != view) {
                                             view.hideProgress();
-                                            view.showQueryError(e);
+                                            view.showError(e);
                                         }
                                     }
 
@@ -108,22 +108,12 @@ public class MainPresenterImpl implements MainPresenter {
     }
 
     @Override
-    public void loadCharactersCacheData() {
+    public void loadCharactersCachedData() {
         if (null != view)
             try {
-                view.setCharactersCacheData(databaseHelper.selectAllCharacters());
+                view.setCharactersCachedData(databaseHelper.selectAllCharacters());
             } catch (SQLException e) {
-                view.showQueryError(e);
-            }
-    }
-
-    @Override
-    public void loadLast5CharactersCacheData() {
-        if (null != view)
-            try {
-                view.setLast5CharactersCacheData(databaseHelper.selectLast5Characters());
-            } catch (SQLException e) {
-                view.showQueryError(e);
+                view.showError(e);
             }
     }
 
