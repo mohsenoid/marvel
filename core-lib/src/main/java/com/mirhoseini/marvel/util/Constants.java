@@ -17,7 +17,8 @@ public abstract class Constants {
     public static final int CACHE_MAX_STALE = 7; // 7 day
 
     public static final int CODE_OK = 200;
-    
+
     public static final String PORTRAIT_XLARGE = "portrait_xlarge";
     public static final String STANDARD_XLARGE = "standard_xlarge";
+
 }
