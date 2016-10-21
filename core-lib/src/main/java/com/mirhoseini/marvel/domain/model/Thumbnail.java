@@ -3,18 +3,19 @@ package com.mirhoseini.marvel.domain.model;
 /**
  * Created by Mohsen on 20/10/2016.
  */
-public class Thumbnail {
 
-    private String extension;
+public class Thumbnail {
 
     private String path;
 
-    public String getExtension() {
-        return extension;
+    private String extension;
+
+    public Thumbnail() {
     }
 
-    public void setExtension(String extension) {
+    public Thumbnail(String path, String extension) {
         this.extension = extension;
+        this.path = path;
     }
 
     public String getPath() {
@@ -24,4 +25,13 @@ public class Thumbnail {
     public void setPath(String path) {
         this.path = path;
     }
+
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
+    }
+
 }

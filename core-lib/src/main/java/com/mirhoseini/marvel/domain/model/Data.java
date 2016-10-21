@@ -3,6 +3,7 @@ package com.mirhoseini.marvel.domain.model;
 /**
  * Created by Mohsen on 20/10/2016.
  */
+
 public class Data {
 
     private int total;
@@ -14,6 +15,17 @@ public class Data {
     private int count;
 
     private int offset;
+
+    public Data() {
+    }
+
+    public Data(int total, int limit, Results[] results, int count, int offset) {
+        this.total = total;
+        this.limit = limit;
+        this.results = results;
+        this.count = count;
+        this.offset = offset;
+    }
 
     public int getTotal() {
         return total;

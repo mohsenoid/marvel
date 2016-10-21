@@ -20,7 +20,7 @@ android {
 
         /* replaced with custom MockTestRunner */
         // testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunner "com.mirhoseini.marvel.test.dagger.MockMarvelTestRunner"
+        testInstrumentationRunner "com.mirhoseini.marvel.MarvelTestRunner"
     }
 
     buildTypes {

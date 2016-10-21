@@ -64,7 +64,7 @@ public class SearchInteractorTest {
     }
 
     @Test
-    public void testLoadOffers() throws Exception {
+    public void testLoadCharacters() throws Exception {
         TestSubscriber<CharactersResponse> testSubscriber = new TestSubscriber<>();
 
         // call interactor with some random params

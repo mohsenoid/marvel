@@ -20,6 +20,19 @@ public class CharactersResponse {
 
     private String attributionHTML;
 
+    public CharactersResponse() {
+    }
+
+    public CharactersResponse(String attributionText, String etag, String status, Data data, String copyright, int code, String attributionHTML) {
+        this.attributionText = attributionText;
+        this.etag = etag;
+        this.status = status;
+        this.data = data;
+        this.copyright = copyright;
+        this.code = code;
+        this.attributionHTML = attributionHTML;
+    }
+
     public String getAttributionText() {
         return attributionText;
     }

@@ -3,6 +3,7 @@ package com.mirhoseini.marvel.domain.model;
 /**
  * Created by Mohsen on 20/10/2016.
  */
+
 public class Results {
 
     private String id;
@@ -26,6 +27,23 @@ public class Results {
     private Comics comics;
 
     private String modified;
+
+    public Results() {
+    }
+
+    public Results(String id, Series series, Stories stories, Thumbnail thumbnail, String resourceURI, Urls[] urls, Events events, String description, String name, Comics comics, String modified) {
+        this.id = id;
+        this.series = series;
+        this.stories = stories;
+        this.thumbnail = thumbnail;
+        this.resourceURI = resourceURI;
+        this.urls = urls;
+        this.events = events;
+        this.description = description;
+        this.name = name;
+        this.comics = comics;
+        this.modified = modified;
+    }
 
     public String getId() {
         return id;
