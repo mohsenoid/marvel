@@ -30,8 +30,8 @@ import timber.log.Timber;
 
 public class MainActivity extends BaseActivity implements CharacterSearchFragment.OnListFragmentInteractionListener, CharacterCacheFragment.OnListFragmentInteractionListener, BaseView {
 
-    private static final String TAG_SEARCH_FRAGMENT = "search_fragment";
-    private static final String TAG_CACHE_FRAGMENT = "cache_fragment";
+    public static final String TAG_SEARCH_FRAGMENT = "search_fragment";
+    public static final String TAG_CACHE_FRAGMENT = "cache_fragment";
 
     // injecting dependencies via Dagger
     @Inject

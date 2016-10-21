@@ -45,7 +45,7 @@ public class SearchInteractorTest {
         Data charactersData = new Data();
         charactersData.setResults(characters);
 
-        // put the test offer in a test api result
+        // put the test character in a test api result
         expectedResult = new CharactersResponse();
         expectedResult.setData(charactersData);
 

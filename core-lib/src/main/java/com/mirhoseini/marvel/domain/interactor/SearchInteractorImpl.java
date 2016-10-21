@@ -23,8 +23,8 @@ public class SearchInteractorImpl implements SearchInteractor {
     private MarvelApi api;
     private SchedulerProvider scheduler;
 
-    private ReplaySubject<CharactersResponse> offersSubject;
-    private Subscription offersSubscription;
+    private ReplaySubject<CharactersResponse> characterSubject;
+    private Subscription characterSubscription;
 
     @Inject
     public SearchInteractorImpl(MarvelApi api, SchedulerProvider scheduler) {
@@ -37,25 +37,25 @@ public class SearchInteractorImpl implements SearchInteractor {
                                                         String privateKey,
                                                         String publicKey,
                                                         long timestamp) {
-        if (offersSubscription == null || offersSubscription.isUnsubscribed()) {
-            offersSubject = ReplaySubject.create();
+        if (characterSubscription == null || characterSubscription.isUnsubscribed()) {
+            characterSubject = ReplaySubject.create();
 
             String hash = HashGenerator.generate(timestamp, privateKey, publicKey);
 
-            offersSubscription = api.getCharacters(query, publicKey, hash, timestamp)
+            characterSubscription = api.getCharacters(query, publicKey, hash, timestamp)
                     .subscribeOn(scheduler.backgroundThread())
                     .observeOn(scheduler.mainThread())
-                    .subscribe(offersSubject);
+                    .subscribe(characterSubject);
         }
 
-        return offersSubject.asObservable();
+        return characterSubject.asObservable();
     }
 
 
     @Override
     public void onDestroy() {
-        if (offersSubscription != null && !offersSubscription.isUnsubscribed())
-            offersSubscription.unsubscribe();
+        if (characterSubscription != null && !characterSubscription.isUnsubscribed())
+            characterSubscription.unsubscribe();
     }
 
 }

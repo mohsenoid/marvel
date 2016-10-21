@@ -72,7 +72,7 @@ public class CharacterCacheFragment extends BaseFragment implements CacheView {
 
         subscriptions.add(
                 adapter.asObservable()
-                        .filter(offer -> null != listener)
+                        .filter(characterModel -> null != listener)
                         .subscribe(listener::showCharacter));
     }
 
