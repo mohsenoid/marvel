@@ -10,11 +10,9 @@ ext {
     okhttpVersion = "3.4.1"
     retrofitVersion = "2.1.0"
     utilsVersion = "1.0.1"
-    appSettingsVersion = "1.0.2"
     timberVersion = "4.1.2"
     picassoVersion = "2.5.2"
     daggerVersion = "2.4"
-    gmsVersion = "9.6.0"
     rxbindingVersion = "0.4.0"
     ormLiteVersion = "5.0"
     firebaseVersion = "9.6.1"
@@ -41,7 +39,6 @@ ext {
             rxjava           : "io.reactivex:rxjava:${rxjavaVersion}",
             rxandroid        : "io.reactivex:rxandroid:${rxandroidVersion}",
             utils            : "com.mirhoseini.utils:utils:${utilsVersion}",
-            appSettings      : "com.mirhoseini.appsettings:appsettings:${appSettingsVersion}",
             timber           : "com.jakewharton.timber:timber:${timberVersion}",
             butterknife      : "com.jakewharton:butterknife:${butterknifeVersion}",
             okhttp           : "com.squareup.okhttp3:okhttp:${okhttpVersion}",
@@ -51,7 +48,6 @@ ext {
             retrofitAdapter  : "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
             picasso          : "com.squareup.picasso:picasso:${picassoVersion}",
             dagger           : "com.google.dagger:dagger:${daggerVersion}",
-            gmsAds           : "com.google.android.gms:play-services-ads:${gmsVersion}",
             rxbinding        : "com.jakewharton.rxbinding:rxbinding:${rxbindingVersion}",
             ormLite          : "com.j256.ormlite:ormlite-android:${ormLiteVersion}",
             ormLiteCore      : "com.j256.ormlite:ormlite-core:${ormLiteVersion}",
