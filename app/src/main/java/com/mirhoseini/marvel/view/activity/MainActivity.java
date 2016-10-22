@@ -56,9 +56,6 @@ public class MainActivity extends BaseActivity implements CharacterSearchFragmen
 
         setupToolbar();
 
-        Throwable t=null;
-        Timber.e(t,"error");
-
         if (null == savedInstanceState) {
             searchFragment = CharacterSearchFragment.newInstance();
             cacheFragment = CharacterCacheFragment.newInstance();
