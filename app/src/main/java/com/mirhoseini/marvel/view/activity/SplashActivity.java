@@ -24,7 +24,7 @@ public class SplashActivity extends BaseActivity {
     @Inject
     Context context;
 
-    // The thread to process splash screen events
+    // Thread to process splash screen events
     private Thread splashThread;
 
     @Override
@@ -33,11 +33,6 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
 
         ButterKnife.bind(this);
-
-        // The Theme's windowBackground is masked by the opaque background of the activity, and
-        // the windowBackground causes an unnecessary overdraw. Nullifying the windowBackground
-        // removes that overdraw.
-        getWindow().setBackgroundDrawable(null);
 
         // The thread to wait for splash screen events
         splashThread = new Thread() {
