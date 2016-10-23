@@ -66,7 +66,8 @@ public class DatabaseHelperImpl extends OrmLiteSqliteOpenHelper implements Datab
     public int addCharacter(CharacterModel character) throws SQLException {
         CharacterModel result = getCharacterDao().queryForFirst(getCharacterDao()
                 .queryBuilder()
-                .where().like(CharacterModel.FIELD_CHARACTER_NAME, character.getName())
+                .where()
+                .like(CharacterModel.FIELD_CHARACTER_NAME, character.getName())
                 .prepare());
 
         if (null != result)

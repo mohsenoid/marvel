@@ -28,7 +28,7 @@ import timber.log.Timber;
  * Created by Mohsen on 20/10/2016.
  */
 
-public class MainActivity extends BaseActivity implements CharacterSearchFragment.OnListFragmentInteractionListener, CharacterCacheFragment.OnListFragmentInteractionListener, BaseView {
+public class MainActivity extends BaseActivity implements CharacterSearchFragment.OnListFragmentInteractionListener, CharacterCacheFragment.OnListFragmentInteractionListener {
 
     public static final String TAG_SEARCH_FRAGMENT = "search_fragment";
     public static final String TAG_CACHE_FRAGMENT = "cache_fragment";
