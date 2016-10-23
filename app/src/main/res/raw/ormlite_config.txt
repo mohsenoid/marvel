@@ -1,6 +1,6 @@
 # --table-start--
 dataClass=com.mirhoseini.marvel.database.model.CharacterModel
-tableName=character
+tableName=characters
 # --table-fields-start--
 # --field-start--
 fieldName=id
@@ -9,15 +9,19 @@ generatedId=true
 # --field-end--
 # --field-start--
 fieldName=name
+columnName=name
 # --field-end--
 # --field-start--
 fieldName=description
+columnName=description
 # --field-end--
 # --field-start--
 fieldName=thumbnail
+columnName=thumbnail
 # --field-end--
 # --field-start--
 fieldName=image
+columnName=image
 # --field-end--
 # --table-fields-end--
 # --table-end--
