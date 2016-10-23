@@ -9,7 +9,6 @@ import android.view.View;
 import org.robolectric.shadows.ShadowAlertDialog;
 import org.robolectric.shadows.ShadowProgressDialog;
 
-import static android.R.id.message;
 import static com.mirhoseini.marvel.test.support.ResourceLocator.getString;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -22,6 +21,7 @@ import static org.robolectric.Shadows.shadowOf;
  */
 
 public class Assert {
+
     public static void assertViewIsVisible(View view) {
         assertNotNull(view);
         assertThat(view.getVisibility(), equalTo(View.VISIBLE));
@@ -51,4 +51,5 @@ public class Assert {
         assertThat(shadowSnackbar.text, equalTo(getString(message)));
 
     }
+
 }

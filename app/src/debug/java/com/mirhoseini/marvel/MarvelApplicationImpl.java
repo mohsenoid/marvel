@@ -15,7 +15,7 @@ public class MarvelApplicationImpl extends MarvelApplication {
         Timber.plant(new Timber.DebugTree() {
             @Override
             protected String createStackElementTag(StackTraceElement element) {
-                //adding line number to logs
+                // adding line number to logs
                 return super.createStackElementTag(element) + ":" + element.getLineNumber();
             }
         });

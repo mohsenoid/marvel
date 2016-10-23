@@ -6,10 +6,10 @@ package com.mirhoseini.marvel.util;
 
 public abstract class Constants {
 
+    public static final String BASE_URL = "http://gateway.marvel.com:80/";
+
     public static final String PUBLIC_KEY = "785eccfcbab3a76d09c8f02f12bd5ef3";
     public static final String PRIVATE_KEY = "989690d40838c28ff3c435acbdf30777ce785424";
-
-    public static final String BASE_URL = "http://gateway.marvel.com:80/";
 
     public static final int NETWORK_CONNECTION_TIMEOUT = 30; // 30 sec
     public static final long CACHE_SIZE = 10 * 1024 * 1024; // 10 MB

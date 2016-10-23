@@ -5,6 +5,7 @@ import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.mirhoseini.marvel.BR;
 import com.mirhoseini.marvel.database.model.CharacterModel;
 
 /**
@@ -14,7 +15,7 @@ import com.mirhoseini.marvel.database.model.CharacterModel;
 public class CharacterViewHolder extends RecyclerView.ViewHolder {
 
     public final View view;
-    CharacterModel character;
+    private CharacterModel character;
     private ViewDataBinding binding;
 
     public CharacterViewHolder(View view) {
@@ -25,8 +26,14 @@ public class CharacterViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public ViewDataBinding getBinding() {
-        return binding;
+    public CharacterModel getCharacter() {
+        return character;
     }
 
+    public void setCharacter(CharacterModel character) {
+        this.character = character;
+
+        binding.setVariable(BR.character, character);
+        binding.executePendingBindings();
+    }
 }

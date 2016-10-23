@@ -20,6 +20,7 @@ import timber.log.Timber;
 
 public class SplashActivity extends BaseActivity {
 
+    // injecting dependencies via Dagger
     @Inject
     Context context;
 
@@ -46,7 +47,7 @@ public class SplashActivity extends BaseActivity {
                 try {
                     synchronized (this) {
                         // Wait given period of time or exit on touch
-                        wait(AppConstants.SPLASH_TIMEOUT);
+                        wait(AppConstants.SPLASH_TIMEOUT_SEC);
                     }
                 } catch (InterruptedException ex) {
                     Timber.e(ex, "Splash thread interrupted!");
@@ -64,7 +65,7 @@ public class SplashActivity extends BaseActivity {
         splashThread.start();
     }
 
-    // Listening whole activity touch events
+    // Listening to whole activity touch events
     @Override
     public boolean onTouchEvent(MotionEvent evt) {
         if (evt.getAction() == MotionEvent.ACTION_DOWN) {

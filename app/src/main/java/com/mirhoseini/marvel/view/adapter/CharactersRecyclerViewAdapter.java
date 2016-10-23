@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jakewharton.rxbinding.view.RxView;
-import com.mirhoseini.marvel.BR;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.database.model.CharacterModel;
 
@@ -49,12 +48,10 @@ public class CharactersRecyclerViewAdapter extends RecyclerView.Adapter<Characte
 
         final CharacterModel character = characters.get(position);
 
-        holder.character = character;
-        holder.getBinding().setVariable(BR.character, character);
-        holder.getBinding().executePendingBindings();
+        holder.setCharacter(character);
 
         RxView.clicks(holder.view)
-                .map(aVoid -> holder.character)
+                .map(aVoid -> holder.getCharacter())
                 .subscribe(notify::onNext);
     }
 
@@ -65,10 +62,6 @@ public class CharactersRecyclerViewAdapter extends RecyclerView.Adapter<Characte
     @Override
     public int getItemCount() {
         return characters.size();
-    }
-
-    public void clearCharacters() {
-        characters = new ArrayList<>();
     }
 
 }

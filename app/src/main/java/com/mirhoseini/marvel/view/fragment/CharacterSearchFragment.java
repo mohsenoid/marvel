@@ -41,6 +41,7 @@ import timber.log.Timber;
 
 public class CharacterSearchFragment extends BaseFragment implements SearchView {
 
+    // injecting dependencies via Dagger
     @Inject
     Context context;
     @Inject
@@ -49,10 +50,13 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
     SearchPresenter presenter;
     @Inject
     OnListFragmentInteractionListener listener;
+
+    // injecting views via ButterKnife
     @BindView(R.id.character)
     AutoCompleteTextView character;
     @BindView(R.id.show)
     Button show;
+
     private FirebaseAnalytics firebaseAnalytics;
     private ProgressDialog progressDialog;
 

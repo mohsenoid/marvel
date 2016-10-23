@@ -9,6 +9,6 @@ import com.mirhoseini.marvel.view.CacheView;
 
 public interface CachePresenter extends BasePresenter<CacheView> {
 
-    void loadLast5CharactersCacheData();
+    void loadLast5CharactersCachedData();
 
 }

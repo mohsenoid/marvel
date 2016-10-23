@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.mirhoseini.marvel">
 
-    //fixes Jake Wharton Libraries min sdk issue!
+    // fix Jake Wharton Libraries min sdk issue!
     <uses-sdk tools:overrideLibrary="timber.log, com.jakewharton.rxbinding" />
 
     <uses-permission android:name="android.permission.INTERNET" />

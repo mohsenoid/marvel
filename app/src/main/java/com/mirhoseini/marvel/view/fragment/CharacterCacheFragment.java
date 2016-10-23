@@ -34,6 +34,7 @@ import timber.log.Timber;
 
 public class CharacterCacheFragment extends BaseFragment implements CacheView {
 
+    // injecting dependencies via Dagger
     @Inject
     public CachePresenter presenter;
     @Inject
@@ -47,6 +48,7 @@ public class CharacterCacheFragment extends BaseFragment implements CacheView {
     @Inject
     OnListFragmentInteractionListener listener;
 
+    // injecting views via ButterKnife
     @BindView(R.id.list)
     RecyclerView list;
     @BindView(R.id.empty)
@@ -92,7 +94,7 @@ public class CharacterCacheFragment extends BaseFragment implements CacheView {
     public void onResume() {
         super.onResume();
 
-        presenter.loadLast5CharactersCacheData();
+        presenter.loadLast5CharactersCachedData();
     }
 
     @Override
@@ -133,7 +135,7 @@ public class CharacterCacheFragment extends BaseFragment implements CacheView {
     }
 
     @Override
-    public void setLast5CharactersCacheData(List<CharacterModel> characterModels) {
+    public void setLast5CharactersCachedData(List<CharacterModel> characterModels) {
         if (characterModels.size() > 0) {
             list.setVisibility(View.VISIBLE);
             empty.setVisibility(View.GONE);

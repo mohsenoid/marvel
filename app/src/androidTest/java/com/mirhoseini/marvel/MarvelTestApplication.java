@@ -16,7 +16,7 @@ public class MarvelTestApplication extends MarvelApplicationImpl {
         return DaggerApplicationTestComponent
                 .builder()
                 .androidModule(new AndroidModule(this))
-                // replace Api Module with Mocked one
+                // replace Api Module with Mock one
                 .apiModule(new ApiTestModule())
                 .build();
     }

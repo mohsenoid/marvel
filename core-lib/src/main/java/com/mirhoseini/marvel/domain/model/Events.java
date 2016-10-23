@@ -1,17 +1,20 @@
 package com.mirhoseini.marvel.domain.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Mohsen on 20/10/2016.
  */
 
 public class Events {
 
+    @SerializedName("items")
     private Items[] items;
-
+    @SerializedName("collectionURI")
     private String collectionURI;
-
+    @SerializedName("available")
     private String available;
-
+    @SerializedName("returned")
     private String returned;
 
     public Events() {

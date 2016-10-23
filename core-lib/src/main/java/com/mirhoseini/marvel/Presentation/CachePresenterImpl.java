@@ -28,10 +28,10 @@ public class CachePresenterImpl implements CachePresenter {
     }
 
     @Override
-    public void loadLast5CharactersCacheData() {
+    public void loadLast5CharactersCachedData() {
         if (null != view)
             try {
-                view.setLast5CharactersCacheData(databaseHelper.selectLast5Characters());
+                view.setLast5CharactersCachedData(databaseHelper.selectLast5Characters());
             } catch (SQLException e) {
                 view.showError(e);
             }

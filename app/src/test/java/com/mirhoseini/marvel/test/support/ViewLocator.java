@@ -11,6 +11,7 @@ import android.widget.TextView;
  */
 
 public class ViewLocator {
+
     public static View getView(Activity activity, @IdRes int id) {
         return activity.findViewById(id);
     }
@@ -26,4 +27,5 @@ public class ViewLocator {
     public static TextView getTextView(Fragment fragment, @IdRes int id) {
         return (TextView) getView(fragment, id);
     }
+
 }

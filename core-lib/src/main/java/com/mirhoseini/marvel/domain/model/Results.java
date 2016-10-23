@@ -1,48 +1,51 @@
 package com.mirhoseini.marvel.domain.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Mohsen on 20/10/2016.
  */
 
 public class Results {
 
+    @SerializedName("id")
     private String id;
-
-    private Series series;
-
-    private Stories stories;
-
-    private Thumbnail thumbnail;
-
-    private String resourceURI;
-
-    private Urls[] urls;
-
-    private Events events;
-
-    private String description;
-
+    @SerializedName("name")
     private String name;
-
-    private Comics comics;
-
+    @SerializedName("description")
+    private String description;
+    @SerializedName("thumbnail")
+    private Thumbnail thumbnail;
+    @SerializedName("resourceURI")
+    private String resourceURI;
+    @SerializedName("modified")
     private String modified;
+    @SerializedName("urls")
+    private Urls[] urls;
+    @SerializedName("series")
+    private Collection series;
+    @SerializedName("stories")
+    private Collection stories;
+    @SerializedName("events")
+    private Collection events;
+    @SerializedName("comics")
+    private Collection comics;
 
     public Results() {
     }
 
-    public Results(String id, Series series, Stories stories, Thumbnail thumbnail, String resourceURI, Urls[] urls, Events events, String description, String name, Comics comics, String modified) {
+    public Results(String id, String name, String description, Thumbnail thumbnail, String resourceURI, String modified, Urls[] urls, Collection series, Collection stories, Collection events, Collection comics) {
         this.id = id;
-        this.series = series;
-        this.stories = stories;
+        this.name = name;
+        this.description = description;
         this.thumbnail = thumbnail;
         this.resourceURI = resourceURI;
-        this.urls = urls;
-        this.events = events;
-        this.description = description;
-        this.name = name;
-        this.comics = comics;
         this.modified = modified;
+        this.urls = urls;
+        this.series = series;
+        this.stories = stories;
+        this.events = events;
+        this.comics = comics;
     }
 
     public String getId() {
@@ -53,20 +56,20 @@ public class Results {
         this.id = id;
     }
 
-    public Series getSeries() {
-        return series;
+    public String getName() {
+        return name;
     }
 
-    public void setSeries(Series series) {
-        this.series = series;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Stories getStories() {
-        return stories;
+    public String getDescription() {
+        return description;
     }
 
-    public void setStories(Stories stories) {
-        this.stories = stories;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Thumbnail getThumbnail() {
@@ -85,6 +88,14 @@ public class Results {
         this.resourceURI = resourceURI;
     }
 
+    public String getModified() {
+        return modified;
+    }
+
+    public void setModified(String modified) {
+        this.modified = modified;
+    }
+
     public Urls[] getUrls() {
         return urls;
     }
@@ -93,43 +104,35 @@ public class Results {
         this.urls = urls;
     }
 
-    public Events getEvents() {
+    public Collection getSeries() {
+        return series;
+    }
+
+    public void setSeries(Collection series) {
+        this.series = series;
+    }
+
+    public Collection getStories() {
+        return stories;
+    }
+
+    public void setStories(Collection stories) {
+        this.stories = stories;
+    }
+
+    public Collection getEvents() {
         return events;
     }
 
-    public void setEvents(Events events) {
+    public void setEvents(Collection events) {
         this.events = events;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Comics getComics() {
+    public Collection getComics() {
         return comics;
     }
 
-    public void setComics(Comics comics) {
+    public void setComics(Collection comics) {
         this.comics = comics;
-    }
-
-    public String getModified() {
-        return modified;
-    }
-
-    public void setModified(String modified) {
-        this.modified = modified;
     }
 }

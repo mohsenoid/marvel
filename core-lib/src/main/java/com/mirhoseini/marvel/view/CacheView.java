@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface CacheView extends BaseView {
 
-    void setLast5CharactersCacheData(List<CharacterModel> characterModels);
+    void setLast5CharactersCachedData(List<CharacterModel> characterModels);
 
     void showError(Throwable throwable);
 

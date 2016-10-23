@@ -10,6 +10,15 @@ import java.security.NoSuchAlgorithmException;
 
 public class HashGenerator {
 
+    public static String generate(long timestamp, String privateKey, String publicKey) {
+        try {
+            String concatResult = timestamp + privateKey + publicKey;
+            return md5(concatResult);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public static String md5(String s) throws NoSuchAlgorithmException {
         // Create MD5 Hash
         MessageDigest digest = MessageDigest
@@ -26,12 +35,4 @@ public class HashGenerator {
         return hashText;
     }
 
-    public static String generate(long timestamp, String privateKey, String publicKey) {
-        try {
-            String concatResult = timestamp + privateKey + publicKey;
-            return md5(concatResult);
-        } catch (Exception e) {
-            return null;
-        }
-    }
 }

@@ -40,6 +40,7 @@ public class SearchInteractorImpl implements SearchInteractor {
         if (characterSubscription == null || characterSubscription.isUnsubscribed()) {
             characterSubject = ReplaySubject.create();
 
+            // generate hash using timestamp and API keys
             String hash = HashGenerator.generate(timestamp, privateKey, publicKey);
 
             characterSubscription = api.getCharacters(query, publicKey, hash, timestamp)

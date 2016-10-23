@@ -18,7 +18,7 @@ public interface MarvelApi {
     String HASH = "hash";
     String TIMESTAMP = "ts";
 
-    //    http://gateway.marvel.com:80/v1/public/characters?name=Iron%20Man&apikey=PUBLIC_API_KEY&hash=HASH&ts=TIMESTAMP
+    // http://gateway.marvel.com:80/v1/public/characters?name=Iron%20Man&apikey=PUBLIC_API_KEY&hash=HASH&ts=TIMESTAMP
     @GET("v1/public/characters")
     Observable<CharactersResponse> getCharacters(
             @Query(NAME) String query,

@@ -57,7 +57,7 @@ public class MainActivityTest {
     public ActivityTestRule<MainActivity> mainActivity = new ActivityTestRule<>(
             MainActivity.class,
             true,
-            // do not launch the activity immediately
+            // false: do not launch the activity immediately
             false);
 
     @Inject
@@ -70,6 +70,8 @@ public class MainActivityTest {
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
         MarvelTestApplication app = (MarvelTestApplication) instrumentation.getTargetContext().getApplicationContext();
         ApplicationTestComponent component = (ApplicationTestComponent) app.getComponent();
+
+        // inject dagger
         component.inject(this);
 
         // Set up the stub we want to return in the mock
@@ -109,7 +111,7 @@ public class MainActivityTest {
                 allOf(withId(R.id.show), isDisplayed()));
         appCompatButton.perform(click());
 
-        // Check that the view is what we expect it to be
+        // Check view is loaded as we expect it to be
         onView(withText(TEST_CHARACTER_NAME)).check(matches(withText(TEST_CHARACTER_NAME)));
         onView(withId(R.id.description)).check(matches(withText(TEST_CHARACTER_DESCRIPTION)));
     }
@@ -130,6 +132,7 @@ public class MainActivityTest {
 
         pressBack();
 
+        // Check view is loaded as we expect it to be
         ViewInteraction cachedName = onView(
                 allOf(withId(R.id.name), withText(TEST_CHARACTER_NAME),
                         childAtPosition(

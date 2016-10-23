@@ -1,19 +1,22 @@
 package com.mirhoseini.marvel.domain.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Mohsen on 20/10/2016.
  */
 
 public class Data {
 
+    @SerializedName("total")
     private int total;
-
+    @SerializedName("limit")
     private int limit;
-
+    @SerializedName("results")
     private Results[] results;
-
+    @SerializedName("count")
     private int count;
-
+    @SerializedName("offset")
     private int offset;
 
     public Data() {

@@ -1,22 +1,26 @@
 package com.mirhoseini.marvel.domain.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Mohsen on 20/10/2016.
  */
-public class Comics {
 
+public class Collection {
+
+    @SerializedName("items")
     private Items[] items;
-
+    @SerializedName("collectionURI")
     private String collectionURI;
-
+    @SerializedName("available")
     private String available;
-
+    @SerializedName("returned")
     private String returned;
 
-    public Comics() {
+    public Collection() {
     }
 
-    public Comics(Items[] items, String collectionURI, String available, String returned) {
+    public Collection(Items[] items, String collectionURI, String available, String returned) {
         this.items = items;
         this.collectionURI = collectionURI;
         this.available = available;

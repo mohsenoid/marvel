@@ -34,4 +34,5 @@ public abstract class MarvelApplication extends Application {
     }
 
     public abstract void initApplication();
+
 }

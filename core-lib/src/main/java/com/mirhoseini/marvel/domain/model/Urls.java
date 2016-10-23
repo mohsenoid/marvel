@@ -1,13 +1,16 @@
 package com.mirhoseini.marvel.domain.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Mohsen on 20/10/2016.
  */
 
 public class Urls {
 
+    @SerializedName("type")
     private String type;
-
+    @SerializedName("url")
     private String url;
 
     public Urls() {

@@ -26,6 +26,7 @@ import java.util.List;
 @SuppressWarnings({"UnusedDeclaration", "Unchecked"})
 @Implements(Snackbar.class)
 public class ShadowSnackbar {
+
     static List<ShadowSnackbar> shadowSnackbars = new ArrayList<>();
 
     @RealObject
@@ -78,10 +79,6 @@ public class ShadowSnackbar {
             }
 
             if (view instanceof FrameLayout) {
-//                if(view.getId() == 16908290) {
-//                    return (ViewGroup)view;
-//                }
-
                 fallback = (ViewGroup) view;
             }
 
@@ -133,4 +130,5 @@ public class ShadowSnackbar {
 
         return null;
     }
+
 }

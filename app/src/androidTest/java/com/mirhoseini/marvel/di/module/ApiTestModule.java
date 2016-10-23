@@ -14,6 +14,7 @@ public class ApiTestModule extends ApiModule {
 
     @Override
     public MarvelApi provideMarvelApiService(Retrofit retrofit) {
+        // replace real MarvelApi with Mock one
         return mock(MarvelApi.class);
     }
 
