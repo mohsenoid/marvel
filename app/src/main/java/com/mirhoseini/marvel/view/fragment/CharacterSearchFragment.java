@@ -89,7 +89,7 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
         String query = character.getText().toString().trim();
 
         if (presenter.isQueryValid(query)) {
-            logFirebaseAnalyticsEvent(query);
+            logFirebaseAnalyticsSearchEvent(query);
 
             presenter.doSearch(Utils.isConnected(context), query, Utils.getCurrentTimestamp());
         } else {
@@ -98,7 +98,7 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
         }
     }
 
-    private void logFirebaseAnalyticsEvent(String query) {
+    private void logFirebaseAnalyticsSearchEvent(String query) {
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.SEARCH_TERM, query);
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SEARCH, bundle);
@@ -212,8 +212,17 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
 
     @Override
     public void showCharacter(CharacterModel character) {
+        logFirebaseAnalyticsSelectEvent(character);
+
         if (null != listener)
             listener.showCharacter(character);
+    }
+
+    private void logFirebaseAnalyticsSelectEvent(CharacterModel character) {
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, character.getId() + "");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, character.getName());
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
     public interface OnListFragmentInteractionListener extends BaseView {

@@ -25,7 +25,7 @@ ext {
     dexmakerVersion = "1.2"
     mockitoVersion = "1.10.19"
     supportTestVesion = "0.5"
-    robolectricVersion = "3.1-rc1"
+    robolectricVersion = "3.1.1"
     espressoVersion = "2.2.2"
 
     libraries = [
