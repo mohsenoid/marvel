@@ -1,15 +1,15 @@
 ext {
     minSdkVersion = 9
-    compileSdkVersion = 24
-    buildToolsVersion = "24.0.3"
+    compileSdkVersion = 25
+    buildToolsVersion = "25.0.0"
 
     //Android
-    androidSupportVersion = "24.2.1"
+    androidSupportVersion = "25.0.0"
     butterknifeVersion = "8.0.1"
     rxandroidVersion = "1.2.1"
     okhttpVersion = "3.4.1"
     retrofitVersion = "2.1.0"
-    utilsVersion = "1.0.1"
+    utilsVersion = "1.0.3"
     timberVersion = "4.1.2"
     picassoVersion = "2.5.2"
     daggerVersion = "2.4"

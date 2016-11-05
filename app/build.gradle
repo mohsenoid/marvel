@@ -99,6 +99,7 @@ dependencies {
 
     compile rootProject.ext.libraries.firebaseCore
     compile rootProject.ext.libraries.firebaseCrash
+    compile 'com.android.support:support-annotations:25.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

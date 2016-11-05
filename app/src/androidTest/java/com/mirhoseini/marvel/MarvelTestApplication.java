@@ -1,9 +1,7 @@
 package com.mirhoseini.marvel;
 
-import com.mirhoseini.marvel.di.component.ApplicationTestComponent;
-import com.mirhoseini.marvel.di.component.DaggerApplicationTestComponent;
-import com.mirhoseini.marvel.di.module.AndroidModule;
-import com.mirhoseini.marvel.di.module.ApiTestModule;
+
+import com.mirhoseini.marvel.domain.ApiTestModule;
 
 /**
  * Created by Mohsen on 21/10/2016.
