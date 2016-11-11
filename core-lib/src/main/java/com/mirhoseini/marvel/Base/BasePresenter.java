@@ -6,8 +6,8 @@ package com.mirhoseini.marvel.base;
 
 public interface BasePresenter<T> {
 
-    void setView(T view);
+    void bind(T view);
 
-    void destroy();
+    void unbind();
 
 }

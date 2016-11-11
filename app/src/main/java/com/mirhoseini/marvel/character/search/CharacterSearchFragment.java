@@ -144,7 +144,7 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
         super.onDetach();
         listener = null;
 
-        presenter.destroy();
+        presenter.unbind();
         presenter = null;
     }
 
@@ -198,6 +198,13 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
     public void hideProgress() {
         if (null != progressDialog)
             progressDialog.dismiss();
+    }
+
+    @Override
+    public void showServiceError(ApiResponseCodeException throwable) {
+        Timber.e(throwable, "Service Error!");
+
+        showRetryMessage(throwable);
     }
 
 

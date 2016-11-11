@@ -27,4 +27,6 @@ interface SearchView extends BaseView {
 
     void hideProgress();
 
+    void showServiceError(ApiResponseCodeException throwable);
+
 }

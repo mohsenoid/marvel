@@ -44,7 +44,6 @@ class SearchInteractorImpl implements SearchInteractor {
 
             characterSubscription = api.getCharacters(query, publicKey, hash, timestamp)
                     .subscribeOn(scheduler.backgroundThread())
-                    .observeOn(scheduler.mainThread())
                     .subscribe(characterSubject);
         }
 
@@ -53,7 +52,7 @@ class SearchInteractorImpl implements SearchInteractor {
 
 
     @Override
-    public void onDestroy() {
+    public void unbind() {
         if (characterSubscription != null && !characterSubscription.isUnsubscribed())
             characterSubscription.unsubscribe();
     }

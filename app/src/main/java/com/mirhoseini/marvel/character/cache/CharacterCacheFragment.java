@@ -107,7 +107,7 @@ public class CharacterCacheFragment extends BaseFragment implements CacheView {
         super.onDetach();
         listener = null;
 
-        presenter.destroy();
+        presenter.unbind();
         presenter = null;
 
         subscriptions.unsubscribe();

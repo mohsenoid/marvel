@@ -30,7 +30,7 @@ class SearchModule {
     @Provides
     @Search
     public SearchPresenter providePresenter(SearchPresenterImpl presenter) {
-        presenter.setView(view);
+        presenter.bind(view);
         return presenter;
     }
 

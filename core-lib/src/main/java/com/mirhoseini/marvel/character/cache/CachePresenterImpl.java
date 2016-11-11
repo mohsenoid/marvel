@@ -22,7 +22,7 @@ class CachePresenterImpl implements CachePresenter {
     }
 
     @Override
-    public void setView(CacheView view) {
+    public void bind(CacheView view) {
         this.view = view;
     }
 
@@ -37,7 +37,7 @@ class CachePresenterImpl implements CachePresenter {
     }
 
     @Override
-    public void destroy() {
+    public void unbind() {
         view = null;
     }
 }

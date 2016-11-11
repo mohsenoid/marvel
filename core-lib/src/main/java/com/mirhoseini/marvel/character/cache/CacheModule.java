@@ -24,7 +24,7 @@ class CacheModule {
     @Provides
     @Cache
     public CachePresenter providePresenter(CachePresenterImpl presenter) {
-        presenter.setView(view);
+        presenter.bind(view);
         return presenter;
     }
 

@@ -2,14 +2,15 @@ package com.mirhoseini.marvel.character.search;
 
 import com.mirhoseini.marvel.database.DatabaseHelper;
 import com.mirhoseini.marvel.database.mapper.Mapper;
-import com.mirhoseini.marvel.database.model.CharacterModel;
 import com.mirhoseini.marvel.util.Constants;
+import com.mirhoseini.marvel.util.SchedulerProvider;
 
 import java.sql.SQLException;
 
 import javax.inject.Inject;
 
 import rx.Subscription;
+import rx.exceptions.Exceptions;
 import rx.subscriptions.Subscriptions;
 
 /**
@@ -25,13 +26,15 @@ class SearchPresenterImpl implements SearchPresenter {
 
     private SearchView view;
     private Subscription subscription = Subscriptions.empty();
+    private SchedulerProvider scheduler;
 
     @Inject
-    public SearchPresenterImpl() {
+    public SearchPresenterImpl(SchedulerProvider scheduler) {
+        this.scheduler = scheduler;
     }
 
     @Override
-    public void setView(SearchView view) {
+    public void bind(SearchView view) {
         this.view = view;
     }
 
@@ -43,43 +46,40 @@ class SearchPresenterImpl implements SearchPresenter {
         }
 
         subscription = interactor.loadCharacter(query, Constants.PRIVATE_KEY, Constants.PUBLIC_KEY, timestamp)
-                .subscribe(charactersResponse -> {
-                            // check if result code is OK
-                            if (Constants.CODE_OK == charactersResponse.getCode()) {
-                                // check if is there any result
-                                if (charactersResponse.getData().getCount() > 0) {
-                                    CharacterModel character = Mapper.mapCharacterResponseToCharacter(charactersResponse);
+                // check if result code is OK
+                .map(charactersResponse -> {
+                    if (Constants.CODE_OK == charactersResponse.getCode())
+                        return charactersResponse;
+                    else
+                        throw Exceptions.propagate(new ApiResponseCodeException(charactersResponse.getCode(), charactersResponse.getStatus()));
+                })
+                // check if is there any result
+                .map(charactersResponse -> {
+                    if (charactersResponse.getData().getCount() > 0)
+                        return charactersResponse;
+                    else
+                        throw Exceptions.propagate(new NoSuchCharacterException());
+                })
+                // map CharacterResponse to CharacterModel
+                .map(Mapper::mapCharacterResponseToCharacter)
+                // cache data on database
+                .map(character -> {
+                    try {
+                        databaseHelper.addCharacter(character);
+                    } catch (SQLException e) {
+                        throw Exceptions.propagate(e);
+                    }
 
-                                    // cache data on database
-                                    try {
-                                        databaseHelper.addCharacter(character);
-                                    } catch (SQLException e) {
-                                        if (null != view) {
-                                            view.hideProgress();
-                                            view.showError(e);
-                                        }
-                                    }
+                    return character;
+                })
+                .observeOn(scheduler.mainThread())
+                .subscribe(character -> {
+                            if (null != view) {
+                                view.hideProgress();
+                                view.showCharacter(character);
 
-                                    if (null != view) {
-                                        view.hideProgress();
-                                        view.showCharacter(character);
-
-                                        if (!isConnected)
-                                            view.showOfflineMessage();
-                                    }
-                                } else {
-                                    // show no character found
-                                    if (null != view) {
-                                        view.hideProgress();
-                                        view.showQueryNoResult();
-                                    }
-                                }
-                            } else {
-                                // show query error
-                                if (null != view) {
-                                    view.hideProgress();
-                                    view.showQueryError(new Throwable(charactersResponse.getStatus()));
-                                }
+                                if (!isConnected)
+                                    view.showOfflineMessage();
                             }
                         },
                         // handle exceptions
@@ -90,7 +90,12 @@ class SearchPresenterImpl implements SearchPresenter {
 
                             if (isConnected) {
                                 if (null != view) {
-                                    view.showRetryMessage(null);
+                                    if (throwable instanceof ApiResponseCodeException)
+                                        view.showServiceError((ApiResponseCodeException) throwable);
+                                    else if (throwable instanceof NoSuchCharacterException)
+                                        view.showQueryNoResult();
+                                    else
+                                        view.showRetryMessage(throwable);
                                 }
                             } else {
                                 if (null != view) {
@@ -116,11 +121,11 @@ class SearchPresenterImpl implements SearchPresenter {
     }
 
     @Override
-    public void destroy() {
+    public void unbind() {
         if (subscription != null && !subscription.isUnsubscribed())
             subscription.unsubscribe();
 
-        interactor.onDestroy();
+        interactor.unbind();
 
         view = null;
         interactor = null;

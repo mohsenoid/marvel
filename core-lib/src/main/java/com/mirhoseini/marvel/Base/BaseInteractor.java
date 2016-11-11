@@ -6,6 +6,6 @@ package com.mirhoseini.marvel.base;
 
 public interface BaseInteractor {
 
-    void onDestroy();
+    void unbind();
 
 }
