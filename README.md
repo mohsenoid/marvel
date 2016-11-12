@@ -1,4 +1,4 @@
-Marvel Application [![CircleCI](https://circleci.com/gh/mmirhoseini/marvel.svg?style=svg)](https://circleci.com/gh/mmirhoseini/marvel) [![Build Status](https://travis-ci.org/mmirhoseini/marvel.svg?branch=master)](https://travis-ci.org/mmirhoseini/marvel)
+Marvel Application [![CircleCI](https://circleci.com/gh/mmirhoseini/marvel.svg?style=svg)](https://circleci.com/gh/mmirhoseini/marvel) [![Build Status](https://travis-ci.org/mmirhoseini/marvel.svg?branch=master)](https://travis-ci.org/mmirhoseini/marvel) [![codecov](https://codecov.io/gh/mmirhoseini/marvel/branch/master/graph/badge.svg)](https://codecov.io/gh/mmirhoseini/marvel)
 ===============================
 
 This repository holds the source code of the Marvel Application, a simple Android client for the [Marvel.com](http://marvel.com).
@@ -19,14 +19,15 @@ This application was created by [Mohsen Mirhoseini Argi](http://mirhoseini.com),
 
 * Android Studio v2.2.1
 * gradle-plugin v2.2.1
-* Android SDK Build Tools v24.0.3
+* Android SDK Build Tools v25.0.0
 * MinSdkVersion 9
-* CompileSDKVersion 24
+* CompileSDKVersion 25
+* Retrolambda v3.3.1
 
 --------------------
 ### Dependencies ###
 
-* Android Support Tools (recyclerView, cardView, vector, palette,... ) v24.2.1
+* Android Support Tools (recyclerView, cardView, vector, palette,... ) v25.0.0
 * Retrofit v2.1.0
 * Okhttp v3.4.1
 * Dagger v2.4

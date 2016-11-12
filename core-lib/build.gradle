@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'jacoco'
 apply plugin: 'me.tatarka.retrolambda'
 
 configurations {
@@ -9,6 +10,20 @@ sourceSets {
     main {
         compileClasspath += configurations.provided
     }
+}
+
+jacocoTestReport{
+    reports {
+        xml.enabled true
+    }
+}
+
+retrolambda {
+    jdk System.getenv("JAVA_HOME")
+    oldJdk System.getenv("JAVA7_HOME")
+    javaVersion JavaVersion.VERSION_1_7
+    defaultMethods false
+    incremental true
 }
 
 dependencies {

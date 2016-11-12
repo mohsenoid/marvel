@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco-android'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 
@@ -28,6 +29,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-debug'
+            testCoverageEnabled true
+        }
     }
 
     dataBinding {
@@ -54,6 +61,11 @@ android {
             force rootProject.ext.libraries.recyclerView
         }
     }
+}
+
+jacocoAndroidUnitTestReport {
+    // fix jacoco issue with ButterKnife
+    excludes += ['**/*$ViewBinder*.*']
 }
 
 dependencies {

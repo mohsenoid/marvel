@@ -34,10 +34,4 @@ public class AndroidModule {
         return application.getResources();
     }
 
-    @Provides
-    @Singleton
-    SharedPreferences provideSharedPreferences() {
-        return PreferenceManager.getDefaultSharedPreferences(application);
-    }
-
 }

@@ -6,6 +6,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.WindowManager;
 
 import com.mirhoseini.marvel.ApplicationTestComponent;
 import com.mirhoseini.marvel.MarvelApplication;
@@ -98,10 +99,21 @@ public class MainActivityTest {
                 .thenReturn(Observable.just(expectedResult));
     }
 
+    public void unlockScreen() {
+        final MainActivity activity = mainActivity.getActivity();
+        Runnable wakeUpDevice = () -> activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        activity.runOnUiThread(wakeUpDevice);
+    }
+
     @Test
     public void shouldBeAbleToSearchForTestCharacter() {
         // Launch the activity
         mainActivity.launchActivity(new Intent());
+
+        // fix Travis locked device issue
+        unlockScreen();
 
         // search for Test Character
         ViewInteraction appCompatAutoCompleteTextView = onView(
