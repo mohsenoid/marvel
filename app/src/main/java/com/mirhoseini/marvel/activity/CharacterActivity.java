@@ -39,11 +39,13 @@ public class CharacterActivity extends BaseActivity {
         // inject views using ButterKnife
         ButterKnife.bind(this);
 
+        if (null == getIntent() || null == getIntent().getExtras() || null == getIntent().getExtras().getSerializable(ARG_CHARACTER)) {
+            finish();
+            return;
+        }
+
         // get args
         CharacterModel character = (CharacterModel) getIntent().getExtras().getSerializable(ARG_CHARACTER);
-
-        if (null == character)
-            finish();
 
         // bind value using Android Binding
         binding.setVariable(BR.character, character);

@@ -50,10 +50,10 @@ import static org.mockito.Mockito.when;
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
 
-    public static final String TEST_CHARACTER_NAME = "Test Name";
-    public static final String TEST_CHARACTER_DESCRIPTION = "Test Description";
-    public static final String TEST_CHARACTER_THUMBNAIL_PATH = "Test Thumbnail";
-    public static final String TEST_CHARACTER_THUMBNAIL_EXTENSION = "Test Extension";
+    private static final String TEST_CHARACTER_NAME = "Test Name";
+    private static final String TEST_CHARACTER_DESCRIPTION = "Test Description";
+    private static final String TEST_CHARACTER_THUMBNAIL_PATH = "Test Thumbnail";
+    private static final String TEST_CHARACTER_THUMBNAIL_EXTENSION = "Test Extension";
 
     @Rule
     public ActivityTestRule<MainActivity> mainActivity = new ActivityTestRule<>(

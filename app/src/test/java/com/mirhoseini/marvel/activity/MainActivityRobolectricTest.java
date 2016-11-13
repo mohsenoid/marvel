@@ -1,5 +1,8 @@
 package com.mirhoseini.marvel.activity;
 
+import android.content.ComponentName;
+import android.content.Intent;
+
 import com.mirhoseini.marvel.BuildConfig;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.test.support.ShadowSnackbar;
@@ -8,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
 
@@ -22,7 +25,7 @@ import static org.junit.Assert.assertNotNull;
  * Created by Mohsen on 21/10/2016.
  */
 
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, shadows = {ShadowSnackbar.class})
 public class MainActivityRobolectricTest {
 
@@ -49,5 +52,7 @@ public class MainActivityRobolectricTest {
 
         assertSnackbarIsShown(R.string.offline_message);
     }
+
+
 
 }
