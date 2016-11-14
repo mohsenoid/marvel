@@ -33,7 +33,17 @@ android {
         debug {
             applicationIdSuffix '.debug'
             versionNameSuffix '-debug'
+
+            // Run code coverage reports by default on debug builds.
             testCoverageEnabled true
+        }
+    }
+
+    productFlavors {
+        prod {
+        }
+
+        mock {
         }
     }
 
@@ -59,6 +69,24 @@ android {
             force rootProject.ext.libraries.appCompat
             force rootProject.ext.libraries.designSupport
             force rootProject.ext.libraries.recyclerView
+        }
+    }
+}
+
+// Grant animation permissions to avoid test failure because of ui sync.
+task grantAnimationPermissions(type: Exec, dependsOn: 'installMock') {
+    group = 'test'
+    description = 'Grant permissions for testing.'
+
+    def absolutePath = file('..') // Get project absolute path
+    commandLine "$absolutePath/set_animation_permissions.sh com.mirhoseini.marvel".split(" ")
+}
+
+// Source: http://stackoverflow.com/q/29908110/112705
+afterEvaluate {
+    tasks.each { task ->
+        if (task.name.startsWith('assembleMockAndroidTest')) {
+            task.dependsOn grantAnimationPermissions
         }
     }
 }
