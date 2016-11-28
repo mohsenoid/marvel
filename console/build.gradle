@@ -1,0 +1,30 @@
+apply plugin: 'java'
+apply plugin: 'me.tatarka.retrolambda'
+
+configurations {
+    provided
+}
+
+sourceSets {
+    main {
+        compileClasspath += configurations.provided
+    }
+}
+
+retrolambda {
+    jdk System.getenv("JAVA_HOME")
+    oldJdk System.getenv("JAVA7_HOME")
+    javaVersion JavaVersion.VERSION_1_7
+    defaultMethods false
+    incremental true
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':marvel-core')
+
+    compile rootProject.ext.libraries.rxjava
+
+    compile rootProject.ext.libraries.dagger
+    provided rootProject.ext.aptLibraries.daggerCompiler
+}
