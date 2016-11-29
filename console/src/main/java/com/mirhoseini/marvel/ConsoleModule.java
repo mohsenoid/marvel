@@ -24,7 +24,7 @@ public class ConsoleModule {
     @Singleton
     @Named("isDebug")
     boolean provideIsDebug() {
-        return true;
+        return false;
     }
 
     @Provides

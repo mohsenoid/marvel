@@ -12,7 +12,7 @@ public class MainClass {
         CharacterSearch characterSearch = new CharacterSearch(component);
 
         while (true) {
-            System.out.println("Please enter character name or q to exit:");
+            System.out.println("Please enter a character name or 'q' to exit:");
             String query = scanner.nextLine();
             if (query.equalsIgnoreCase("q"))
                 break;

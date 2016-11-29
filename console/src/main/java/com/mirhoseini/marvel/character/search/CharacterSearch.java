@@ -31,7 +31,7 @@ public class CharacterSearch implements SearchView {
 
     @Override
     public void showCharacter(CharacterModel character) {
-        System.out.println(character.getDescription());
+        System.out.println(String.format("----------\n%s:\n%s\n----------", character.getName(), character.getDescription()));
     }
 
     @Override
