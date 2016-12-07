@@ -26,7 +26,7 @@ class SearchInteractorImpl implements SearchInteractor {
     private Subscription characterSubscription;
 
     @Inject
-    public SearchInteractorImpl(MarvelApi api, SchedulerProvider scheduler) {
+    SearchInteractorImpl(MarvelApi api, SchedulerProvider scheduler) {
         this.api = api;
         this.scheduler = scheduler;
     }

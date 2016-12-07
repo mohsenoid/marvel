@@ -4,21 +4,21 @@ ext {
     buildToolsVersion = "25.0.0"
 
     //Android
-    androidSupportVersion = "25.0.0"
-    butterknifeVersion = "8.0.1"
+    androidSupportVersion = "25.0.1"
+    butterknifeVersion = "8.4.0"
     rxandroidVersion = "1.2.1"
     okhttpVersion = "3.4.1"
     retrofitVersion = "2.1.0"
-    utilsVersion = "1.0.3"
-    timberVersion = "4.1.2"
+    utilsVersion = "1.0.7"
+    timberVersion = "4.3.1"
     picassoVersion = "2.5.2"
-    daggerVersion = "2.4"
-    rxbindingVersion = "0.4.0"
+    daggerVersion = "2.8"
+    rxbindingVersion = "1.0.0"
     ormLiteVersion = "5.0"
     firebaseVersion = "9.6.1"
 
     //Java
-    rxjavaVersion = "1.1.9"
+    rxjavaVersion = "1.2.3"
 
     //Testing
     junitVersion = "4.12"

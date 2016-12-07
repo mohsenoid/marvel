@@ -4,7 +4,7 @@
     package="com.mirhoseini.marvel">
 
     // fix Jake Wharton Libraries min sdk issue!
-    <uses-sdk tools:overrideLibrary="timber.log, com.jakewharton.rxbinding" />
+    <uses-sdk tools:overrideLibrary="com.jakewharton.rxbinding" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -19,7 +19,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.SplashActivity"
-            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.Splash" />
 

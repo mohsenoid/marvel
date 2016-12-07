@@ -29,15 +29,17 @@ This application was created by [Mohsen Mirhoseini Argi](http://mirhoseini.com),
 
 * Android Support Tools (recyclerView, cardView, vector, palette,... ) v25.0.0
 * Retrofit v2.1.0
-* Okhttp v3.4.1
-* Dagger v2.4
-* RxJava v1.1.9
+* OkHttp v3.4.1
+* Dagger v2.8
+* RxJava v1.2.3
 * RxAndroid v1.2.1
-* Butterknife v8.0.1
-* Timber v4.1.2
+* RxBinding v1.0.0
+* ButterKnife v8.4.0
+* Timber v4.3.1
+* Picasso v2.5.2
 * OrmLite v5.0
 * Firebase v9.6.1
-* AndroidUtils v1.0.1
+* AndroidUtils v1.0.7
 * jUnit v4.12
 * Android Support Test v0.5
 * Mockito v1.10.19
