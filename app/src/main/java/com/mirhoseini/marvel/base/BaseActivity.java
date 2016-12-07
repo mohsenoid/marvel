@@ -16,11 +16,22 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        injectDependencies(MarvelApplication.getComponent());
+        injectDependencies(MarvelApplication.get(this), MarvelApplication.getComponent());
 
         // can be used for general purpose in all Activities of Application
     }
 
-    protected abstract void injectDependencies(ApplicationComponent component);
+    protected abstract void injectDependencies(MarvelApplication application, ApplicationComponent component);
+
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        releaseSubComponents(MarvelApplication.get(this));
+    }
+
+    protected abstract void releaseSubComponents(MarvelApplication application);
+
 
 }

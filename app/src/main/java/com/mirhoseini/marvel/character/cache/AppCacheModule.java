@@ -19,7 +19,7 @@ public class AppCacheModule extends CacheModule {
     private final int columnCount;
     private final CharacterCacheFragment.OnListFragmentInteractionListener listener;
 
-    AppCacheModule(Context context, CharacterCacheFragment fragment, int columnCount) {
+    public AppCacheModule(Context context, CharacterCacheFragment fragment, int columnCount) {
         super(fragment);
 
         this.context = context;

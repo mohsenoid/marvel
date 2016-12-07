@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.EditText;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mirhoseini.marvel.ApplicationComponent;
+import com.mirhoseini.marvel.MarvelApplication;
 import com.mirhoseini.marvel.base.BaseView;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.base.BaseFragment;
@@ -103,6 +105,14 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Obtain the FirebaseAnalytics instance.
+        firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
@@ -110,14 +120,6 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
         ButterKnife.bind(this, view);
 
         return view;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        // Obtain the FirebaseAnalytics instance.
-        firebaseAnalytics = FirebaseAnalytics.getInstance(context);
     }
 
     @Override
@@ -133,9 +135,9 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
     }
 
     @Override
-    protected void injectDependencies(ApplicationComponent component, Context context) {
-        component
-                .plus(new AppSearchModule(context, this))
+    protected void injectDependencies(MarvelApplication application) {
+        application
+                .getSearchSubComponent()
                 .inject(this);
     }
 

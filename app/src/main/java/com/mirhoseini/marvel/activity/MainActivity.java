@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
 import com.mirhoseini.marvel.ApplicationComponent;
+import com.mirhoseini.marvel.MarvelApplication;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.base.BaseActivity;
 import com.mirhoseini.marvel.character.cache.CharacterCacheFragment;
@@ -69,8 +70,10 @@ public class MainActivity extends BaseActivity implements CharacterSearchFragmen
     }
 
     @Override
-    protected void injectDependencies(ApplicationComponent component) {
+    protected void injectDependencies(MarvelApplication application, ApplicationComponent component) {
         component.inject(this);
+        application.createCacheSubComponent(this, cacheFragment, 2);
+        application.createSearchSubComponent(this, searchFragment);
     }
 
     private void setupToolbar() {
@@ -98,10 +101,8 @@ public class MainActivity extends BaseActivity implements CharacterSearchFragmen
         Timber.d("Showing Offline Message");
 
         Snackbar.make(toolbar, R.string.offline_message, Snackbar.LENGTH_LONG)
-                .setAction(R.string.go_online, v -> {
-                    startActivity(new Intent(
-                            Settings.ACTION_WIFI_SETTINGS));
-                })
+                .setAction(R.string.go_online, v -> startActivity(new Intent(
+                        Settings.ACTION_WIFI_SETTINGS)))
                 .setActionTextColor(Color.GREEN)
                 .show();
     }
@@ -110,4 +111,11 @@ public class MainActivity extends BaseActivity implements CharacterSearchFragmen
     public void showCharacter(CharacterModel character) {
         startActivity(CharacterActivity.newIntent(this, character));
     }
+
+    @Override
+    protected void releaseSubComponents(MarvelApplication application) {
+        application.releaseCacheSubComponent();
+        application.releaseSearchSubComponent();
+    }
+
 }

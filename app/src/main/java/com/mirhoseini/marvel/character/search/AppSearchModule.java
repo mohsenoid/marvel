@@ -13,7 +13,7 @@ import dagger.Provides;
 public class AppSearchModule extends SearchModule {
     private final CharacterSearchFragment.OnListFragmentInteractionListener listener;
 
-    AppSearchModule(Context context, CharacterSearchFragment fragment) {
+    public AppSearchModule(Context context, CharacterSearchFragment fragment) {
         super(fragment);
 
         if (context instanceof CharacterSearchFragment.OnListFragmentInteractionListener) {

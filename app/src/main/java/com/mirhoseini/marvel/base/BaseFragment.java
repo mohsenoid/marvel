@@ -1,9 +1,10 @@
 package com.mirhoseini.marvel.base;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
-import com.mirhoseini.marvel.ApplicationComponent;
 import com.mirhoseini.marvel.MarvelApplication;
 
 /**
@@ -13,14 +14,14 @@ import com.mirhoseini.marvel.MarvelApplication;
 public abstract class BaseFragment extends Fragment {
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        injectDependencies(MarvelApplication.getComponent(), context);
+        injectDependencies(MarvelApplication.get(getContext()));
 
         // can be used for general purpose in all Fragments of Application
     }
 
-    protected abstract void injectDependencies(ApplicationComponent component, Context context);
+    protected abstract void injectDependencies(MarvelApplication application);
 
 }

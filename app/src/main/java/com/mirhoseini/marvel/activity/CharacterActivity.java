@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.mirhoseini.marvel.ApplicationComponent;
 import com.mirhoseini.marvel.BR;
+import com.mirhoseini.marvel.MarvelApplication;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.base.BaseActivity;
 import com.mirhoseini.marvel.database.model.CharacterModel;
@@ -55,6 +56,11 @@ public class CharacterActivity extends BaseActivity {
         Timber.d("Character Activity Created");
     }
 
+    @Override
+    protected void injectDependencies(MarvelApplication application, ApplicationComponent component) {
+        component.inject(this);
+    }
+
     private void setupToolbar(String characterName) {
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.logo);
@@ -63,8 +69,8 @@ public class CharacterActivity extends BaseActivity {
     }
 
     @Override
-    protected void injectDependencies(ApplicationComponent component) {
-        component.inject(this);
+    protected void releaseSubComponents(MarvelApplication application) {
+
     }
 
 }
