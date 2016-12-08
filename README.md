@@ -94,3 +94,15 @@ Used new [Google Firebase](http://firebase.google.com/) as application Analytics
 Sample test cases are implemented by mockito, espresso, robolectric and mocking dagger.
 
 Finally, used [circleci](https://circleci.com/gh/mmirhoseini/marvel) and [travis ci](https://travis-ci.org/mmirhoseini/marvel) as Continues Integration services which are bind with [Github](https://github.com/mmirhoseini/marvel) repo.
+
+--------------------
+
+### Read more... ###
+You can read more about this sample project in this 5-part article:
+
+* [Part 1: Lets get to know the project](https://medium.com/@m_mirhoseini/yet-another-mvp-article-part-1-lets-get-to-know-the-project-d3fd553b3e21#.h18h1lefy)
+* [Part 2: How Dagger helps with the project](https://medium.com/@m_mirhoseini/yet-another-mvp-article-part-2-how-dagger-helps-with-the-project-90d049a45e00#.744fya69g)
+* [Part 3: Calling APIs using Retrofit](https://medium.com/@m_mirhoseini/yet-another-mvp-article-part-3-calling-apis-using-retrofit-23757f4eee05#.8c1wpn1vz)
+* [Part 4: RxJava and RxAndroid know how to response](https://medium.com/@m_mirhoseini/yet-another-mvp-article-part-4-rxjava-and-rxandroid-knows-how-to-response-cde42ccc4958#.pvk5vac37)
+* [Part 5: Writing Test using a mixture of Dagger and Espresso](https://medium.com/@m_mirhoseini/yet-another-mvp-article-part-5-writing-test-using-a-mixture-of-dagger-and-espresso-15c638182706#.mildke14n)
+ 

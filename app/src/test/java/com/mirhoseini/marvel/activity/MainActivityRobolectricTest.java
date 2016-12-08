@@ -1,8 +1,5 @@
 package com.mirhoseini.marvel.activity;
 
-import android.content.ComponentName;
-import android.content.Intent;
-
 import com.mirhoseini.marvel.BuildConfig;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.test.support.ShadowSnackbar;
@@ -52,7 +49,6 @@ public class MainActivityRobolectricTest {
 
         assertSnackbarIsShown(R.string.offline_message);
     }
-
 
 
 }
