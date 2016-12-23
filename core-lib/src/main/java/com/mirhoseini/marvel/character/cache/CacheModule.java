@@ -8,23 +8,11 @@ import dagger.Provides;
  */
 
 @Module
-class CacheModule {
-
-    private CacheView view;
-
-    CacheModule(CacheView view) {
-        this.view = view;
-    }
-
-    @Provides
-    public CacheView provideView() {
-        return view;
-    }
+public class CacheModule {
 
     @Provides
     @Cache
     public CachePresenter providePresenter(CachePresenterImpl presenter) {
-        presenter.bind(view);
         return presenter;
     }
 

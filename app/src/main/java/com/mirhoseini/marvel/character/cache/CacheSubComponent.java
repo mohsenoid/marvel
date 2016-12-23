@@ -8,10 +8,10 @@ import dagger.Subcomponent;
 
 @Cache
 @Subcomponent(modules = {
-        AppCacheModule.class
+        CacheModule.class
 })
 public interface CacheSubComponent {
 
-    void inject(CharacterCacheFragment fragment);
+    void inject(CacheFragment fragment);
 
 }

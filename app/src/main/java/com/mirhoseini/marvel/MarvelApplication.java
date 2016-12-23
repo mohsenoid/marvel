@@ -3,11 +3,9 @@ package com.mirhoseini.marvel;
 import android.app.Application;
 import android.content.Context;
 
-import com.mirhoseini.marvel.character.cache.AppCacheModule;
+import com.mirhoseini.marvel.character.cache.CacheModule;
 import com.mirhoseini.marvel.character.cache.CacheSubComponent;
-import com.mirhoseini.marvel.character.cache.CharacterCacheFragment;
-import com.mirhoseini.marvel.character.search.AppSearchModule;
-import com.mirhoseini.marvel.character.search.CharacterSearchFragment;
+import com.mirhoseini.marvel.character.search.SearchModule;
 import com.mirhoseini.marvel.character.search.SearchSubComponent;
 
 /**
@@ -24,16 +22,22 @@ public abstract class MarvelApplication extends Application {
         return component;
     }
 
+    public static MarvelApplication get(Context context) {
+        return (MarvelApplication) context.getApplicationContext();
+    }
+
     public CacheSubComponent getCacheSubComponent() {
+        if (null == cacheSubComponent)
+            createCacheSubComponent();
+
         return cacheSubComponent;
     }
 
     public SearchSubComponent getSearchSubComponent() {
-        return searchSubComponent;
-    }
+        if (null == searchSubComponent)
+            createSearchSubComponent();
 
-    public static MarvelApplication get(Context context) {
-        return (MarvelApplication) context.getApplicationContext();
+        return searchSubComponent;
     }
 
     @Override
@@ -51,8 +55,8 @@ public abstract class MarvelApplication extends Application {
                 .build();
     }
 
-    public CacheSubComponent createCacheSubComponent(Context context, CharacterCacheFragment fragment, int columnCount) {
-        cacheSubComponent = component.plus(new AppCacheModule(context, fragment, columnCount));
+    public CacheSubComponent createCacheSubComponent() {
+        cacheSubComponent = component.plus(new CacheModule());
         return cacheSubComponent;
     }
 
@@ -60,8 +64,8 @@ public abstract class MarvelApplication extends Application {
         cacheSubComponent = null;
     }
 
-    public SearchSubComponent createSearchSubComponent(Context context, CharacterSearchFragment fragment) {
-        searchSubComponent = component.plus(new AppSearchModule(context, fragment));
+    public SearchSubComponent createSearchSubComponent() {
+        searchSubComponent = component.plus(new SearchModule());
         return searchSubComponent;
     }
 

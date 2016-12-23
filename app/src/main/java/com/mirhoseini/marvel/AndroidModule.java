@@ -1,9 +1,7 @@
 package com.mirhoseini.marvel;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.preference.PreferenceManager;
 
 import javax.inject.Singleton;
 

@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -17,9 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.mirhoseini.marvel.ApplicationComponent;
 import com.mirhoseini.marvel.MarvelApplication;
-import com.mirhoseini.marvel.base.BaseView;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.base.BaseFragment;
 import com.mirhoseini.marvel.database.model.CharacterModel;
@@ -33,13 +30,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnEditorAction;
+import rx.Observable;
+import rx.subjects.PublishSubject;
 import timber.log.Timber;
 
 /**
  * Created by Mohsen on 20/10/2016.
  */
 
-public class CharacterSearchFragment extends BaseFragment implements SearchView {
+public class SearchFragment extends BaseFragment implements SearchView {
 
     // injecting dependencies via Dagger
     @Inject
@@ -47,9 +46,9 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
     @Inject
     Resources resources;
     @Inject
-    SearchPresenter presenter;
+    FirebaseAnalytics firebaseAnalytics;
     @Inject
-    OnListFragmentInteractionListener listener;
+    SearchPresenter presenter;
 
     // injecting views via ButterKnife
     @BindView(R.id.character)
@@ -57,18 +56,21 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
     @BindView(R.id.show)
     Button show;
 
-    private FirebaseAnalytics firebaseAnalytics;
-    private ProgressDialog progressDialog;
+    ProgressDialog progressDialog;
+
+    PublishSubject<CharacterModel> notifyCharacter = PublishSubject.create();
+    PublishSubject<String> notifyMessage = PublishSubject.create();
+    PublishSubject<Boolean> notifyOffline = PublishSubject.create();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public CharacterSearchFragment() {
+    public SearchFragment() {
     }
 
-    public static CharacterSearchFragment newInstance() {
-        CharacterSearchFragment fragment = new CharacterSearchFragment();
+    public static SearchFragment newInstance() {
+        SearchFragment fragment = new SearchFragment();
         return fragment;
     }
 
@@ -105,11 +107,17 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
-        // Obtain the FirebaseAnalytics instance.
-        firebaseAnalytics = FirebaseAnalytics.getInstance(context);
+        presenter.bind(this);
+    }
+
+    @Override
+    protected void injectDependencies(MarvelApplication application) {
+        application
+                .getSearchSubComponent()
+                .inject(this);
     }
 
     @Override
@@ -135,33 +143,20 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
     }
 
     @Override
-    protected void injectDependencies(MarvelApplication application) {
-        application
-                .getSearchSubComponent()
-                .inject(this);
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
-        listener = null;
 
         presenter.unbind();
-        presenter = null;
     }
 
     @Override
     public void showMessage(String message) {
-        if (null != listener) {
-            listener.showMessage(message);
-        }
+        notifyMessage.onNext(message);
     }
 
     @Override
-    public void showOfflineMessage() {
-        if (null != listener) {
-            listener.showOfflineMessage();
-        }
+    public void showOfflineMessage(boolean isCritical) {
+        notifyOffline.onNext(isCritical);
     }
 
     @Override
@@ -221,8 +216,7 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
     public void showCharacter(CharacterModel character) {
         logFirebaseAnalyticsSelectEvent(character);
 
-        if (null != listener)
-            listener.showCharacter(character);
+        notifyCharacter.onNext(character);
     }
 
     private void logFirebaseAnalyticsSelectEvent(CharacterModel character) {
@@ -232,10 +226,16 @@ public class CharacterSearchFragment extends BaseFragment implements SearchView 
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
-    public interface OnListFragmentInteractionListener extends BaseView {
+    public Observable<CharacterModel> characterObservable() {
+        return notifyCharacter.asObservable();
+    }
 
-        void showCharacter(CharacterModel character);
+    public Observable<String> messageObservable() {
+        return notifyMessage.asObservable();
+    }
 
+    public Observable<Boolean> offlineObservable() {
+        return notifyOffline.asObservable();
     }
 
 }

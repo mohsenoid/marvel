@@ -3,9 +3,9 @@ package com.mirhoseini.marvel;
 import com.mirhoseini.marvel.activity.CharacterActivity;
 import com.mirhoseini.marvel.activity.MainActivity;
 import com.mirhoseini.marvel.activity.SplashActivity;
-import com.mirhoseini.marvel.character.cache.AppCacheModule;
+import com.mirhoseini.marvel.character.cache.CacheModule;
 import com.mirhoseini.marvel.character.cache.CacheSubComponent;
-import com.mirhoseini.marvel.character.search.AppSearchModule;
+import com.mirhoseini.marvel.character.search.SearchModule;
 import com.mirhoseini.marvel.character.search.SearchSubComponent;
 import com.mirhoseini.marvel.database.DatabaseModule;
 import com.mirhoseini.marvel.domain.ApiModule;
@@ -35,8 +35,8 @@ public interface ApplicationComponent {
 
     void inject(CharacterActivity characterActivity);
 
-    SearchSubComponent plus(AppSearchModule module);
+    SearchSubComponent plus(SearchModule module);
 
-    CacheSubComponent plus(AppCacheModule module);
+    CacheSubComponent plus(CacheModule module);
 
 }

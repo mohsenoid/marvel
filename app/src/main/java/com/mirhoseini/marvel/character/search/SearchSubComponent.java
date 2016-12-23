@@ -8,10 +8,10 @@ import dagger.Subcomponent;
 
 @Search
 @Subcomponent(modules = {
-        AppSearchModule.class
+        SearchModule.class
 })
 public interface SearchSubComponent {
 
-    void inject(CharacterSearchFragment fragment);
+    void inject(SearchFragment fragment);
 
 }

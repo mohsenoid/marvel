@@ -16,8 +16,10 @@ public class CharacterSearch implements SearchView {
     SearchPresenter presenter;
 
     public CharacterSearch(ConsoleComponent component) {
-        component.plus(new ConsoleSearchModule(this))
+        component.plus(new SearchModule())
                 .inject(this);
+
+        presenter.bind(this);
     }
 
     public void doSearch(String query) {
@@ -75,7 +77,7 @@ public class CharacterSearch implements SearchView {
     }
 
     @Override
-    public void showOfflineMessage() {
+    public void showOfflineMessage(boolean isCritical) {
         System.out.println("Offline!!!");
     }
 }

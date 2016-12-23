@@ -2,6 +2,7 @@ package com.mirhoseini.marvel;
 
 import android.content.Context;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mirhoseini.marvel.util.AppSchedulerProvider;
 import com.mirhoseini.marvel.util.Constants;
 import com.mirhoseini.marvel.util.SchedulerProvider;
@@ -82,4 +83,8 @@ public class ApplicationModule {
         return Utils.isConnected(context);
     }
 
+    @Provides
+    FirebaseAnalytics provideFirebaseAnalytics(Context context) {
+        return FirebaseAnalytics.getInstance(context);
+    }
 }

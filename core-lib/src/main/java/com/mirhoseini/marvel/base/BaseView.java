@@ -8,6 +8,6 @@ public interface BaseView {
 
     void showMessage(String message);
 
-    void showOfflineMessage();
+    void showOfflineMessage(boolean isCritical);
 
 }

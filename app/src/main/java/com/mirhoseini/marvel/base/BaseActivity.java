@@ -23,7 +23,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void injectDependencies(MarvelApplication application, ApplicationComponent component);
 
-
     @Override
     public void finish() {
         super.finish();
@@ -32,6 +31,5 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract void releaseSubComponents(MarvelApplication application);
-
 
 }

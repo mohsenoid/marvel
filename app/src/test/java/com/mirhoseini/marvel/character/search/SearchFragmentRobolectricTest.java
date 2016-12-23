@@ -26,10 +26,10 @@ import static org.junit.Assert.assertNull;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, shadows = {ShadowSnackbar.class})
-public class CharacterSearchFragmentRobolectricTest {
+public class SearchFragmentRobolectricTest {
 
     private MainActivity activity;
-    private CharacterSearchFragment fragment;
+    private SearchFragment fragment;
 
     @Before
     public void setUp() throws Exception {
@@ -38,7 +38,7 @@ public class CharacterSearchFragmentRobolectricTest {
         assertNotNull(activity);
 
         // setup fragment
-        fragment = (CharacterSearchFragment) activity.getSupportFragmentManager().findFragmentByTag(MainActivity.TAG_SEARCH_FRAGMENT);
+        fragment = (SearchFragment) activity.getSupportFragmentManager().findFragmentByTag(MainActivity.TAG_SEARCH_FRAGMENT);
         assertNotNull(fragment);
 
     }
@@ -85,13 +85,5 @@ public class CharacterSearchFragmentRobolectricTest {
 
         assertThat(activity.getString(R.string.no_result), equalTo(ShadowToast.getTextOfLatestToast()));
     }
-
-    @Test
-    public void testOnDestroy() throws Exception {
-        fragment.onDetach();
-
-        assertNull(fragment.listener);
-        assertNull(fragment.presenter);
-    }
-
+    
 }
