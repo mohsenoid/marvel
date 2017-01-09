@@ -3,9 +3,12 @@ package com.mirhoseini.marvel;
 import android.content.Context;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.mirhoseini.marvel.util.AppConstants;
 import com.mirhoseini.marvel.util.AppSchedulerProvider;
 import com.mirhoseini.marvel.util.Constants;
 import com.mirhoseini.marvel.util.SchedulerProvider;
+import com.mirhoseini.marvel.util.StateManager;
+import com.mirhoseini.marvel.util.StateManagerImpl;
 import com.mirhoseini.utils.Utils;
 
 import java.io.File;
@@ -34,7 +37,7 @@ public class ApplicationModule {
     @Singleton
     @Named("networkTimeoutInSeconds")
     int provideNetworkTimeoutInSeconds() {
-        return Constants.NETWORK_CONNECTION_TIMEOUT;
+        return AppConstants.NETWORK_CONNECTION_TIMEOUT;
     }
 
     @Provides
@@ -53,21 +56,28 @@ public class ApplicationModule {
     @Singleton
     @Named("cacheSize")
     long provideCacheSize() {
-        return Constants.CACHE_SIZE;
+        return AppConstants.CACHE_SIZE;
     }
 
     @Provides
     @Singleton
     @Named("cacheMaxAge")
     int provideCacheMaxAgeMinutes() {
-        return Constants.CACHE_MAX_AGE;
+        return AppConstants.CACHE_MAX_AGE;
     }
 
     @Provides
     @Singleton
     @Named("cacheMaxStale")
     int provideCacheMaxStaleDays() {
-        return Constants.CACHE_MAX_STALE;
+        return AppConstants.CACHE_MAX_STALE;
+    }
+
+    @Provides
+    @Singleton
+    @Named("retryCount")
+    public int provideApiRetryCount() {
+        return AppConstants.API_RETRY_COUNT;
     }
 
     @Provides
@@ -86,5 +96,11 @@ public class ApplicationModule {
     @Provides
     FirebaseAnalytics provideFirebaseAnalytics(Context context) {
         return FirebaseAnalytics.getInstance(context);
+    }
+
+    @Provides
+    @Singleton
+    public StateManager provideStateManager(StateManagerImpl stateManager) {
+        return stateManager;
     }
 }

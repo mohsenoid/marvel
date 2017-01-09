@@ -41,6 +41,7 @@ public class MainActivity extends BaseActivity {
     // injecting views via ButterKnife
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
     CompositeSubscription subscriptions;
     private SearchFragment searchFragment;
     private CacheFragment cacheFragment;

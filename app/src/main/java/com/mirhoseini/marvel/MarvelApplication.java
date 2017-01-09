@@ -33,11 +33,29 @@ public abstract class MarvelApplication extends Application {
         return cacheSubComponent;
     }
 
+    public CacheSubComponent createCacheSubComponent() {
+        cacheSubComponent = component.plus(new CacheModule());
+        return cacheSubComponent;
+    }
+
+    public void releaseCacheSubComponent() {
+        cacheSubComponent = null;
+    }
+
     public SearchSubComponent getSearchSubComponent() {
         if (null == searchSubComponent)
             createSearchSubComponent();
 
         return searchSubComponent;
+    }
+
+    public SearchSubComponent createSearchSubComponent() {
+        searchSubComponent = component.plus(new SearchModule());
+        return searchSubComponent;
+    }
+
+    public void releaseSearchSubComponent() {
+        searchSubComponent = null;
     }
 
     @Override
@@ -54,25 +72,6 @@ public abstract class MarvelApplication extends Application {
                 .androidModule(new AndroidModule(this))
                 .build();
     }
-
-    public CacheSubComponent createCacheSubComponent() {
-        cacheSubComponent = component.plus(new CacheModule());
-        return cacheSubComponent;
-    }
-
-    public void releaseCacheSubComponent() {
-        cacheSubComponent = null;
-    }
-
-    public SearchSubComponent createSearchSubComponent() {
-        searchSubComponent = component.plus(new SearchModule());
-        return searchSubComponent;
-    }
-
-    public void releaseSearchSubComponent() {
-        searchSubComponent = null;
-    }
-
 
     public abstract void initApplication();
 

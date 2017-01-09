@@ -1,6 +1,9 @@
 package com.mirhoseini.marvel.domain;
 
+import com.mirhoseini.marvel.util.StateManager;
+
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Named;
@@ -22,7 +25,10 @@ import okhttp3.logging.HttpLoggingInterceptor;
 
 @Module
 public class ClientModule {
+
+    private static final String HTTP_CACHE_PATH = "http-cache";
     private static final String CACHE_CONTROL = "Cache-Control";
+    private static final String PRAGMA = "Pragma";
 
     @Singleton
     @Provides
@@ -31,11 +37,13 @@ public class ClientModule {
                                             @Named("isDebug") boolean isDebug,
                                             Cache cache,
                                             @Named("cacheInterceptor") Interceptor cacheInterceptor,
-                                            @Named("offlineInterceptor") Interceptor offlineCacheInterceptor) {
+                                            @Named("offlineInterceptor") Interceptor offlineCacheInterceptor,
+                                            @Named("retryInterceptor") Interceptor retryInterceptor) {
 
         OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder()
                 .addNetworkInterceptor(cacheInterceptor)
                 .addInterceptor(offlineCacheInterceptor)
+                .addInterceptor(retryInterceptor)
                 .cache(cache)
                 .connectTimeout(networkTimeoutInSeconds, TimeUnit.SECONDS);
 
@@ -52,7 +60,6 @@ public class ClientModule {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         return logging;
-
     }
 
     @Provides
@@ -61,7 +68,7 @@ public class ClientModule {
         Cache cache = null;
 
         try {
-            cache = new Cache(new File(cacheDir.getPath(), "http-cache"), cacheSize);
+            cache = new Cache(new File(cacheDir.getPath(), HTTP_CACHE_PATH), cacheSize);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,6 +88,8 @@ public class ClientModule {
                     .build();
 
             return response.newBuilder()
+                    .removeHeader(PRAGMA)
+                    .removeHeader(CACHE_CONTROL)
                     .header(CACHE_CONTROL, cacheControl.toString())
                     .build();
         };
@@ -89,11 +98,11 @@ public class ClientModule {
     @Singleton
     @Provides
     @Named("offlineInterceptor")
-    public Interceptor provideOfflineCacheInterceptor(@Named("isConnect") boolean isConnect, @Named("cacheMaxStale") int maxStaleDay) {
+    public Interceptor provideOfflineCacheInterceptor(StateManager stateManager, @Named("cacheMaxStale") int maxStaleDay) {
         return chain -> {
             Request request = chain.request();
 
-            if (!isConnect) {
+            if (!stateManager.isConnect()) {
                 CacheControl cacheControl = new CacheControl.Builder()
                         .maxStale(maxStaleDay, TimeUnit.DAYS)
                         .build();
@@ -104,6 +113,36 @@ public class ClientModule {
             }
 
             return chain.proceed(request);
+        };
+    }
+
+    @Singleton
+    @Provides
+    @Named("retryInterceptor")
+    public Interceptor provideRetryInterceptor(@Named("retryCount") int retryCount) {
+        return chain -> {
+            Request request = chain.request();
+            Response response = null;
+            IOException exception = null;
+
+            int tryCount = 0;
+            while (tryCount < retryCount && (null == response || !response.isSuccessful())) {
+                // retry the request
+                try {
+                    response = chain.proceed(request);
+                } catch (IOException e) {
+                    exception = e;
+                } finally {
+                    tryCount++;
+                }
+            }
+
+            // throw last exception
+            if (null == response && null != exception)
+                throw exception;
+
+            // otherwise just pass the original response on
+            return response;
         };
     }
 }
