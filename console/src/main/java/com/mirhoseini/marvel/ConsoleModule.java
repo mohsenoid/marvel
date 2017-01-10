@@ -1,8 +1,11 @@
 package com.mirhoseini.marvel;
 
+import com.mirhoseini.marvel.util.ConsoleConstants;
 import com.mirhoseini.marvel.util.ConsoleSchedulerProvider;
 import com.mirhoseini.marvel.util.Constants;
 import com.mirhoseini.marvel.util.SchedulerProvider;
+import com.mirhoseini.marvel.util.StateManager;
+import com.mirhoseini.marvel.util.StateManagerImpl;
 
 import java.io.File;
 
@@ -31,13 +34,13 @@ public class ConsoleModule {
     @Singleton
     @Named("networkTimeoutInSeconds")
     int provideNetworkTimeoutInSeconds() {
-        return Constants.NETWORK_CONNECTION_TIMEOUT;
+        return ConsoleConstants.NETWORK_CONNECTION_TIMEOUT;
     }
 
     @Provides
     @Singleton
     HttpUrl provideEndpoint() {
-        return HttpUrl.parse(Constants.BASE_URL);
+        return HttpUrl.parse(ConsoleConstants.BASE_URL);
     }
 
     @Provides
@@ -50,21 +53,28 @@ public class ConsoleModule {
     @Singleton
     @Named("cacheSize")
     long provideCacheSize() {
-        return Constants.CACHE_SIZE;
+        return ConsoleConstants.CACHE_SIZE;
     }
 
     @Provides
     @Singleton
     @Named("cacheMaxAge")
     int provideCacheMaxAgeMinutes() {
-        return Constants.CACHE_MAX_AGE;
+        return ConsoleConstants.CACHE_MAX_AGE;
     }
 
     @Provides
     @Singleton
     @Named("cacheMaxStale")
     int provideCacheMaxStaleDays() {
-        return Constants.CACHE_MAX_STALE;
+        return ConsoleConstants.CACHE_MAX_STALE;
+    }
+
+    @Provides
+    @Singleton
+    @Named("retryCount")
+    public int provideApiRetryCount() {
+        return ConsoleConstants.API_RETRY_COUNT;
     }
 
     @Provides
@@ -80,4 +90,9 @@ public class ConsoleModule {
         return true;
     }
 
+    @Provides
+    @Singleton
+    public StateManager provideStateManager(StateManagerImpl stateManager) {
+        return stateManager;
+    }
 }
