@@ -43,12 +43,4 @@ public class MainActivityRobolectricTest {
         assertThat(TEST_TEXT, equalTo(ShadowToast.getTextOfLatestToast()));
     }
 
-    @Test
-    public void testShowOfflineMessage() throws Exception {
-        activity.showOfflineMessage(false);
-
-        assertSnackbarIsShown(R.string.offline_message);
-    }
-
-
 }

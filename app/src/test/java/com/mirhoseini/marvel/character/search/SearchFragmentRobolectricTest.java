@@ -59,27 +59,6 @@ public class SearchFragmentRobolectricTest {
     }
 
     @Test
-    public void testShowError() throws Exception {
-        fragment.showError(new Throwable("unknown error"));
-
-        assertSnackbarIsShown(R.string.retry_message);
-    }
-
-    @Test
-    public void testShowRetryMessage() throws Exception {
-        fragment.showRetryMessage(new Throwable("unknown error"));
-
-        assertSnackbarIsShown(R.string.retry_message);
-    }
-
-    @Test
-    public void testShowQueryError() throws Exception {
-        fragment.showQueryError(new Throwable("unknown error"));
-
-        assertSnackbarIsShown(R.string.retry_message);
-    }
-
-    @Test
     public void testShowQueryNoResult() throws Exception {
         fragment.showQueryNoResult();
 

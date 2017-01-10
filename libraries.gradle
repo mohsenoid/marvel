@@ -4,7 +4,7 @@ ext {
     buildToolsVersion = "25.0.0"
 
     //Android
-    androidSupportVersion = "25.0.1"
+    androidSupportVersion = "25.1.0"
     butterknifeVersion = "8.4.0"
     rxandroidVersion = "1.2.1"
     okhttpVersion = "3.4.1"
