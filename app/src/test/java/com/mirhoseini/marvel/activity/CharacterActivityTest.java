@@ -28,12 +28,12 @@ import static org.junit.Assert.assertTrue;
 @Config(constants = BuildConfig.class, sdk = 21, shadows = {ShadowSnackbar.class})
 public class CharacterActivityTest {
 
-    public static final String TEST_CHARACTER_NAME = "Test Name";
-    public static final String TEST_CHARACTER_DESCRIPTION = "Test Description";
-    public static final String TEST_CHARACTER_THUMBNAIL = "Test Thumbnail";
+    static final String TEST_CHARACTER_NAME = "Test Name";
+    static final String TEST_CHARACTER_DESCRIPTION = "Test Description";
+    static final String TEST_CHARACTER_THUMBNAIL = "Test Thumbnail";
 
-    private CharacterActivity activity;
-    private CharacterModel character;
+    CharacterActivity activity;
+    CharacterModel character;
 
     @Before
     public void setUp() throws Exception {

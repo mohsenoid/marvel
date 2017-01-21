@@ -3,7 +3,6 @@ package com.mirhoseini.marvel.base;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
-import com.mirhoseini.marvel.ApplicationComponent;
 import com.mirhoseini.marvel.MarvelApplication;
 
 /**
@@ -16,11 +15,11 @@ public abstract class BaseFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        injectDependencies(MarvelApplication.getComponent(), context);
+        injectDependencies(MarvelApplication.get(getContext()));
 
         // can be used for general purpose in all Fragments of Application
     }
 
-    protected abstract void injectDependencies(ApplicationComponent component, Context context);
+    protected abstract void injectDependencies(MarvelApplication application);
 
 }

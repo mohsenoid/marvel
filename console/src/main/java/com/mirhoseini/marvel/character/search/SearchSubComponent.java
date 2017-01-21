@@ -8,7 +8,7 @@ import dagger.Subcomponent;
 
 @Search
 @Subcomponent(modules = {
-        ConsoleSearchModule.class
+        SearchModule.class
 })
 public interface SearchSubComponent {
 

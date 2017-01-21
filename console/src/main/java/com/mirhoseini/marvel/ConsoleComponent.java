@@ -1,6 +1,6 @@
 package com.mirhoseini.marvel;
 
-import com.mirhoseini.marvel.character.search.ConsoleSearchModule;
+import com.mirhoseini.marvel.character.search.SearchModule;
 import com.mirhoseini.marvel.character.search.SearchSubComponent;
 import com.mirhoseini.marvel.database.DatabaseModule;
 import com.mirhoseini.marvel.domain.ApiModule;
@@ -25,6 +25,6 @@ public interface ConsoleComponent {
 
     void inject(MainClass main);
 
-    SearchSubComponent plus(ConsoleSearchModule module);
+    SearchSubComponent plus(SearchModule module);
 
 }

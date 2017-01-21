@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 
 import com.mirhoseini.marvel.ApplicationComponent;
+import com.mirhoseini.marvel.MarvelApplication;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.base.BaseActivity;
 import com.mirhoseini.marvel.util.AppConstants;
@@ -61,6 +62,11 @@ public class SplashActivity extends BaseActivity {
         splashThread.start();
     }
 
+    @Override
+    protected void injectDependencies(MarvelApplication application, ApplicationComponent component) {
+        component.inject(this);
+    }
+
     // Listening to whole activity touch events
     @Override
     public boolean onTouchEvent(MotionEvent evt) {
@@ -74,7 +80,8 @@ public class SplashActivity extends BaseActivity {
     }
 
     @Override
-    protected void injectDependencies(ApplicationComponent component) {
-        component.inject(this);
+    protected void releaseSubComponents(MarvelApplication application) {
+
     }
+
 }

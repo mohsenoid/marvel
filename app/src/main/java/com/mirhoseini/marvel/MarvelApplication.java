@@ -1,6 +1,12 @@
 package com.mirhoseini.marvel;
 
 import android.app.Application;
+import android.content.Context;
+
+import com.mirhoseini.marvel.character.cache.CacheModule;
+import com.mirhoseini.marvel.character.cache.CacheSubComponent;
+import com.mirhoseini.marvel.character.search.SearchModule;
+import com.mirhoseini.marvel.character.search.SearchSubComponent;
 
 /**
  * Created by Mohsen on 20/10/2016.
@@ -9,9 +15,47 @@ import android.app.Application;
 public abstract class MarvelApplication extends Application {
 
     private static ApplicationComponent component;
+    private CacheSubComponent cacheSubComponent;
+    private SearchSubComponent searchSubComponent;
 
     public static ApplicationComponent getComponent() {
         return component;
+    }
+
+    public static MarvelApplication get(Context context) {
+        return (MarvelApplication) context.getApplicationContext();
+    }
+
+    public CacheSubComponent getCacheSubComponent() {
+        if (null == cacheSubComponent)
+            createCacheSubComponent();
+
+        return cacheSubComponent;
+    }
+
+    public CacheSubComponent createCacheSubComponent() {
+        cacheSubComponent = component.plus(new CacheModule());
+        return cacheSubComponent;
+    }
+
+    public void releaseCacheSubComponent() {
+        cacheSubComponent = null;
+    }
+
+    public SearchSubComponent getSearchSubComponent() {
+        if (null == searchSubComponent)
+            createSearchSubComponent();
+
+        return searchSubComponent;
+    }
+
+    public SearchSubComponent createSearchSubComponent() {
+        searchSubComponent = component.plus(new SearchModule());
+        return searchSubComponent;
+    }
+
+    public void releaseSearchSubComponent() {
+        searchSubComponent = null;
     }
 
     @Override

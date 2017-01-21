@@ -9,12 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.mirhoseini.marvel.ApplicationComponent;
-import com.mirhoseini.marvel.base.BaseView;
+import com.mirhoseini.marvel.MarvelApplication;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.base.BaseFragment;
 import com.mirhoseini.marvel.character.cache.adapter.CharactersRecyclerViewAdapter;
 import com.mirhoseini.marvel.database.model.CharacterModel;
+import com.mirhoseini.marvel.util.AppConstants;
 import com.mirhoseini.marvel.util.GridSpacingItemDecoration;
 
 import java.util.List;
@@ -23,6 +23,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.Observable;
+import rx.subjects.PublishSubject;
 import rx.subscriptions.CompositeSubscription;
 import timber.log.Timber;
 
@@ -30,21 +32,16 @@ import timber.log.Timber;
  * Created by Mohsen on 20/10/2016.
  */
 
-public class CharacterCacheFragment extends BaseFragment implements CacheView {
+public class CacheFragment extends BaseFragment implements CacheView {
 
+    public static final int COLUMN_COUNT = 2;
     // injecting dependencies via Dagger
-    @Inject
-    CachePresenter presenter;
     @Inject
     Context context;
     @Inject
-    GridLayoutManager layoutManager;
-    @Inject
-    GridSpacingItemDecoration gridSpacingItemDecoration;
+    CachePresenter presenter;
     @Inject
     CharactersRecyclerViewAdapter adapter;
-    @Inject
-    OnListFragmentInteractionListener listener;
 
     // injecting views via ButterKnife
     @BindView(R.id.list)
@@ -52,17 +49,23 @@ public class CharacterCacheFragment extends BaseFragment implements CacheView {
     @BindView(R.id.empty)
     ViewGroup empty;
 
-    private CompositeSubscription subscriptions = new CompositeSubscription();
+    CompositeSubscription subscriptions = new CompositeSubscription();
+    GridLayoutManager gridLayoutManager;
+    GridSpacingItemDecoration gridSpacingItemDecoration;
+
+    PublishSubject<CharacterModel> notifyCharacter = PublishSubject.create();
+    PublishSubject<String> notifyMessage = PublishSubject.create();
+    PublishSubject<Boolean> notifyOffline = PublishSubject.create();
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public CharacterCacheFragment() {
+    public CacheFragment() {
     }
 
-    public static CharacterCacheFragment newInstance() {
-        CharacterCacheFragment fragment = new CharacterCacheFragment();
+    public static CacheFragment newInstance() {
+        CacheFragment fragment = new CacheFragment();
         return fragment;
     }
 
@@ -70,10 +73,18 @@ public class CharacterCacheFragment extends BaseFragment implements CacheView {
     public void onAttach(Context context) {
         super.onAttach(context);
 
+        presenter.bind(this);
+
         subscriptions.add(
                 adapter.asObservable()
-                        .filter(characterModel -> null != listener)
-                        .subscribe(listener::showCharacter));
+                        .subscribe(notifyCharacter::onNext));
+    }
+
+    @Override
+    protected void injectDependencies(MarvelApplication application) {
+        application
+                .getCacheSubComponent()
+                .inject(this);
     }
 
     @Override
@@ -96,40 +107,45 @@ public class CharacterCacheFragment extends BaseFragment implements CacheView {
     }
 
     @Override
-    protected void injectDependencies(ApplicationComponent component, Context context) {
-        component
-                .plus(new AppCacheModule(context, this, 2))
-                .inject(this);
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
-        listener = null;
 
         presenter.unbind();
-        presenter = null;
 
         subscriptions.unsubscribe();
     }
 
     @Override
     public void showMessage(String message) {
-        if (null != listener) {
-            listener.showMessage(message);
-        }
+        notifyMessage.onNext(message);
     }
 
     @Override
-    public void showOfflineMessage() {
-        if (null != listener) {
-            listener.showOfflineMessage();
-        }
+    public void showOfflineMessage(boolean isCritical) {
+        notifyOffline.onNext(isCritical);
     }
 
     private void initRecyclerView() {
-        list.setLayoutManager(layoutManager);
+        initLayoutManager();
+        initGridSpacingItemDecoration();
+
+        list.setLayoutManager(gridLayoutManager);
         list.addItemDecoration(gridSpacingItemDecoration);
+    }
+
+    public void initLayoutManager() {
+        gridLayoutManager = new GridLayoutManager(context, COLUMN_COUNT);
+        // Create a custom SpanSizeLookup where the first item spans both columns
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return position == 0 ? COLUMN_COUNT : 1;
+            }
+        });
+    }
+
+    public void initGridSpacingItemDecoration() {
+        gridSpacingItemDecoration = new GridSpacingItemDecoration(COLUMN_COUNT, AppConstants.RECYCLER_VIEW_ITEM_SPACE, true, 1);
     }
 
     @Override
@@ -153,9 +169,16 @@ public class CharacterCacheFragment extends BaseFragment implements CacheView {
         Toast.makeText(context, throwable.getMessage(), Toast.LENGTH_LONG).show();
     }
 
-    public interface OnListFragmentInteractionListener extends BaseView {
-
-        void showCharacter(CharacterModel character);
-
+    public Observable<CharacterModel> characterObservable() {
+        return notifyCharacter.asObservable();
     }
+
+    public Observable<String> messageObservable() {
+        return notifyMessage.asObservable();
+    }
+
+    public Observable<Boolean> offlineObservable() {
+        return notifyOffline.asObservable();
+    }
+
 }

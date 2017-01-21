@@ -8,18 +8,7 @@ import dagger.Provides;
  */
 
 @Module
-class SearchModule {
-
-    private SearchView view;
-
-    SearchModule(SearchView view) {
-        this.view = view;
-    }
-
-    @Provides
-    public SearchView provideView() {
-        return view;
-    }
+public class SearchModule {
 
     @Provides
     @Search
@@ -30,7 +19,6 @@ class SearchModule {
     @Provides
     @Search
     public SearchPresenter providePresenter(SearchPresenterImpl presenter) {
-        presenter.bind(view);
         return presenter;
     }
 

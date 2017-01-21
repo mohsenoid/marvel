@@ -12,7 +12,6 @@ import rx.Observable;
  */
 
 public interface MarvelApi {
-
     String NAME = "name";
     String API_KEY = "apikey";
     String HASH = "hash";
