@@ -26,7 +26,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21, shadows = {ShadowSnackbar.class})
-public class CharacterActivityTest {
+public class CharacterActivityRobolectricTest {
 
     static final String TEST_CHARACTER_NAME = "Test Name";
     static final String TEST_CHARACTER_DESCRIPTION = "Test Description";

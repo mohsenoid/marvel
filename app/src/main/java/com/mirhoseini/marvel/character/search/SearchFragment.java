@@ -38,7 +38,7 @@ import timber.log.Timber;
  * Created by Mohsen on 20/10/2016.
  */
 
-public class SearchFragment extends BaseFragment implements SearchView {
+public class SearchFragment extends BaseFragment implements SearchContract.View {
 
     // injecting dependencies via Dagger
     @Inject
@@ -48,7 +48,7 @@ public class SearchFragment extends BaseFragment implements SearchView {
     @Inject
     FirebaseAnalytics firebaseAnalytics;
     @Inject
-    SearchPresenter presenter;
+    SearchContract.Presenter presenter;
 
     // injecting views via ButterKnife
     @BindView(R.id.character)
@@ -164,6 +164,13 @@ public class SearchFragment extends BaseFragment implements SearchView {
         Timber.e(throwable, "Error!");
 
         showRetryMessage(throwable);
+    }
+
+    @Override
+    public void showDatabaseError(Throwable throwable) {
+        Timber.e(throwable, "Error!");
+
+        showMessage(throwable.getMessage());
     }
 
     @Override

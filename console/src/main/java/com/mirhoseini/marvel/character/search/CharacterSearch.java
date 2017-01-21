@@ -11,9 +11,9 @@ import javax.inject.Inject;
  * Created by Mohsen on 28/11/2016.
  */
 
-public class CharacterSearch implements SearchView {
+public class CharacterSearch implements SearchContract.View {
     @Inject
-    SearchPresenter presenter;
+    SearchContract.Presenter presenter;
 
     public CharacterSearch(ConsoleComponent component) {
         component.plus(new SearchModule())
@@ -53,6 +53,11 @@ public class CharacterSearch implements SearchView {
 
     @Override
     public void showError(Throwable throwable) {
+        System.out.println(throwable);
+    }
+
+    @Override
+    public void showDatabaseError(Throwable throwable) {
         System.out.println(throwable);
     }
 

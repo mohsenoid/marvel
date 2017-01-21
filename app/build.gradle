@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
-apply plugin: 'jacoco-android'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'jacoco-android'
+apply plugin: 'spoon'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -96,6 +97,18 @@ jacocoAndroidUnitTestReport {
     excludes += ['**/*$ViewBinder*.*']
 }
 
+spoon {
+//    codeCoverage = true
+}
+
+retrolambda {
+//    jdk System.getenv("JAVA_HOME")
+    oldJdk System.getenv("JAVA7_HOME")
+    javaVersion JavaVersion.VERSION_1_7
+    defaultMethods false
+    incremental true
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':marvel-core')
@@ -110,6 +123,7 @@ dependencies {
     androidTestCompile rootProject.ext.testLibraries.supportAnnotations
     androidTestCompile rootProject.ext.testLibraries.espresso
     androidTestCompile rootProject.ext.testLibraries.espressoContrib
+    androidTestCompile rootProject.ext.testLibraries.spoon
 
     compile rootProject.ext.libraries.appCompat
     compile rootProject.ext.libraries.androidSupport
@@ -139,7 +153,6 @@ dependencies {
 
     compile rootProject.ext.libraries.firebaseCore
     compile rootProject.ext.libraries.firebaseCrash
-    compile 'com.android.support:support-annotations:25.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

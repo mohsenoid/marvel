@@ -78,12 +78,26 @@ public class DatabaseHelperImpl extends OrmLiteSqliteOpenHelper implements Datab
 
     @Override
     public List<CharacterModel> selectLast5Characters() throws SQLException {
-        return getCharacterDao().query(getCharacterDao().queryBuilder().orderBy(CharacterModel.FIELD_CHARACTER_ID, false).limit(5L).prepare());
+        return getCharacterDao().query(getCharacterDao()
+                .queryBuilder()
+                .orderBy(CharacterModel.FIELD_CHARACTER_ID, false)
+                .limit(5L)
+                .prepare());
     }
 
     @Override
     public List<CharacterModel> selectAllCharacters() throws SQLException {
-        return getCharacterDao().query(getCharacterDao().queryBuilder().prepare());
+        return getCharacterDao().query(getCharacterDao().queryBuilder()
+                .prepare());
+    }
+
+    @Override
+    public CharacterModel getCharacters(String query) throws SQLException {
+        return getCharacterDao().queryForFirst(getCharacterDao()
+                .queryBuilder()
+                .where()
+                .like(CharacterModel.FIELD_CHARACTER_NAME, query)
+                .prepare());
     }
 
     // Close the database connections and clear any cached DAOs.

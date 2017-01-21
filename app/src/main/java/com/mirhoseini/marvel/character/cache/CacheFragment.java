@@ -32,14 +32,14 @@ import timber.log.Timber;
  * Created by Mohsen on 20/10/2016.
  */
 
-public class CacheFragment extends BaseFragment implements CacheView {
+public class CacheFragment extends BaseFragment implements CacheContract.View {
 
     public static final int COLUMN_COUNT = 2;
     // injecting dependencies via Dagger
     @Inject
     Context context;
     @Inject
-    CachePresenter presenter;
+    CacheContract.Presenter presenter;
     @Inject
     CharactersRecyclerViewAdapter adapter;
 

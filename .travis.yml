@@ -51,7 +51,7 @@ script:
   - adb shell settings put global transition_animation_scale 0
   - adb shell settings put global animator_duration_scale 0
 
-  - ./gradlew build createMockDebugCoverageReport jacocoTestReport
+  - ./gradlew build spoonMockDebugAndroidTest createMockDebugCoverageReport jacocoTestReport
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

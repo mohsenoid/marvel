@@ -18,6 +18,7 @@ import com.mirhoseini.marvel.domain.model.Data;
 import com.mirhoseini.marvel.domain.model.Results;
 import com.mirhoseini.marvel.domain.model.Thumbnail;
 import com.mirhoseini.marvel.util.Constants;
+import com.squareup.spoon.Spoon;
 
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Before;
@@ -127,6 +128,8 @@ public class MainActivityTest {
         // Check view is loaded as we expect it to be
         onView(withText(TEST_CHARACTER_NAME)).check(matches(withText(TEST_CHARACTER_NAME)));
         onView(withId(R.id.description)).check(matches(withText(TEST_CHARACTER_DESCRIPTION)));
+
+        Spoon.screenshot(mainActivity.getActivity(),"shouldBeAbleToSearchForTestCharacter");
     }
 
     @Test
@@ -155,6 +158,8 @@ public class MainActivityTest {
                                 1),
                         isDisplayed()));
         cachedName.check(matches(withText(TEST_CHARACTER_NAME)));
+
+        Spoon.screenshot(mainActivity.getActivity(),"shouldBeAbleToCacheTestCharacter");
     }
 }
 

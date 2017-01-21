@@ -27,4 +27,9 @@ public class DatabaseHelperImpl implements DatabaseHelper {
     public List<CharacterModel> selectAllCharacters() throws SQLException {
         return null;
     }
+
+    @Override
+    public CharacterModel getCharacters(String query) throws SQLException {
+        return null;
+    }
 }

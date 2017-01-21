@@ -6,9 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import javax.inject.Scope;
 
 /**
- * Created by Mohsen on 20/10/2016.
+ * Cache Scope
  */
-
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
 @interface Cache {

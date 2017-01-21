@@ -4,15 +4,14 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by Mohsen on 20/10/2016.
+ * This is a Dagger module used to pass in Cache Presenter dependency.
  */
-
 @Module
 public class CacheModule {
 
     @Provides
     @Cache
-    public CachePresenter providePresenter(CachePresenterImpl presenter) {
+    public CacheContract.Presenter providePresenter(CachePresenter presenter) {
         return presenter;
     }
 

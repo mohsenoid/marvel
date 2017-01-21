@@ -9,13 +9,17 @@ import com.mirhoseini.marvel.character.search.SearchModule;
 import com.mirhoseini.marvel.character.search.SearchSubComponent;
 
 /**
+ * Marvel Application class used for general variables required during application run.
  * Created by Mohsen on 20/10/2016.
  */
 
 public abstract class MarvelApplication extends Application {
 
+    /** Application main component used for injection. */
     private static ApplicationComponent component;
+    /** Cache subComponent used for injection. */
     private CacheSubComponent cacheSubComponent;
+    /** Search subComponent used for injection. */
     private SearchSubComponent searchSubComponent;
 
     public static ApplicationComponent getComponent() {
