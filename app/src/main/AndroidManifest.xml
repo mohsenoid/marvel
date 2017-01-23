@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.SplashActivity"
+            android:name=".splash.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.Splash" />
 
@@ -29,7 +29,7 @@
         <activity-alias
             android:name=".Launcher"
             android:label="@string/app_name"
-            android:targetActivity=".activity.SplashActivity">
+            android:targetActivity=".splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,16 +38,16 @@
         </activity-alias>
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".main.MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
-            android:name=".activity.CharacterActivity"
+            android:name=".character.CharacterActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".activity.MainActivity">
+            android:parentActivityName=".main.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mirhoseini.marvel.activity.MainActivity" />
+                android:value="com.mirhoseini.marvel.main.MainActivity" />
         </activity>
     </application>
 

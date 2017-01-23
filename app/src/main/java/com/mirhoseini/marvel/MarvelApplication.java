@@ -15,11 +15,17 @@ import com.mirhoseini.marvel.character.search.SearchSubComponent;
 
 public abstract class MarvelApplication extends Application {
 
-    /** Application main component used for injection. */
+    /**
+     * Application main component used for injection.
+     */
     private static ApplicationComponent component;
-    /** Cache subComponent used for injection. */
+    /**
+     * Cache subComponent used for injection.
+     */
     private CacheSubComponent cacheSubComponent;
-    /** Search subComponent used for injection. */
+    /**
+     * Search subComponent used for injection.
+     */
     private SearchSubComponent searchSubComponent;
 
     public static ApplicationComponent getComponent() {

@@ -2,6 +2,7 @@ package com.mirhoseini.marvel.activity;
 
 import android.app.Instrumentation;
 import android.content.Intent;
+import android.os.Build;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
@@ -12,11 +13,12 @@ import com.mirhoseini.marvel.ApplicationTestComponent;
 import com.mirhoseini.marvel.MarvelApplication;
 import com.mirhoseini.marvel.MarvelTestApplication;
 import com.mirhoseini.marvel.R;
-import com.mirhoseini.marvel.domain.client.MarvelApi;
-import com.mirhoseini.marvel.domain.model.CharactersResponse;
-import com.mirhoseini.marvel.domain.model.Data;
-import com.mirhoseini.marvel.domain.model.Results;
-import com.mirhoseini.marvel.domain.model.Thumbnail;
+import com.mirhoseini.marvel.network.client.MarvelApi;
+import com.mirhoseini.marvel.network.model.CharactersResponse;
+import com.mirhoseini.marvel.network.model.Data;
+import com.mirhoseini.marvel.network.model.Results;
+import com.mirhoseini.marvel.network.model.Thumbnail;
+import com.mirhoseini.marvel.main.MainActivity;
 import com.mirhoseini.marvel.util.Constants;
 import com.squareup.spoon.Spoon;
 
@@ -45,9 +47,8 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.when;
 
 /**
- * Created by Mohsen on 21/10/2016.
+ * MainActivity instrumentation test using espresso.
  */
-
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
 
@@ -60,7 +61,7 @@ public class MainActivityTest {
     public ActivityTestRule<MainActivity> mainActivity = new ActivityTestRule<>(
             MainActivity.class,
             true,
-            // false: do not launch the activity immediately
+            // false: means do not launch the activity immediately
             false);
 
     @Inject
@@ -129,7 +130,9 @@ public class MainActivityTest {
         onView(withText(TEST_CHARACTER_NAME)).check(matches(withText(TEST_CHARACTER_NAME)));
         onView(withId(R.id.description)).check(matches(withText(TEST_CHARACTER_DESCRIPTION)));
 
-        Spoon.screenshot(mainActivity.getActivity(),"shouldBeAbleToSearchForTestCharacter");
+        // avoid error caused by permission in new android devices
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1)
+            Spoon.screenshot(mainActivity.getActivity(), "shouldBeAbleToSearchForTestCharacter");
     }
 
     @Test
@@ -159,7 +162,9 @@ public class MainActivityTest {
                         isDisplayed()));
         cachedName.check(matches(withText(TEST_CHARACTER_NAME)));
 
-        Spoon.screenshot(mainActivity.getActivity(),"shouldBeAbleToCacheTestCharacter");
+        // avoid error caused by permission in new android devices
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1)
+            Spoon.screenshot(mainActivity.getActivity(), "shouldBeAbleToCacheTestCharacter");
     }
 }
 

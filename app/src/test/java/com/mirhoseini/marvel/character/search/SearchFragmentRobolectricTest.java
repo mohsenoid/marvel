@@ -2,7 +2,7 @@ package com.mirhoseini.marvel.character.search;
 
 import com.mirhoseini.marvel.BuildConfig;
 import com.mirhoseini.marvel.R;
-import com.mirhoseini.marvel.activity.MainActivity;
+import com.mirhoseini.marvel.main.MainActivity;
 import com.mirhoseini.marvel.test.support.ShadowSnackbar;
 
 import org.junit.Before;
@@ -14,11 +14,9 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
 
 import static com.mirhoseini.marvel.test.support.Assert.assertProgressDialogIsShown;
-import static com.mirhoseini.marvel.test.support.Assert.assertSnackbarIsShown;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 /**
  * Created by Mohsen on 21/10/2016.
@@ -64,5 +62,5 @@ public class SearchFragmentRobolectricTest {
 
         assertThat(activity.getString(R.string.no_result), equalTo(ShadowToast.getTextOfLatestToast()));
     }
-    
+
 }

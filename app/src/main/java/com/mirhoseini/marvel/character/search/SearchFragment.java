@@ -16,10 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.mirhoseini.marvel.ApplicationContext;
 import com.mirhoseini.marvel.MarvelApplication;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.base.BaseFragment;
-import com.mirhoseini.marvel.database.model.CharacterModel;
+import com.mirhoseini.marvel.storage.model.CharacterModel;
 import com.mirhoseini.utils.Utils;
 
 import java.util.List;
@@ -42,7 +43,8 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
 
     // injecting dependencies via Dagger
     @Inject
-    Context context;
+    @ApplicationContext
+    Context applicationContext;
     @Inject
     Resources resources;
     @Inject
@@ -86,14 +88,14 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
     @OnClick(R.id.show)
     void onShowClick(View view) {
         character.setError(null);
-        Utils.hideKeyboard(context, character);
+        Utils.hideKeyboard(applicationContext, character);
 
         String query = character.getText().toString().trim();
 
         if (presenter.isQueryValid(query)) {
             logFirebaseAnalyticsSearchEvent(query);
 
-            presenter.doSearch(Utils.isConnected(context), query, Utils.getCurrentTimestamp());
+            presenter.doSearch(query, Utils.getCurrentTimestamp());
         } else {
             character.setError(resources.getString(R.string.character_error));
             character.requestFocus();
@@ -139,7 +141,7 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
 
     @Override
     public void setCharactersCachedData(List<CharacterModel> characters) {
-        character.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, characters));
+        character.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, characters));
     }
 
     @Override

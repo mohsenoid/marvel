@@ -1,5 +1,5 @@
 # --table-start--
-dataClass=com.mirhoseini.marvel.database.model.CharacterModel
+dataClass=com.mirhoseini.marvel.storage.model.CharacterModel
 tableName=characters
 # --table-fields-start--
 # --field-start--

@@ -9,7 +9,6 @@ import com.mirhoseini.marvel.util.Constants;
 import com.mirhoseini.marvel.util.SchedulerProvider;
 import com.mirhoseini.marvel.util.StateManager;
 import com.mirhoseini.marvel.util.StateManagerImpl;
-import com.mirhoseini.utils.Utils;
 
 import java.io.File;
 
@@ -26,6 +25,7 @@ import okhttp3.HttpUrl;
 
 @Module
 public class ApplicationModule {
+
     @Provides
     @Singleton
     @Named("isDebug")
@@ -35,15 +35,13 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    @Named("networkTimeoutInSeconds")
-    int provideNetworkTimeoutInSeconds() {
-        return AppConstants.NETWORK_CONNECTION_TIMEOUT;
+    StateManager provideStateManager(StateManagerImpl stateManager) {
+        return stateManager;
     }
 
     @Provides
-    @Singleton
-    HttpUrl provideEndpoint() {
-        return HttpUrl.parse(Constants.BASE_URL);
+    FirebaseAnalytics provideFirebaseAnalytics(@ApplicationContext Context context) {
+        return FirebaseAnalytics.getInstance(context);
     }
 
     @Provides
@@ -54,9 +52,9 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    @Named("cacheSize")
-    long provideCacheSize() {
-        return AppConstants.CACHE_SIZE;
+    @Named("networkTimeoutInSeconds")
+    int provideNetworkTimeoutInSeconds() {
+        return AppConstants.NETWORK_CONNECTION_TIMEOUT;
     }
 
     @Provides
@@ -76,31 +74,28 @@ public class ApplicationModule {
     @Provides
     @Singleton
     @Named("retryCount")
-    public int provideApiRetryCount() {
+    int provideApiRetryCount() {
         return AppConstants.API_RETRY_COUNT;
     }
 
     @Provides
     @Singleton
     @Named("cacheDir")
-    File provideCacheDir(Context context) {
+    File provideCacheDir(@ApplicationContext Context context) {
         return context.getCacheDir();
     }
 
     @Provides
-    @Named("isConnect")
-    boolean provideIsConnect(Context context) {
-        return Utils.isConnected(context);
-    }
-
-    @Provides
-    FirebaseAnalytics provideFirebaseAnalytics(Context context) {
-        return FirebaseAnalytics.getInstance(context);
+    @Singleton
+    @Named("cacheSize")
+    long provideCacheSize() {
+        return AppConstants.CACHE_SIZE;
     }
 
     @Provides
     @Singleton
-    public StateManager provideStateManager(StateManagerImpl stateManager) {
-        return stateManager;
+    HttpUrl provideEndpoint() {
+        return HttpUrl.parse(Constants.BASE_URL);
     }
+
 }

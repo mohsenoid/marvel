@@ -1,6 +1,6 @@
 package com.mirhoseini.marvel.character.cache;
 
-import com.mirhoseini.marvel.database.DatabaseHelper;
+import com.mirhoseini.marvel.storage.DatabaseHelper;
 
 import java.sql.SQLException;
 

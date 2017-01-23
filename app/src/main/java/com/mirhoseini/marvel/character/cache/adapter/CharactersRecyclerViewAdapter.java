@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.jakewharton.rxbinding.view.RxView;
 import com.mirhoseini.marvel.R;
-import com.mirhoseini.marvel.database.model.CharacterModel;
+import com.mirhoseini.marvel.storage.model.CharacterModel;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.mirhoseini.marvel.BR;
-import com.mirhoseini.marvel.database.model.CharacterModel;
+import com.mirhoseini.marvel.storage.model.CharacterModel;
 
 /**
  * Created by Mohsen on 20/10/2016.

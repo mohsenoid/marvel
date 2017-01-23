@@ -9,11 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.mirhoseini.marvel.ApplicationContext;
 import com.mirhoseini.marvel.MarvelApplication;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.base.BaseFragment;
 import com.mirhoseini.marvel.character.cache.adapter.CharactersRecyclerViewAdapter;
-import com.mirhoseini.marvel.database.model.CharacterModel;
+import com.mirhoseini.marvel.storage.model.CharacterModel;
 import com.mirhoseini.marvel.util.AppConstants;
 import com.mirhoseini.marvel.util.GridSpacingItemDecoration;
 
@@ -37,7 +38,8 @@ public class CacheFragment extends BaseFragment implements CacheContract.View {
     public static final int COLUMN_COUNT = 2;
     // injecting dependencies via Dagger
     @Inject
-    Context context;
+    @ApplicationContext
+    Context applicationContext;
     @Inject
     CacheContract.Presenter presenter;
     @Inject
@@ -134,7 +136,7 @@ public class CacheFragment extends BaseFragment implements CacheContract.View {
     }
 
     public void initLayoutManager() {
-        gridLayoutManager = new GridLayoutManager(context, COLUMN_COUNT);
+        gridLayoutManager = new GridLayoutManager(applicationContext, COLUMN_COUNT);
         // Create a custom SpanSizeLookup where the first item spans both columns
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -166,7 +168,7 @@ public class CacheFragment extends BaseFragment implements CacheContract.View {
     public void showError(Throwable throwable) {
         Timber.e(throwable, "Error!");
 
-        Toast.makeText(context, throwable.getMessage(), Toast.LENGTH_LONG).show();
+        Toast.makeText(applicationContext, throwable.getMessage(), Toast.LENGTH_LONG).show();
     }
 
     public Observable<CharacterModel> characterObservable() {

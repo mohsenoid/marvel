@@ -31,16 +31,19 @@ public class AndroidModule {
 
     /**
      * Provide Application Context for Dagger injection.
+     *
      * @return Application Context
      */
     @Provides
     @Singleton
+    @ApplicationContext
     Context provideContext() {
         return application.getApplicationContext();
     }
 
     /**
      * Provide Application Resources for Dagger injection.
+     *
      * @return Application Resources
      */
     @Provides

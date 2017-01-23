@@ -1,13 +1,13 @@
 package com.mirhoseini.marvel.character.search;
 
-import com.mirhoseini.marvel.database.DatabaseHelper;
-import com.mirhoseini.marvel.database.mapper.Mapper;
-import com.mirhoseini.marvel.database.model.CharacterModel;
-import com.mirhoseini.marvel.domain.client.MarvelApi;
-import com.mirhoseini.marvel.domain.model.CharactersResponse;
-import com.mirhoseini.marvel.domain.model.Data;
-import com.mirhoseini.marvel.domain.model.Results;
-import com.mirhoseini.marvel.domain.model.Thumbnail;
+import com.mirhoseini.marvel.storage.DatabaseHelper;
+import com.mirhoseini.marvel.storage.mapper.Mapper;
+import com.mirhoseini.marvel.storage.model.CharacterModel;
+import com.mirhoseini.marvel.network.client.MarvelApi;
+import com.mirhoseini.marvel.network.model.CharactersResponse;
+import com.mirhoseini.marvel.network.model.Data;
+import com.mirhoseini.marvel.network.model.Results;
+import com.mirhoseini.marvel.network.model.Thumbnail;
 import com.mirhoseini.marvel.util.Constants;
 import com.mirhoseini.marvel.util.SchedulerProvider;
 
@@ -15,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
-import java.util.Collections;
 
 import rx.Observable;
 import rx.observers.TestSubscriber;

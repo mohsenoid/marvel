@@ -2,9 +2,9 @@ package com.mirhoseini.marvel;
 
 import com.mirhoseini.marvel.character.search.SearchModule;
 import com.mirhoseini.marvel.character.search.SearchSubComponent;
-import com.mirhoseini.marvel.database.DatabaseModule;
-import com.mirhoseini.marvel.domain.ApiModule;
-import com.mirhoseini.marvel.domain.ClientModule;
+import com.mirhoseini.marvel.storage.DatabaseModule;
+import com.mirhoseini.marvel.network.client.ApiModule;
+import com.mirhoseini.marvel.network.client.ClientModule;
 
 import javax.inject.Singleton;
 

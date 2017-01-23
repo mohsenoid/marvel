@@ -6,7 +6,8 @@ import android.widget.TextView;
 
 import com.mirhoseini.marvel.BuildConfig;
 import com.mirhoseini.marvel.R;
-import com.mirhoseini.marvel.database.model.CharacterModel;
+import com.mirhoseini.marvel.character.CharacterActivity;
+import com.mirhoseini.marvel.storage.model.CharacterModel;
 import com.mirhoseini.marvel.test.support.ShadowSnackbar;
 
 import org.junit.Before;

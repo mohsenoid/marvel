@@ -1,7 +1,7 @@
 ext {
     minSdkVersion = 9
     compileSdkVersion = 25
-    buildToolsVersion = "25.0.0"
+    buildToolsVersion = "25.0.2"
 
     //Android
     androidSupportVersion = "25.1.0"
@@ -22,8 +22,7 @@ ext {
 
     //Testing
     junitVersion = "4.12"
-    dexmakerVersion = "1.2"
-    mockitoVersion = "1.10.19"
+    mockitoVersion = "2.6.7"
     supportTestVesion = "0.5"
     robolectricVersion = "3.1.1"
     espressoVersion = "2.2.2"
@@ -63,10 +62,9 @@ ext {
 
     testLibraries = [
             junit             : "junit:junit:${junitVersion}",
-            mockito           : "org.mockito:mockito-core:${mockitoVersion}",
+            mockitoCore       : "org.mockito:mockito-core:${mockitoVersion}",
+            mockitoAndroid    : "org.mockito:mockito-android:${mockitoVersion}",
             robolectric       : "org.robolectric:robolectric:${robolectricVersion}",
-            dexmaker          : "com.google.dexmaker:dexmaker:${dexmakerVersion}",
-            dexmakerMockito   : "com.google.dexmaker:dexmaker-mockito:${dexmakerVersion}",
             supportAnnotations: "com.android.support:support-annotations:${androidSupportVersion}",
             supportTestRunner : "com.android.support.test:runner:${supportTestVesion}",
             supportTestRules  : "com.android.support.test:rules:${supportTestVesion}",

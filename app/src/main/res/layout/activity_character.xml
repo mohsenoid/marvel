@@ -7,7 +7,7 @@
 
         <variable
             name="character"
-            type="com.mirhoseini.marvel.database.model.CharacterModel" />
+            type="com.mirhoseini.marvel.storage.model.CharacterModel" />
     </data>
 
     <LinearLayout

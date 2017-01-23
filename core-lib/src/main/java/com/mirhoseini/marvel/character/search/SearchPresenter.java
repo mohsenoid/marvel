@@ -1,6 +1,7 @@
 package com.mirhoseini.marvel.character.search;
 
 import com.mirhoseini.marvel.util.SchedulerProvider;
+import com.mirhoseini.marvel.util.StateManager;
 
 import javax.inject.Inject;
 
@@ -15,12 +16,14 @@ class SearchPresenter implements SearchContract.Presenter {
     private SchedulerProvider scheduler;
     private SearchContract.Interactor interactor;
     private SearchContract.View view;
+    private StateManager stateManager;
     private CompositeSubscription subscriptions = new CompositeSubscription();
 
     @Inject
-    public SearchPresenter(SchedulerProvider scheduler, SearchContract.Interactor interactor) {
+    public SearchPresenter(SchedulerProvider scheduler, SearchContract.Interactor interactor, StateManager stateManager) {
         this.scheduler = scheduler;
         this.interactor = interactor;
+        this.stateManager = stateManager;
     }
 
     @Override
@@ -30,7 +33,7 @@ class SearchPresenter implements SearchContract.Presenter {
 
 
     @Override
-    public void doSearch(boolean isConnected, String query, long timestamp) {
+    public void doSearch(String query, long timestamp) {
         if (null != view) {
             view.showProgress();
         }
@@ -43,7 +46,7 @@ class SearchPresenter implements SearchContract.Presenter {
                                         view.hideProgress();
                                         view.showCharacter(character);
 
-                                        if (!isConnected)
+                                        if (!stateManager.isConnect())
                                             view.showOfflineMessage(false);
                                     }
                                 },
@@ -52,7 +55,7 @@ class SearchPresenter implements SearchContract.Presenter {
                                     if (null != view) {
                                         view.hideProgress();
 
-                                        if (isConnected) {
+                                        if (stateManager.isConnect()) {
                                             if (throwable instanceof ApiResponseCodeException)
                                                 view.showServiceError((ApiResponseCodeException) throwable);
                                             else if (throwable instanceof NoSuchCharacterException)

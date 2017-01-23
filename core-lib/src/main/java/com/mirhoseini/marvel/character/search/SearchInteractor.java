@@ -1,10 +1,10 @@
 package com.mirhoseini.marvel.character.search;
 
 
-import com.mirhoseini.marvel.database.DatabaseHelper;
-import com.mirhoseini.marvel.database.mapper.Mapper;
-import com.mirhoseini.marvel.database.model.CharacterModel;
-import com.mirhoseini.marvel.domain.client.MarvelApi;
+import com.mirhoseini.marvel.storage.DatabaseHelper;
+import com.mirhoseini.marvel.storage.mapper.Mapper;
+import com.mirhoseini.marvel.storage.model.CharacterModel;
+import com.mirhoseini.marvel.network.client.MarvelApi;
 import com.mirhoseini.marvel.util.Constants;
 import com.mirhoseini.marvel.util.HashGenerator;
 import com.mirhoseini.marvel.util.SchedulerProvider;

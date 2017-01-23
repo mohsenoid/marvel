@@ -2,7 +2,7 @@ package com.mirhoseini.marvel.character.cache;
 
 import com.mirhoseini.marvel.base.BasePresenter;
 import com.mirhoseini.marvel.base.BaseView;
-import com.mirhoseini.marvel.database.model.CharacterModel;
+import com.mirhoseini.marvel.storage.model.CharacterModel;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.mirhoseini.marvel.character.search;
 
 import com.mirhoseini.marvel.ConsoleComponent;
-import com.mirhoseini.marvel.database.model.CharacterModel;
+import com.mirhoseini.marvel.storage.model.CharacterModel;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class CharacterSearch implements SearchContract.View {
     }
 
     public void doSearch(String query) {
-        presenter.doSearch(true, query, System.currentTimeMillis() / 1000);
+        presenter.doSearch(query, System.currentTimeMillis() / 1000);
     }
 
     @Override
