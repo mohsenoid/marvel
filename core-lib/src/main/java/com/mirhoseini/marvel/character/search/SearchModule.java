@@ -4,21 +4,20 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
- * Created by Mohsen on 20/10/2016.
+ * This is a Dagger module used to pass in Search Presenter and Interactor dependencies.
  */
-
 @Module
 public class SearchModule {
 
     @Provides
     @Search
-    public SearchInteractor provideInteractor(SearchInteractorImpl interactor) {
+    public SearchContract.Interactor provideInteractor(SearchInteractor interactor) {
         return interactor;
     }
 
     @Provides
     @Search
-    public SearchPresenter providePresenter(SearchPresenterImpl presenter) {
+    public SearchContract.Presenter providePresenter(SearchPresenter presenter) {
         return presenter;
     }
 

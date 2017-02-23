@@ -15,6 +15,7 @@ package com.mirhoseini.marvel.util;
 
 import android.content.Context;
 
+import com.mirhoseini.marvel.ApplicationContext;
 import com.mirhoseini.utils.Utils;
 
 import javax.inject.Inject;
@@ -28,7 +29,7 @@ public class StateManagerImpl implements StateManager {
     private Context context;
 
     @Inject
-    public StateManagerImpl(Context context) {
+    StateManagerImpl(@ApplicationContext Context context) {
         this.context = context;
     }
 

@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'jacoco-android'
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'jacoco-android'
+apply plugin: 'spoon'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -96,20 +96,32 @@ jacocoAndroidUnitTestReport {
     excludes += ['**/*$ViewBinder*.*']
 }
 
+spoon {
+//    codeCoverage = true
+}
+
+retrolambda {
+//    jdk System.getenv("JAVA_HOME")
+    oldJdk System.getenv("JAVA7_HOME")
+    javaVersion JavaVersion.VERSION_1_7
+    defaultMethods false
+    incremental true
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':marvel-core')
 
     testCompile rootProject.ext.testLibraries.junit
     testCompile rootProject.ext.testLibraries.robolectric
+    testCompile rootProject.ext.testLibraries.mockitoCore
 
-    androidTestCompile rootProject.ext.testLibraries.mockito
-    androidTestCompile rootProject.ext.testLibraries.dexmaker
-    androidTestCompile rootProject.ext.testLibraries.dexmakerMockito
+    androidTestCompile rootProject.ext.testLibraries.mockitoAndroid
     androidTestCompile rootProject.ext.testLibraries.supportTestRunner
     androidTestCompile rootProject.ext.testLibraries.supportAnnotations
     androidTestCompile rootProject.ext.testLibraries.espresso
     androidTestCompile rootProject.ext.testLibraries.espressoContrib
+    androidTestCompile rootProject.ext.testLibraries.spoon
 
     compile rootProject.ext.libraries.appCompat
     compile rootProject.ext.libraries.androidSupport
@@ -127,11 +139,11 @@ dependencies {
     compile rootProject.ext.libraries.picasso
 
     compile rootProject.ext.libraries.butterknife
-    apt rootProject.ext.aptLibraries.butterknifeCompiler
+    annotationProcessor rootProject.ext.aptLibraries.butterknifeCompiler
 
     compile rootProject.ext.libraries.dagger
-    apt rootProject.ext.aptLibraries.daggerCompiler
-    androidTestApt rootProject.ext.aptLibraries.daggerCompiler
+    annotationProcessor rootProject.ext.aptLibraries.daggerCompiler
+    androidTestAnnotationProcessor rootProject.ext.aptLibraries.daggerCompiler
 
     compile rootProject.ext.libraries.timber
 
@@ -139,7 +151,6 @@ dependencies {
 
     compile rootProject.ext.libraries.firebaseCore
     compile rootProject.ext.libraries.firebaseCrash
-    compile 'com.android.support:support-annotations:25.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -1,9 +1,8 @@
 package com.mirhoseini.marvel.base;
 
 /**
- * Created by Mohsen on 20/10/2016.
+ * Contains Interactor's general methods.
  */
-
 public interface BaseInteractor {
 
     void unbind();

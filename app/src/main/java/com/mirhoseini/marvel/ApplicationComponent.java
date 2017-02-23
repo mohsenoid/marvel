@@ -1,15 +1,16 @@
 package com.mirhoseini.marvel;
 
-import com.mirhoseini.marvel.activity.CharacterActivity;
-import com.mirhoseini.marvel.activity.MainActivity;
-import com.mirhoseini.marvel.activity.SplashActivity;
+import com.mirhoseini.marvel.character.CharacterActivity;
 import com.mirhoseini.marvel.character.cache.CacheModule;
 import com.mirhoseini.marvel.character.cache.CacheSubComponent;
 import com.mirhoseini.marvel.character.search.SearchModule;
 import com.mirhoseini.marvel.character.search.SearchSubComponent;
-import com.mirhoseini.marvel.database.DatabaseModule;
-import com.mirhoseini.marvel.domain.ApiModule;
-import com.mirhoseini.marvel.domain.ClientModule;
+import com.mirhoseini.marvel.storage.DatabaseModule;
+import com.mirhoseini.marvel.network.client.ApiModule;
+import com.mirhoseini.marvel.network.client.ClientModule;
+import com.mirhoseini.marvel.main.MainModule;
+import com.mirhoseini.marvel.main.MainSubComponent;
+import com.mirhoseini.marvel.splash.SplashActivity;
 
 import javax.inject.Singleton;
 
@@ -31,9 +32,9 @@ public interface ApplicationComponent {
 
     void inject(SplashActivity activity);
 
-    void inject(MainActivity activity);
-
     void inject(CharacterActivity characterActivity);
+
+    MainSubComponent plus(MainModule module);
 
     SearchSubComponent plus(SearchModule module);
 

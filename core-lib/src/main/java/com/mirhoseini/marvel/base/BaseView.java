@@ -1,9 +1,8 @@
 package com.mirhoseini.marvel.base;
 
 /**
- * Created by Mohsen on 20/10/2016.
+ * Contains View's general methods.
  */
-
 public interface BaseView {
 
     void showMessage(String message);

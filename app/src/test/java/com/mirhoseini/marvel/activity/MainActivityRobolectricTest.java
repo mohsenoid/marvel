@@ -1,7 +1,7 @@
 package com.mirhoseini.marvel.activity;
 
 import com.mirhoseini.marvel.BuildConfig;
-import com.mirhoseini.marvel.R;
+import com.mirhoseini.marvel.main.MainActivity;
 import com.mirhoseini.marvel.test.support.ShadowSnackbar;
 
 import org.junit.Before;
@@ -12,7 +12,6 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
 
-import static com.mirhoseini.marvel.test.support.Assert.assertSnackbarIsShown;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;

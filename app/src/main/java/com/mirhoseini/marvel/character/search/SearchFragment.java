@@ -16,10 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.mirhoseini.marvel.ApplicationContext;
 import com.mirhoseini.marvel.MarvelApplication;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.base.BaseFragment;
-import com.mirhoseini.marvel.database.model.CharacterModel;
+import com.mirhoseini.marvel.storage.model.CharacterModel;
 import com.mirhoseini.utils.Utils;
 
 import java.util.List;
@@ -38,17 +39,18 @@ import timber.log.Timber;
  * Created by Mohsen on 20/10/2016.
  */
 
-public class SearchFragment extends BaseFragment implements SearchView {
+public class SearchFragment extends BaseFragment implements SearchContract.View {
 
     // injecting dependencies via Dagger
     @Inject
-    Context context;
+    @ApplicationContext
+    Context applicationContext;
     @Inject
     Resources resources;
     @Inject
     FirebaseAnalytics firebaseAnalytics;
     @Inject
-    SearchPresenter presenter;
+    SearchContract.Presenter presenter;
 
     // injecting views via ButterKnife
     @BindView(R.id.character)
@@ -86,14 +88,14 @@ public class SearchFragment extends BaseFragment implements SearchView {
     @OnClick(R.id.show)
     void onShowClick(View view) {
         character.setError(null);
-        Utils.hideKeyboard(context, character);
+        Utils.hideKeyboard(applicationContext, character);
 
         String query = character.getText().toString().trim();
 
         if (presenter.isQueryValid(query)) {
             logFirebaseAnalyticsSearchEvent(query);
 
-            presenter.doSearch(Utils.isConnected(context), query, Utils.getCurrentTimestamp());
+            presenter.doSearch(query, Utils.getCurrentTimestamp());
         } else {
             character.setError(resources.getString(R.string.character_error));
             character.requestFocus();
@@ -139,7 +141,7 @@ public class SearchFragment extends BaseFragment implements SearchView {
 
     @Override
     public void setCharactersCachedData(List<CharacterModel> characters) {
-        character.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, characters));
+        character.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, characters));
     }
 
     @Override
@@ -164,6 +166,13 @@ public class SearchFragment extends BaseFragment implements SearchView {
         Timber.e(throwable, "Error!");
 
         showRetryMessage(throwable);
+    }
+
+    @Override
+    public void showDatabaseError(Throwable throwable) {
+        Timber.e(throwable, "Error!");
+
+        showMessage(throwable.getMessage());
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.mirhoseini.marvel;
 
 
-import com.mirhoseini.marvel.domain.ApiTestModule;
+import com.mirhoseini.marvel.network.ApiTestModule;
 
 /**
  * Created by Mohsen on 21/10/2016.
