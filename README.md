@@ -59,7 +59,7 @@ Some simple Test Cases was designed to test application UI functionality and cor
 
 The Application implemented and structured bases on the MVP pattern best practice, contributed by [Antonio Leiva](http://antonioleiva.com/mvp-android/).
 
-Whole application functionality is implemented in "Core-Lib" module using pure Java, and .the "App" module contain all codes required for Android Application to load on Android OS, which can be replace by any other interface (e.g. console app or web app)
+Whole application functionality is implemented in "Core-Lib" module using pure Java, and the "App" module contain all codes required for Android Application to load on Android OS, which can be replace by any other interface (e.g. console app or web app)
 
 The **view** (MainActivity), contain two fragments. Search and Cache fragments both contain their own presenter and implement View interfaces and the only thing that the view will do is calling a method from the presenter every time there is an interface action.
 
