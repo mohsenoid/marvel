@@ -1,4 +1,4 @@
-Marvel Application [![CircleCI](https://circleci.com/gh/mmirhoseini/marvel.svg?style=svg)](https://circleci.com/gh/mmirhoseini/marvel) [![Build Status](https://travis-ci.org/mmirhoseini/marvel.svg?branch=master)](https://travis-ci.org/mmirhoseini/marvel) [![codecov](https://codecov.io/gh/mmirhoseini/marvel/branch/master/graph/badge.svg)](https://codecov.io/gh/mmirhoseini/marvel)
+Marvel Application [![CircleCI](https://circleci.com/gh/mohsenoid/marvel.svg?style=svg)](https://circleci.com/gh/mohsenoid/marvel) [![Build Status](https://travis-ci.org/mmirhoseini/marvel.svg?branch=master)](https://travis-ci.org/mmirhoseini/marvel) [![codecov](https://codecov.io/gh/mmirhoseini/marvel/branch/master/graph/badge.svg)](https://codecov.io/gh/mmirhoseini/marvel)
 ===============================
 
 This repository holds the source code of the Marvel Application, a simple Android client for the [Marvel.com](http://marvel.com).
@@ -100,9 +100,9 @@ Finally, used [circleci](https://circleci.com/gh/mmirhoseini/marvel) and [travis
 ### Read more... ###
 You can read more about this sample project in this 5-part article:
 
-* [Part 1: Lets get to know the project](https://medium.com/@m_mirhoseini/yet-another-mvp-article-part-1-lets-get-to-know-the-project-d3fd553b3e21#.h18h1lefy)
-* [Part 2: How Dagger helps with the project](https://medium.com/@m_mirhoseini/yet-another-mvp-article-part-2-how-dagger-helps-with-the-project-90d049a45e00#.744fya69g)
-* [Part 3: Calling APIs using Retrofit](https://medium.com/@m_mirhoseini/yet-another-mvp-article-part-3-calling-apis-using-retrofit-23757f4eee05#.8c1wpn1vz)
-* [Part 4: RxJava and RxAndroid know how to response](https://medium.com/@m_mirhoseini/yet-another-mvp-article-part-4-rxjava-and-rxandroid-knows-how-to-response-cde42ccc4958#.pvk5vac37)
-* [Part 5: Writing Test using a mixture of Dagger and Espresso](https://medium.com/@m_mirhoseini/yet-another-mvp-article-part-5-writing-test-using-a-mixture-of-dagger-and-espresso-15c638182706#.mildke14n)
+* [Part 1: Lets get to know the project](https://medium.com/@mohsenoid/yet-another-mvp-article-part-1-lets-get-to-know-the-project-d3fd553b3e21#.h18h1lefy)
+* [Part 2: How Dagger helps with the project](https://medium.com/@mohsenoid/yet-another-mvp-article-part-2-how-dagger-helps-with-the-project-90d049a45e00#.744fya69g)
+* [Part 3: Calling APIs using Retrofit](https://medium.com/@mohsenoid/yet-another-mvp-article-part-3-calling-apis-using-retrofit-23757f4eee05#.8c1wpn1vz)
+* [Part 4: RxJava and RxAndroid know how to response](https://medium.com/@mohsenoid/yet-another-mvp-article-part-4-rxjava-and-rxandroid-knows-how-to-response-cde42ccc4958#.pvk5vac37)
+* [Part 5: Writing Test using a mixture of Dagger and Espresso](https://medium.com/@mohsenoid/yet-another-mvp-article-part-5-writing-test-using-a-mixture-of-dagger-and-espresso-15c638182706#.mildke14n)
  
