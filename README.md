@@ -1,4 +1,4 @@
-Marvel Application [![CircleCI](https://circleci.com/gh/mohsenoid/marvel.svg?style=svg)](https://circleci.com/gh/mohsenoid/marvel) [![Build Status](https://travis-ci.org/mmirhoseini/marvel.svg?branch=master)](https://travis-ci.org/mmirhoseini/marvel) [![codecov](https://codecov.io/gh/mmirhoseini/marvel/branch/master/graph/badge.svg)](https://codecov.io/gh/mmirhoseini/marvel)
+Marvel Application [![CircleCI](https://circleci.com/gh/mohsenoid/marvel.svg?style=svg)](https://circleci.com/gh/mohsenoid/marvel) [![Build Status](https://travis-ci.org/mohsenoid/marvel.svg?branch=master)](https://travis-ci.org/mohsenoid/marvel) [![codecov](https://codecov.io/gh/mohsenoid/marvel/branch/master/graph/badge.svg)](https://codecov.io/gh/mohsenoid/marvel)
 ===============================
 
 This repository holds the source code of the Marvel Application, a simple Android client for the [Marvel.com](http://marvel.com).
