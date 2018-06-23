@@ -59,6 +59,13 @@ android {
         abortOnError false
     }
 
+    /* allows robolectric to access Android resources */
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
     /* allow using java 8 lambda */
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
@@ -90,48 +97,57 @@ jacocoAndroidUnitTestReport {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':marvel-core')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':marvel-core')
 
-    testCompile "junit:junit:$junitVersion"
-    testCompile "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
 
-    androidTestCompile "org.mockito:mockito-core:$mockitoVersion"
-    androidTestCompile "com.google.dexmaker:dexmaker:$dexmakerVersion"
-    androidTestCompile "com.google.dexmaker:dexmaker-mockito:$dexmakerVersion"
-    androidTestCompile "com.android.support.test:runner:$supportTestVesion"
-    androidTestCompile "com.android.support.test.espresso:espresso-core:$espressoVersion"
-    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$espressoVersion"
+    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
+    androidTestImplementation "com.google.dexmaker:dexmaker:$dexmakerVersion"
+    androidTestImplementation "com.google.dexmaker:dexmaker-mockito:$dexmakerVersion"
+    androidTestImplementation "com.android.support:support-annotations:$androidSupportVersion"
+    androidTestImplementation "com.android.support.test:runner:$supportTestVesion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espressoVersion"
 
-    compile "com.android.support:appcompat-v7:$androidSupportVersion"
-    compile "com.android.support:support-v4:$androidSupportVersion"
-    compile "com.android.support:support-annotations:$androidSupportVersion"
-    compile "com.android.support:design:$androidSupportVersion"
-    compile "com.android.support:support-vector-drawable:$androidSupportVersion"
-    compile "com.android.support:recyclerview-v7:$androidSupportVersion"
-    compile "com.android.support:cardview-v7:$androidSupportVersion"
-    compile "com.android.support:palette-v7:$androidSupportVersion"
+    implementation "com.android.support:appcompat-v7:$androidSupportVersion"
+    implementation "com.android.support:support-v4:$androidSupportVersion"
+    implementation "com.android.support:design:$androidSupportVersion"
+    implementation "com.android.support:support-vector-drawable:$androidSupportVersion"
+    implementation "com.android.support:recyclerview-v7:$androidSupportVersion"
+    implementation "com.android.support:cardview-v7:$androidSupportVersion"
+    implementation "com.android.support:palette-v7:$androidSupportVersion"
 
-    compile "io.reactivex:rxandroid:$rxandroidVersion"
-    compile "com.jakewharton.rxbinding:rxbinding:$rxbindingVersion"
+    implementation "io.reactivex:rxandroid:$rxandroidVersion"
+    implementation "com.jakewharton.rxbinding:rxbinding:$rxbindingVersion"
 
-    compile "com.mirhoseini.utils:utils:$utilsVersion"
+    implementation "com.mirhoseini.utils:utils:$utilsVersion"
 
-    compile "com.squareup.picasso:picasso:$picassoVersion"
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
 
-    compile "com.jakewharton:butterknife:$butterknifeVersion"
+    implementation "com.jakewharton:butterknife:$butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 
-    compile "com.google.dagger:dagger:$daggerVersion"
+    implementation "io.reactivex:rxjava:$rxjavaVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+
+    implementation "com.google.dagger:dagger:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 
-    compile "com.jakewharton.timber:timber:$timberVersion"
+    implementation "com.jakewharton.timber:timber:$timberVersion"
 
-    compile "com.j256.ormlite:ormlite-android:$ormLiteVersion"
+    implementation "com.j256.ormlite:ormlite-android:$ormLiteVersion"
 
-    compile "com.google.firebase:firebase-core:$firebaseVersion"
-    compile "com.google.firebase:firebase-crash:$firebaseVersion"
+    implementation "com.google.firebase:firebase-core:$firebaseVersion"
+    implementation "com.google.firebase:firebase-crash:$firebaseVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'

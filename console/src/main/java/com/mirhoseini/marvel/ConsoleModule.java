@@ -2,7 +2,6 @@ package com.mirhoseini.marvel;
 
 import com.mirhoseini.marvel.util.ConsoleConstants;
 import com.mirhoseini.marvel.util.ConsoleSchedulerProvider;
-import com.mirhoseini.marvel.util.Constants;
 import com.mirhoseini.marvel.util.SchedulerProvider;
 import com.mirhoseini.marvel.util.StateManager;
 import com.mirhoseini.marvel.util.StateManagerImpl;

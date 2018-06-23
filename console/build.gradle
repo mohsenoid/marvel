@@ -11,11 +11,21 @@ sourceSets {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':marvel-core')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':marvel-core')
 
-    compile "io.reactivex:rxjava:${rxjavaVersion}"
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
-    compile "com.google.dagger:dagger:${daggerVersion}"
-    provided "com.google.dagger:dagger-compiler:${daggerVersion}"
+    implementation "io.reactivex:rxjava:$rxjavaVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    provided "com.google.dagger:dagger-compiler:$daggerVersion"
 }

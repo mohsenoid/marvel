@@ -4,17 +4,17 @@ ext {
 
     //Android
     androidSupportVersion = "27.1.1"
-    butterknifeVersion = "8.4.0"
+    butterknifeVersion = "8.8.1"
     rxandroidVersion = "1.2.1"
     okhttpVersion = "3.4.1"
     retrofitVersion = "2.1.0"
-    utilsVersion = "1.0.7"
-    timberVersion = "4.3.1"
+    utilsVersion = "1.0.11"
+    timberVersion = "4.7.0"
     picassoVersion = "2.5.2"
     daggerVersion = "2.8"
     rxbindingVersion = "1.0.0"
     ormLiteVersion = "5.0"
-    firebaseVersion = "9.6.1"
+    firebaseVersion = "16.0.1"
 
     //Java
     rxjavaVersion = "1.2.3"
@@ -23,7 +23,7 @@ ext {
     junitVersion = "4.12"
     dexmakerVersion = "1.2"
     mockitoVersion = "1.10.19"
-    supportTestVesion = "0.5"
-    robolectricVersion = "3.1.1"
+    supportTestVesion = "1.0.2"
+    robolectricVersion = "3.8"
     espressoVersion = "2.2.2"
 }

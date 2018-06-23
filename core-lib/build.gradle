@@ -19,22 +19,22 @@ jacocoTestReport {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    testCompile "junit:junit:$junitVersion"
-    testCompile "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
-    compile "io.reactivex:rxjava:$rxjavaVersion"
+    implementation "io.reactivex:rxjava:$rxjavaVersion"
 
-    compile "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    compile "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    compile "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
 
-    compile "com.squareup.okhttp3:okhttp:$okhttpVersion"
-    compile "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
 
-    compile "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger:$daggerVersion"
     provided "com.google.dagger:dagger-compiler:$daggerVersion"
 
-    compile "com.j256.ormlite:ormlite-core:$ormLiteVersion"
+    implementation "com.j256.ormlite:ormlite-core:$ormLiteVersion"
 }

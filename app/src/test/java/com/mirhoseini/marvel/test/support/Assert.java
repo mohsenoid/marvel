@@ -3,7 +3,6 @@ package com.mirhoseini.marvel.test.support;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.support.annotation.StringRes;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 
 import org.robolectric.shadows.ShadowAlertDialog;
@@ -44,12 +43,4 @@ public class Assert {
         ShadowProgressDialog shadowProgressDialog = shadowOf(alert);
         assertThat(shadowProgressDialog.getTitle().toString(), equalTo(getString(title)));
     }
-
-    public static void assertSnackbarIsShown(@StringRes int message) {
-        Snackbar snackbar = ShadowSnackbar.getLatestSnackbar();
-        ShadowSnackbar shadowSnackbar = ShadowSnackbar.shadowOf(snackbar);
-        assertThat(shadowSnackbar.text, equalTo(getString(message)));
-
-    }
-
 }
