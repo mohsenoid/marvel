@@ -106,3 +106,6 @@ You can read more about this sample project in this 5-part article:
 * [Part 4: RxJava and RxAndroid know how to response](https://medium.com/@mohsenoid/yet-another-mvp-article-part-4-rxjava-and-rxandroid-knows-how-to-response-cde42ccc4958#.pvk5vac37)
 * [Part 5: Writing Test using a mixture of Dagger and Espresso](https://medium.com/@mohsenoid/yet-another-mvp-article-part-5-writing-test-using-a-mixture-of-dagger-and-espresso-15c638182706#.mildke14n)
  
+ and to get exact code at that point checkout this tag:
+ https://github.com/mohsenoid/marvel/releases/tag/Yet-another-MVP-article
+
