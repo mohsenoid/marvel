@@ -1,0 +1,47 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/app
+    docker:
+      - image: circleci/android:api-27-alpha
+    environment:
+      JVM_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - restore_cache:
+          key: ndk-bundle
+      - run: sdkmanager ndk-bundle
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+         name: Chmod permissions
+         command: sudo chmod +x ./gradlew
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Run Tests
+          command: ./gradlew lint test
+      - run:
+          name: Run Code Coverage
+          command: ./gradlew build jacocoTestReport
+      - run:
+          name: Submit Code Coverage results to codecov.io
+          command: bash <(curl -s https://codecov.io/bash)
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+      - store_test_results:
+          path: app/build/test-results
+          destination: tests
+      - run:
+          name: Assemble Stable Release
+          command: ./gradlew assembleRelease
+      - store_artifacts:
+          path: app/build/outputs/apk/
+          destination: apks
