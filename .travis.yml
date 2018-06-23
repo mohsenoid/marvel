@@ -1,14 +1,18 @@
 language: android
 
-sudo: required
+jdk: oraclejdk8
 
-jdk:
-  - oraclejdk8
+sudo: required
 
 env:
   global:
-    - ANDROID_API_LEVEL=27
-    - ANDROID_BUILD_TOOLS_VERSION=27.0.3
+   - ANDROID_API_LEVEL=28
+   - ANDROID_BUILD_TOOLS_VERSION=28.0.0
+   - ANDROID_EMU_API_LEVEL=24
+   - ANDROID_ABI=armeabi-v7a
+
+before_install:
+  - yes | sdkmanager "platforms;android-26"
 
 android:
   components:
@@ -16,41 +20,25 @@ android:
     - platform-tools
     - build-tools-$ANDROID_BUILD_TOOLS_VERSION
     - android-$ANDROID_API_LEVEL
-    - addon-google_apis-google-$ANDROID_API_LEVEL
-    - extra-google-google_play_services
-    - extra-google-m2repository
-    - extra-google-google_play_services
-    - extra-android-m2repository
+    - android-$ANDROID_EMU_API_LEVEL
     - extra-android-support
-    - sys-img-armeabi-v7a-google_apis-21
-  licenses:
-    - '.+'
+    - extra-android-m2repository
+    - extra-google-m2repository
+    - sys-img-$ANDROID_ABI-google_apis-$ANDROID_EMU_API_LEVEL
 
-before_install:
-  - echo y | sudo apt-get update
-  - echo y | sudo apt-get install openjdk-7-jre
-  - export JAVA7_HOME=/usr/lib/jvm/java-7-oracle
-  - export JAVA8_HOME=/usr/lib/jvm/java-8-oracle
-  - export JAVA_HOME=$JAVA8_HOME
+licenses:
+  - '.+'
+
+before_script:
   - chmod +x gradlew
+  - android list targets
+  - echo no | android create avd --force -n test -t android-$ANDROID_EMU_API_LEVEL --abi google_apis/$ANDROID_ABI
+  - emulator -avd test -no-audio -no-window &
+  - android-wait-for-emulator
+  - ./gradlew connectedCheck
+  - adb shell input keyevent 82 &
 
 script:
-  - android list targets
-
-  - echo no | android create avd --force -n testemulator -t "android-21" --abi armeabi-v7a
-  - echo 'vm.heapSize=512' >> ~/.android/avd/testemulator.ini
-  - echo 'hw.ramSize=1024' >> ~/.android/avd/testemulator.ini
-  - cat ~/.android/avd/testemulator.ini
-
-  - emulator -avd testemulator -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
-
-  - adb shell input keyevent 82 &
-  - adb shell svc power stayon true
-  - adb shell settings put global window_animation_scale 0
-  - adb shell settings put global transition_animation_scale 0
-  - adb shell settings put global animator_duration_scale 0
-
   - ./gradlew build createMockDebugCoverageReport jacocoTestReport
 
 after_success:
