@@ -17,7 +17,7 @@ This application was created by [Mohsen Mirhoseini Argi](http://mirhoseini.com),
 --------------------
 ### Development Tools ###
 
-* Android Studio v2.2.1
+* Android Studio v3.1.3
 * gradle-plugin v2.2.1
 * Android SDK Build Tools v25.0.0
 * MinSdkVersion 9

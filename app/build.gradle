@@ -1,18 +1,18 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
-apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.mirhoseini.marvel"
+
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.compileSdkVersion
+
         versionCode 1
         versionName "1.0"
+
         vectorDrawables.useSupportLibrary = true
 
         dataBinding {
@@ -39,11 +39,15 @@ android {
         }
     }
 
+    flavorDimensions "mode"
+
     productFlavors {
         prod {
+            dimension "mode"
         }
 
         mock {
+            dimension "mode"
         }
     }
 
@@ -59,17 +63,6 @@ android {
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
-    }
-
-    /* fixes espresso conflict with supportAnnotation and androidSupport new versions */
-    configurations.all {
-        resolutionStrategy {
-            force rootProject.ext.testLibraries.supportAnnotations
-            force rootProject.ext.libraries.androidSupport
-            force rootProject.ext.libraries.appCompat
-            force rootProject.ext.libraries.designSupport
-            force rootProject.ext.libraries.recyclerView
-        }
     }
 }
 
@@ -100,46 +93,45 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':marvel-core')
 
-    testCompile rootProject.ext.testLibraries.junit
-    testCompile rootProject.ext.testLibraries.robolectric
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.robolectric:robolectric:$robolectricVersion"
 
-    androidTestCompile rootProject.ext.testLibraries.mockito
-    androidTestCompile rootProject.ext.testLibraries.dexmaker
-    androidTestCompile rootProject.ext.testLibraries.dexmakerMockito
-    androidTestCompile rootProject.ext.testLibraries.supportTestRunner
-    androidTestCompile rootProject.ext.testLibraries.supportAnnotations
-    androidTestCompile rootProject.ext.testLibraries.espresso
-    androidTestCompile rootProject.ext.testLibraries.espressoContrib
+    androidTestCompile "org.mockito:mockito-core:$mockitoVersion"
+    androidTestCompile "com.google.dexmaker:dexmaker:$dexmakerVersion"
+    androidTestCompile "com.google.dexmaker:dexmaker-mockito:$dexmakerVersion"
+    androidTestCompile "com.android.support.test:runner:$supportTestVesion"
+    androidTestCompile "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$espressoVersion"
 
-    compile rootProject.ext.libraries.appCompat
-    compile rootProject.ext.libraries.androidSupport
-    compile rootProject.ext.libraries.designSupport
-    compile rootProject.ext.libraries.vectorSupport
-    compile rootProject.ext.libraries.recyclerView
-    compile rootProject.ext.libraries.cardView
-    compile rootProject.ext.libraries.palette
+    compile "com.android.support:appcompat-v7:$androidSupportVersion"
+    compile "com.android.support:support-v4:$androidSupportVersion"
+    compile "com.android.support:support-annotations:$androidSupportVersion"
+    compile "com.android.support:design:$androidSupportVersion"
+    compile "com.android.support:support-vector-drawable:$androidSupportVersion"
+    compile "com.android.support:recyclerview-v7:$androidSupportVersion"
+    compile "com.android.support:cardview-v7:$androidSupportVersion"
+    compile "com.android.support:palette-v7:$androidSupportVersion"
 
-    compile rootProject.ext.libraries.rxandroid
-    compile rootProject.ext.libraries.rxbinding
+    compile "io.reactivex:rxandroid:$rxandroidVersion"
+    compile "com.jakewharton.rxbinding:rxbinding:$rxbindingVersion"
 
-    compile rootProject.ext.libraries.utils
+    compile "com.mirhoseini.utils:utils:$utilsVersion"
 
-    compile rootProject.ext.libraries.picasso
+    compile "com.squareup.picasso:picasso:$picassoVersion"
 
-    compile rootProject.ext.libraries.butterknife
-    apt rootProject.ext.aptLibraries.butterknifeCompiler
+    compile "com.jakewharton:butterknife:$butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 
-    compile rootProject.ext.libraries.dagger
-    apt rootProject.ext.aptLibraries.daggerCompiler
-    androidTestApt rootProject.ext.aptLibraries.daggerCompiler
+    compile "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
 
-    compile rootProject.ext.libraries.timber
+    compile "com.jakewharton.timber:timber:$timberVersion"
 
-    compile rootProject.ext.libraries.ormLite
+    compile "com.j256.ormlite:ormlite-android:$ormLiteVersion"
 
-    compile rootProject.ext.libraries.firebaseCore
-    compile rootProject.ext.libraries.firebaseCrash
-    compile 'com.android.support:support-annotations:25.0.0'
+    compile "com.google.firebase:firebase-core:$firebaseVersion"
+    compile "com.google.firebase:firebase-crash:$firebaseVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'
