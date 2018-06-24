@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import com.mirhoseini.marvel.R;
 import com.squareup.picasso.Picasso;
 
-
 /**
  * Created by Mohsen on 20/10/2016.
  */

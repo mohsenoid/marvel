@@ -1,18 +1,18 @@
 apply plugin: 'com.android.application'
 apply plugin: 'jacoco-android'
-apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.mirhoseini.marvel"
+
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.compileSdkVersion
+
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
+
         vectorDrawables.useSupportLibrary = true
 
         dataBinding {
@@ -39,11 +39,15 @@ android {
         }
     }
 
+    flavorDimensions "mode"
+
     productFlavors {
         prod {
+            dimension "mode"
         }
 
         mock {
+            dimension "mode"
         }
     }
 
@@ -55,21 +59,17 @@ android {
         abortOnError false
     }
 
+    /* allows robolectric to access Android resources */
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
     /* allow using java 8 lambda */
     compileOptions {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
-    }
-
-    /* fixes espresso conflict with supportAnnotation and androidSupport new versions */
-    configurations.all {
-        resolutionStrategy {
-            force rootProject.ext.testLibraries.supportAnnotations
-            force rootProject.ext.libraries.androidSupport
-            force rootProject.ext.libraries.appCompat
-            force rootProject.ext.libraries.designSupport
-            force rootProject.ext.libraries.recyclerView
-        }
     }
 }
 
@@ -97,49 +97,57 @@ jacocoAndroidUnitTestReport {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':marvel-core')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':marvel-core')
 
-    testCompile rootProject.ext.testLibraries.junit
-    testCompile rootProject.ext.testLibraries.robolectric
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
 
-    androidTestCompile rootProject.ext.testLibraries.mockito
-    androidTestCompile rootProject.ext.testLibraries.dexmaker
-    androidTestCompile rootProject.ext.testLibraries.dexmakerMockito
-    androidTestCompile rootProject.ext.testLibraries.supportTestRunner
-    androidTestCompile rootProject.ext.testLibraries.supportAnnotations
-    androidTestCompile rootProject.ext.testLibraries.espresso
-    androidTestCompile rootProject.ext.testLibraries.espressoContrib
+    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
+    androidTestImplementation "com.google.dexmaker:dexmaker:$dexmakerVersion"
+    androidTestImplementation "com.google.dexmaker:dexmaker-mockito:$dexmakerVersion"
+    androidTestImplementation "com.android.support:support-annotations:$androidSupportVersion"
+    androidTestImplementation "com.android.support.test:runner:$supportTestVesion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espressoVersion"
 
-    compile rootProject.ext.libraries.appCompat
-    compile rootProject.ext.libraries.androidSupport
-    compile rootProject.ext.libraries.designSupport
-    compile rootProject.ext.libraries.vectorSupport
-    compile rootProject.ext.libraries.recyclerView
-    compile rootProject.ext.libraries.cardView
-    compile rootProject.ext.libraries.palette
+    implementation "com.android.support:appcompat-v7:$androidSupportVersion"
+    implementation "com.android.support:support-v4:$androidSupportVersion"
+    implementation "com.android.support:design:$androidSupportVersion"
+    implementation "com.android.support:support-vector-drawable:$androidSupportVersion"
+    implementation "com.android.support:recyclerview-v7:$androidSupportVersion"
+    implementation "com.android.support:cardview-v7:$androidSupportVersion"
+    implementation "com.android.support:palette-v7:$androidSupportVersion"
 
-    compile rootProject.ext.libraries.rxandroid
-    compile rootProject.ext.libraries.rxbinding
+    implementation "io.reactivex:rxandroid:$rxandroidVersion"
+    implementation "com.jakewharton.rxbinding:rxbinding:$rxbindingVersion"
 
-    compile rootProject.ext.libraries.utils
+    implementation "com.mirhoseini.utils:utils:$utilsVersion"
 
-    compile rootProject.ext.libraries.picasso
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
 
-    compile rootProject.ext.libraries.butterknife
-    apt rootProject.ext.aptLibraries.butterknifeCompiler
+    implementation "com.jakewharton:butterknife:$butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 
-    compile rootProject.ext.libraries.dagger
-    apt rootProject.ext.aptLibraries.daggerCompiler
-    androidTestApt rootProject.ext.aptLibraries.daggerCompiler
+    implementation "io.reactivex:rxjava:$rxjavaVersion"
 
-    compile rootProject.ext.libraries.timber
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
 
-    compile rootProject.ext.libraries.ormLite
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
 
-    compile rootProject.ext.libraries.firebaseCore
-    compile rootProject.ext.libraries.firebaseCrash
-    compile 'com.android.support:support-annotations:25.0.0'
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    implementation "com.j256.ormlite:ormlite-android:$ormLiteVersion"
+
+    implementation "com.google.firebase:firebase-core:$firebaseVersion"
+    implementation "com.google.firebase:firebase-crash:$firebaseVersion"
 }
 
 apply plugin: 'com.google.gms.google-services'

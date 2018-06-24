@@ -1,5 +1,4 @@
 apply plugin: 'java'
-apply plugin: 'me.tatarka.retrolambda'
 
 configurations {
     provided
@@ -11,20 +10,22 @@ sourceSets {
     }
 }
 
-retrolambda {
-    jdk System.getenv("JAVA_HOME")
-    oldJdk System.getenv("JAVA7_HOME")
-    javaVersion JavaVersion.VERSION_1_7
-    defaultMethods false
-    incremental true
-}
-
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':marvel-core')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':marvel-core')
 
-    compile rootProject.ext.libraries.rxjava
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
-    compile rootProject.ext.libraries.dagger
-    provided rootProject.ext.aptLibraries.daggerCompiler
+    implementation "io.reactivex:rxjava:$rxjavaVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    provided "com.google.dagger:dagger-compiler:$daggerVersion"
 }

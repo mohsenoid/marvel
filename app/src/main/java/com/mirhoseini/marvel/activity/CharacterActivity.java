@@ -18,6 +18,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
+/**
+ * Created by Mohsen on 21/10/2016.
+ */
+
 public class CharacterActivity extends BaseActivity {
 
     private static final String ARG_CHARACTER = "characterModel";

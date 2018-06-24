@@ -1,8 +1,6 @@
 package com.mirhoseini.marvel.activity;
 
 import com.mirhoseini.marvel.BuildConfig;
-import com.mirhoseini.marvel.R;
-import com.mirhoseini.marvel.test.support.ShadowSnackbar;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,35 +10,32 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
 
-import static com.mirhoseini.marvel.test.support.Assert.assertSnackbarIsShown;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
-
 
 /**
  * Created by Mohsen on 21/10/2016.
  */
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21, shadows = {ShadowSnackbar.class})
+@Config(constants = BuildConfig.class)
 public class MainActivityRobolectricTest {
 
     private final static String TEST_TEXT = "This is a test text.";
     private MainActivity activity;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         activity = Robolectric.setupActivity(MainActivity.class);
 
         assertNotNull(activity);
     }
 
     @Test
-    public void testShowToastMessage() throws Exception {
+    public void testShowToastMessage() {
         activity.showMessage(TEST_TEXT);
 
         assertThat(TEST_TEXT, equalTo(ShadowToast.getTextOfLatestToast()));
     }
-
 }

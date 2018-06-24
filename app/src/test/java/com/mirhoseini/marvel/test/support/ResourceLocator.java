@@ -13,5 +13,4 @@ public class ResourceLocator {
     public static String getString(@StringRes int id) {
         return RuntimeEnvironment.application.getString(id);
     }
-
 }

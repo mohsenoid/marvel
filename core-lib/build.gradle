@@ -1,6 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'jacoco'
-apply plugin: 'me.tatarka.retrolambda'
 
 configurations {
     provided
@@ -19,30 +18,23 @@ jacocoTestReport {
     }
 }
 
-retrolambda {
-    jdk System.getenv("JAVA_HOME")
-    oldJdk System.getenv("JAVA7_HOME")
-    javaVersion JavaVersion.VERSION_1_7
-    defaultMethods false
-    incremental true
-}
-
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile rootProject.ext.libraries.rxjava
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    testCompile rootProject.ext.testLibraries.junit
-    testCompile rootProject.ext.testLibraries.mockito
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
-    compile rootProject.ext.libraries.retrofit
-    compile rootProject.ext.libraries.retrofitConverter
-    compile rootProject.ext.libraries.retrofitAdapter
+    implementation "io.reactivex:rxjava:$rxjavaVersion"
 
-    compile rootProject.ext.libraries.okhttp
-    compile rootProject.ext.libraries.okhttpLogging
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
 
-    compile rootProject.ext.libraries.dagger
-    provided rootProject.ext.aptLibraries.daggerCompiler
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
 
-    compile rootProject.ext.libraries.ormLiteCore
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    provided "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    implementation "com.j256.ormlite:ormlite-core:$ormLiteVersion"
 }
