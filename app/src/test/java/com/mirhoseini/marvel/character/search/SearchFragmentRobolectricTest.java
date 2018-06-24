@@ -3,7 +3,6 @@ package com.mirhoseini.marvel.character.search;
 import com.mirhoseini.marvel.BuildConfig;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.activity.MainActivity;
-import com.mirhoseini.marvel.test.support.ShadowSnackbar;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,25 +13,23 @@ import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowToast;
 
 import static com.mirhoseini.marvel.test.support.Assert.assertProgressDialogIsShown;
-import static com.mirhoseini.marvel.test.support.Assert.assertSnackbarIsShown;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 /**
  * Created by Mohsen on 21/10/2016.
  */
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21, shadows = {ShadowSnackbar.class})
+@Config(constants = BuildConfig.class)
 public class SearchFragmentRobolectricTest {
 
     private MainActivity activity;
     private SearchFragment fragment;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         // setup activity
         activity = Robolectric.setupActivity(MainActivity.class);
         assertNotNull(activity);
@@ -44,14 +41,14 @@ public class SearchFragmentRobolectricTest {
     }
 
     @Test
-    public void testShowProgress() throws Exception {
+    public void testShowProgress() {
         fragment.showProgress();
 
         assertProgressDialogIsShown(R.string.please_wait);
     }
 
     @Test
-    public void testHideProgress() throws Exception {
+    public void testHideProgress() {
         fragment.showProgress();
         fragment.hideProgress();
 
@@ -59,10 +56,9 @@ public class SearchFragmentRobolectricTest {
     }
 
     @Test
-    public void testShowQueryNoResult() throws Exception {
+    public void testShowQueryNoResult() {
         fragment.showQueryNoResult();
 
         assertThat(activity.getString(R.string.no_result), equalTo(ShadowToast.getTextOfLatestToast()));
     }
-    
 }
