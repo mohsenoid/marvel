@@ -2,14 +2,14 @@ Marvel Application [![CircleCI](https://circleci.com/gh/mohsenoid/marvel.svg?sty
 ===============================
 
 This repository holds the source code of the Marvel Application, a simple Android client for the [Marvel.com](http://marvel.com).
-This application was created by [Mohsen Mirhoseini Argi](http://mirhoseini.com), as part of the technical assessment by the [smava GmbH](https://www.smava.de) team.
+This application was created by [Mohsen Mirhoseini](http://mohsenoid.com), as part of the technical assessment by the [smava GmbH](https://www.smava.de) team. It also has been used as a sample project for a series of technical articles and tutorials.
 
 --------------------
 ### What is this repository for? ###
 
 * Marvel Application
-*       Version:  1.0
-* Last Update: Fri Oct 21, 2016
+* Version:  1.0.0
+* Last Update: Sun June 24, 2016
 
 ![Screenshot](screenshot2.png)
 ![Screenshot](screenshot3.png)
@@ -18,56 +18,55 @@ This application was created by [Mohsen Mirhoseini Argi](http://mirhoseini.com),
 ### Development Tools ###
 
 * Android Studio v3.1.3
-* gradle-plugin v2.2.1
-* Android SDK Build Tools v25.0.0
-* MinSdkVersion 9
-* CompileSDKVersion 25
-* Retrolambda v3.3.1
+* gradle-plugin v4.4
+* Android SDK Build Tools v27.1.1
+* MinSdkVersion 14
+* CompileSDKVersion 27
 
 --------------------
 ### Dependencies ###
 
-* Android Support Tools (recyclerView, cardView, vector, palette,... ) v25.0.0
+* Android Support Tools (recyclerView, cardView, vector, palette,... ) v27.1.1
 * Retrofit v2.1.0
 * OkHttp v3.4.1
 * Dagger v2.8
 * RxJava v1.2.3
 * RxAndroid v1.2.1
 * RxBinding v1.0.0
-* ButterKnife v8.4.0
-* Timber v4.3.1
+* ButterKnife v8.8.1
+* Timber v4.7.0
 * Picasso v2.5.2
 * OrmLite v5.0
-* Firebase v9.6.1
-* AndroidUtils v1.0.7
+* Firebase v16.0.1
+* AndroidUtils v1.0.11
 * jUnit v4.12
-* Android Support Test v0.5
+* Android Support Test v1.0.2
 * Mockito v1.10.19
-* Robolectric v3.1-rc1
+* Robolectric v3.8
 * Espresso v2.2.2
 
 --------------------
 ### Important Notes ###
 
-The application has two Activities, Main and Character Activities. The Main Activity is consist of two Fragments, Search and Cache Fragments, which are responsible for searching new Mavel characters and presenting recent searched characters.
+The application includes two Activities, Main and Character Activities. The Main Activity is consist of two Fragments, Search and Cache Fragments, which are responsible for searching new Marvel characters and presenting recently searched characters.
 
-All activity lifecycle and network behaviours are implemented, and according to device size and network situation user get a good UI and UX. If no internet connection or network error, a Snackbar pops up and ask user to turn on network connection or retry.
+All activity lifecycle and network behaviors are implemented, and according to device size and network situation user get a good UI and UX. If no internet connection or network error, a Snackbar pops up and ask the user to turn on the network connection or retry.
 
 Some simple Test Cases was designed to test application UI functionality and core classes using jUnit and AndroidUnitTest.
 
 ### Application Structure ###
 
-The Application implemented and structured bases on the MVP pattern best practice, contributed by [Antonio Leiva](http://antonioleiva.com/mvp-android/).
+The Application implemented and structured based on the MVP pattern best practice, contributed by [Antonio Leiva](http://antonioleiva.com/mvp-android/).
 
-Whole application functionality is implemented in "Core-Lib" module using pure Java, and the "App" module contain all codes required for Android Application to load on Android OS, which can be replace by any other interface (e.g. console app or web app)
+Whole application functionality is implemented in "Core-Lib" module using pure Java, and the "App" module contains all codes required for Android Application to load on Android OS, which can be replaced by any other interface (e.g. console app or web app)
 
 The **view** (MainActivity), contain two fragments. Search and Cache fragments both contain their own presenter and implement View interfaces and the only thing that the view will do is calling a method from the presenter every time there is an interface action.
 
-The **presenter** (Search or Cache Presenters), are responsible to act as the middle man between views and models. They retrieves data from the Model or Database and returns it formatted to the view. It also decides what happens when user interact with the view.
+The **presenter** (Search or Cache Presenters), are responsible to act as the middleman between views and models. They retrieve data from Backend or Database and returns it formatted to the view. It also decides what should happens when user interacts with the view.
 
-The **models** (Search Interactor), would only be the gateway to the service domain layer or business logic. In this case it provide the data needed to be displayed in the view from Network.
+The **models** (Search Interactor), would only be the gateway to the service domain layer or business logic. In this case, it provides the data needed to be displayed in the view from Network.
 
-The networking and API call are managed by [Retrofit](http://square.github.io/retrofit/) and OkHttp as its httpclient, contributed by [Square](http://square.github.io). It also shows decent logs while application is running in Debug mode. 
+The networking and API calls are managed by [Retrofit](http://square.github.io/retrofit/) and OkHttp as its httpclient, contributed by [Square](http://square.github.io). It also shows decent logs while the application is running in Debug mode. 
 
 Caching characters data is done using [OrmLite](http://ormlite.com), a Lightweight Object Relational Mapping (ORM) Java Package. Database layer can also be done using other ORM libraries like [realm](https://realm.io) or [DBFlow](https://github.com/Raizlabs/DBFlow). 
 
@@ -81,9 +80,9 @@ Some minor Android common functions are managed using [AndroidUtils](https://git
 
 Whole projects Dependencies are placed in "libraries.gradle" to avoid version conflicts and redundant in different modules.
 
-Used new DataBinding library contributed by Google in Adapters for faster development, and added CustomBindingAdapter to handle downloading and caching images using [Picasso](http://square.github.io/picasso/) library, which also use google [Palette](https://developer.android.com/topic/libraries/support-library/features.html#v7-palette) support library as a helper class to extract prominent colors from image and making a related background for a better UI/UX.
+Used new DataBinding library contributed by Google in Adapters for faster development, and added CustomBindingAdapter to handle downloading and caching images using [Picasso](http://square.github.io/picasso/) library, which also use Google [Palette](https://developer.android.com/topic/libraries/support-library/features.html#v7-palette) support library as a helper class to extract prominent colors from image and making a related background for a better UI/UX.
 
-The Android Log system is replaced with [Timber](https://github.com/JakeWharton/timber) contributed by Jake Wharton, which avoid logging in release version.
+The Android Log system is replaced with [Timber](https://github.com/JakeWharton/timber) contributed by Jake Wharton, which avoids logging in the release version.
 
 A general HashGenerator class generates the hash key required for calling API using params.
 
@@ -106,6 +105,6 @@ You can read more about this sample project in this 5-part article:
 * [Part 4: RxJava and RxAndroid know how to response](https://medium.com/@mohsenoid/yet-another-mvp-article-part-4-rxjava-and-rxandroid-knows-how-to-response-cde42ccc4958#.pvk5vac37)
 * [Part 5: Writing Test using a mixture of Dagger and Espresso](https://medium.com/@mohsenoid/yet-another-mvp-article-part-5-writing-test-using-a-mixture-of-dagger-and-espresso-15c638182706#.mildke14n)
  
- and to get exact code at that point checkout this tag:
+ and to get the exact code at that point check out this tag:
  https://github.com/mohsenoid/marvel/releases/tag/Yet-another-MVP-article
 
