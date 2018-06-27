@@ -38,7 +38,7 @@ public class CustomBindingAdapter {
     public static abstract class PaletteCallback implements com.squareup.picasso.Callback {
         private final ImageView target;
 
-        public PaletteCallback(final ImageView t) {
+        PaletteCallback(final ImageView t) {
             target = t;
         }
 

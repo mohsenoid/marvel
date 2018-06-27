@@ -9,11 +9,9 @@ import com.mirhoseini.marvel.util.SchedulerProvider;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collections;
-
-import rx.Observable;
-import rx.observers.TestSubscriber;
-import rx.schedulers.Schedulers;
+import io.reactivex.Single;
+import io.reactivex.observers.TestObserver;
+import io.reactivex.schedulers.Schedulers;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -51,13 +49,13 @@ public class SearchInteractorTest {
 
         // mock scheduler to run immediately
         when(scheduler.mainThread())
-                .thenReturn(Schedulers.immediate());
+                .thenReturn(Schedulers.trampoline());
         when(scheduler.backgroundThread())
-                .thenReturn(Schedulers.immediate());
+                .thenReturn(Schedulers.trampoline());
 
         // mock api result with expected result
         when(api.getCharacters(any(String.class), any(String.class), any(String.class), any(Long.class)))
-                .thenReturn(Observable.just(expectedResult));
+                .thenReturn(Single.just(expectedResult));
 
         // create a real new interactor using mocked api and scheduler
         interactor = new SearchInteractorImpl(api, scheduler);
@@ -65,7 +63,7 @@ public class SearchInteractorTest {
 
     @Test
     public void testLoadCharacters() throws Exception {
-        TestSubscriber<CharactersResponse> testSubscriber = new TestSubscriber<>();
+        TestObserver<CharactersResponse> testSubscriber = new TestObserver<>();
 
         // call interactor with some random params
         interactor.loadCharacter("query", "privateKey", "publicKey", 1)
@@ -73,6 +71,6 @@ public class SearchInteractorTest {
 
         // it must return the expectedResult with no error
         testSubscriber.assertNoErrors();
-        testSubscriber.assertReceivedOnNext(Collections.singletonList(expectedResult));
+        testSubscriber.assertResult(expectedResult);
     }
 }

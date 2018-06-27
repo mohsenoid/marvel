@@ -9,9 +9,9 @@ import java.sql.SQLException;
 
 import javax.inject.Inject;
 
-import rx.Subscription;
-import rx.exceptions.Exceptions;
-import rx.subscriptions.Subscriptions;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.exceptions.Exceptions;
+
 
 /**
  * Created by Mohsen on 20/10/2016.
@@ -21,11 +21,12 @@ class SearchPresenterImpl implements SearchPresenter {
 
     @Inject
     SearchInteractor interactor;
+
     @Inject
     DatabaseHelper databaseHelper;
 
     private SearchView view;
-    private Subscription subscription = Subscriptions.empty();
+    private Disposable disposable;
     private SchedulerProvider scheduler;
 
     @Inject
@@ -45,7 +46,7 @@ class SearchPresenterImpl implements SearchPresenter {
             view.showProgress();
         }
 
-        subscription = interactor.loadCharacter(query, Constants.PRIVATE_KEY, Constants.PUBLIC_KEY, timestamp)
+        disposable = interactor.loadCharacter(query, Constants.PRIVATE_KEY, Constants.PUBLIC_KEY, timestamp)
                 // check if result code is OK
                 .map(charactersResponse -> {
                     if (Constants.CODE_OK == charactersResponse.getCode())
@@ -119,8 +120,8 @@ class SearchPresenterImpl implements SearchPresenter {
 
     @Override
     public void unbind() {
-        if (subscription != null && !subscription.isUnsubscribed())
-            subscription.unsubscribe();
+        if (disposable != null && !disposable.isDisposed())
+            disposable.dispose();
 
         interactor.unbind();
 

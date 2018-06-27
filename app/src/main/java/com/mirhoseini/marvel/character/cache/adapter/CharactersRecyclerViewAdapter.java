@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.jakewharton.rxbinding.view.RxView;
+import com.jakewharton.rxbinding2.view.RxView;
 import com.mirhoseini.marvel.R;
 import com.mirhoseini.marvel.database.model.CharacterModel;
 
@@ -15,8 +15,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import rx.Observable;
-import rx.subjects.PublishSubject;
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
+
 
 /**
  * Created by Mohsen on 20/10/2016.
@@ -56,7 +57,7 @@ public class CharactersRecyclerViewAdapter extends RecyclerView.Adapter<Characte
     }
 
     public Observable<CharacterModel> asObservable() {
-        return notify.asObservable();
+        return notify.hide();
     }
 
     @Override

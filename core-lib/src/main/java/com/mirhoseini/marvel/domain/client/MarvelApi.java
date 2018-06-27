@@ -1,11 +1,10 @@
 package com.mirhoseini.marvel.domain.client;
 
-
 import com.mirhoseini.marvel.domain.model.CharactersResponse;
 
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import rx.Observable;
 
 /**
  * Created by Mohsen on 20/10/2016.
@@ -19,7 +18,7 @@ public interface MarvelApi {
 
     // http://gateway.marvel.com:80/v1/public/characters?name=Iron%20Man&apikey=PUBLIC_API_KEY&hash=HASH&ts=TIMESTAMP
     @GET("v1/public/characters")
-    Observable<CharactersResponse> getCharacters(
+    Single<CharactersResponse> getCharacters(
             @Query(NAME) String query,
             @Query(API_KEY) String publicKey,
             @Query(HASH) String hash,
