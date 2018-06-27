@@ -8,8 +8,8 @@ This application was created by [Mohsen Mirhoseini](http://mohsenoid.com), as pa
 ### What is this repository for? ###
 
 * Marvel Application
-* Version:  1.0.0
-* Last Update: Sun June 24, 2016
+* Version:  1.0.1
+* Last Update: Wed June 27, 2018
 
 ![Screenshot](screenshot2.png)
 ![Screenshot](screenshot3.png)
@@ -30,9 +30,9 @@ This application was created by [Mohsen Mirhoseini](http://mohsenoid.com), as pa
 * Retrofit v2.1.0
 * OkHttp v3.4.1
 * Dagger v2.8
-* RxJava v1.2.3
-* RxAndroid v1.2.1
-* RxBinding v1.0.0
+* RxJava2 v2.1.13
+* RxAndroid v2.0.2
+* RxBinding v2.1.1
 * ButterKnife v8.8.1
 * Timber v4.7.0
 * Picasso v2.5.2
@@ -107,4 +107,3 @@ You can read more about this sample project in this 5-part article:
  
  and to get the exact code at that point check out this tag:
  https://github.com/mohsenoid/marvel/releases/tag/Yet-another-MVP-article
-
