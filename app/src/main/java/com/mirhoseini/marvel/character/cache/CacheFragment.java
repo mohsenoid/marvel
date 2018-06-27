@@ -23,9 +23,9 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Observable;
-import rx.subjects.PublishSubject;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.Observable;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.subjects.PublishSubject;
 import timber.log.Timber;
 
 /**
@@ -49,7 +49,7 @@ public class CacheFragment extends BaseFragment implements CacheView {
     @BindView(R.id.empty)
     ViewGroup empty;
 
-    CompositeSubscription subscriptions = new CompositeSubscription();
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
     GridLayoutManager gridLayoutManager;
     GridSpacingItemDecoration gridSpacingItemDecoration;
 
@@ -75,7 +75,7 @@ public class CacheFragment extends BaseFragment implements CacheView {
 
         presenter.bind(this);
 
-        subscriptions.add(
+        compositeDisposable.add(
                 adapter.asObservable()
                         .subscribe(notifyCharacter::onNext));
     }
@@ -112,7 +112,7 @@ public class CacheFragment extends BaseFragment implements CacheView {
 
         presenter.unbind();
 
-        subscriptions.unsubscribe();
+        compositeDisposable.dispose();
     }
 
     @Override
@@ -170,15 +170,15 @@ public class CacheFragment extends BaseFragment implements CacheView {
     }
 
     public Observable<CharacterModel> characterObservable() {
-        return notifyCharacter.asObservable();
+        return notifyCharacter.hide();
     }
 
     public Observable<String> messageObservable() {
-        return notifyMessage.asObservable();
+        return notifyMessage.hide();
     }
 
     public Observable<Boolean> offlineObservable() {
-        return notifyOffline.asObservable();
+        return notifyOffline.hide();
     }
 
 }

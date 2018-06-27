@@ -1,6 +1,5 @@
 package com.mirhoseini.marvel.character.search;
 
-
 import com.mirhoseini.marvel.domain.client.MarvelApi;
 import com.mirhoseini.marvel.domain.model.CharactersResponse;
 import com.mirhoseini.marvel.util.HashGenerator;
@@ -8,9 +7,10 @@ import com.mirhoseini.marvel.util.SchedulerProvider;
 
 import javax.inject.Inject;
 
-import rx.Observable;
-import rx.Subscription;
-import rx.subjects.ReplaySubject;
+import io.reactivex.Single;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.SingleSubject;
+
 
 /**
  * Created by Mohsen on 20/10/2016.
@@ -22,8 +22,8 @@ class SearchInteractorImpl implements SearchInteractor {
     private MarvelApi api;
     private SchedulerProvider scheduler;
 
-    private ReplaySubject<CharactersResponse> characterSubject;
-    private Subscription characterSubscription;
+    private SingleSubject<CharactersResponse> characterSubject;
+    private Disposable characterSubscription;
 
     @Inject
     SearchInteractorImpl(MarvelApi api, SchedulerProvider scheduler) {
@@ -32,29 +32,28 @@ class SearchInteractorImpl implements SearchInteractor {
     }
 
     @Override
-    public Observable<CharactersResponse> loadCharacter(String query,
-                                                        String privateKey,
-                                                        String publicKey,
-                                                        long timestamp) {
-        if (characterSubscription == null || characterSubscription.isUnsubscribed()) {
-            characterSubject = ReplaySubject.create();
+    public Single<CharactersResponse> loadCharacter(String query,
+                                                    String privateKey,
+                                                    String publicKey,
+                                                    long timestamp) {
+        if (characterSubscription == null || characterSubscription.isDisposed()) {
+            characterSubject = SingleSubject.create();
 
             // generate hash using timestamp and API keys
             String hash = HashGenerator.generate(timestamp, privateKey, publicKey);
 
             characterSubscription = api.getCharacters(query, publicKey, hash, timestamp)
                     .subscribeOn(scheduler.backgroundThread())
-                    .subscribe(characterSubject);
+                    .subscribe(characterSubject::onSuccess);
         }
 
-        return characterSubject.asObservable();
+        return characterSubject.hide();
     }
 
 
     @Override
     public void unbind() {
-        if (characterSubscription != null && !characterSubscription.isUnsubscribed())
-            characterSubscription.unsubscribe();
+        if (characterSubscription != null && !characterSubscription.isDisposed())
+            characterSubscription.dispose();
     }
-
 }

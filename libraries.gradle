@@ -5,19 +5,20 @@ ext {
     //Android
     androidSupportVersion = "27.1.1"
     butterknifeVersion = "8.8.1"
-    rxandroidVersion = "1.2.1"
+    rxandroidVersion = "2.0.2"
     okhttpVersion = "3.4.1"
     retrofitVersion = "2.1.0"
+    retrofitAdapterVersion = "1.0.0"
     utilsVersion = "1.0.11"
     timberVersion = "4.7.0"
     picassoVersion = "2.5.2"
     daggerVersion = "2.8"
-    rxbindingVersion = "1.0.0"
+    rxbindingVersion = "2.1.1"
     ormLiteVersion = "5.0"
     firebaseVersion = "16.0.1"
 
     //Java
-    rxjavaVersion = "1.2.3"
+    rxjavaVersion = "2.1.13"
 
     //Testing
     junitVersion = "4.12"

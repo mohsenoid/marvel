@@ -1,6 +1,6 @@
 package com.mirhoseini.marvel.util;
 
-import rx.Scheduler;
+import io.reactivex.Scheduler;
 
 /**
  * Created by Mohsen on 20/10/2016.

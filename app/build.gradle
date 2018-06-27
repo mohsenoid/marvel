@@ -119,8 +119,9 @@ dependencies {
     implementation "com.android.support:cardview-v7:$androidSupportVersion"
     implementation "com.android.support:palette-v7:$androidSupportVersion"
 
-    implementation "io.reactivex:rxandroid:$rxandroidVersion"
-    implementation "com.jakewharton.rxbinding:rxbinding:$rxbindingVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding:$rxbindingVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
 
     implementation "com.mirhoseini.utils:utils:$utilsVersion"
 
@@ -129,11 +130,9 @@ dependencies {
     implementation "com.jakewharton:butterknife:$butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
 
-    implementation "io.reactivex:rxjava:$rxjavaVersion"
-
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofitVersion"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$retrofitAdapterVersion"
 
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"

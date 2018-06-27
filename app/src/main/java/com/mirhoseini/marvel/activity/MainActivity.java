@@ -22,7 +22,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.disposables.CompositeDisposable;
 import timber.log.Timber;
 
 /**
@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    CompositeSubscription subscriptions;
+    CompositeDisposable compositeDisposable;
     private SearchFragment searchFragment;
     private CacheFragment cacheFragment;
 
@@ -91,10 +91,10 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        if (null == subscriptions || subscriptions.isUnsubscribed())
-            subscriptions = new CompositeSubscription();
+        if (null == compositeDisposable || compositeDisposable.isDisposed())
+            compositeDisposable = new CompositeDisposable();
 
-        subscriptions.addAll(
+        compositeDisposable.addAll(
                 searchFragment.characterObservable()
                         .subscribe(this::showCharacter),
                 searchFragment.messageObservable()
@@ -134,7 +134,7 @@ public class MainActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
 
-        subscriptions.unsubscribe();
+        compositeDisposable.dispose();
     }
 
     @Override

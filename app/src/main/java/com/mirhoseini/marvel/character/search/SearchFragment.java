@@ -30,8 +30,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnEditorAction;
-import rx.Observable;
-import rx.subjects.PublishSubject;
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
 import timber.log.Timber;
 
 /**
@@ -227,15 +227,15 @@ public class SearchFragment extends BaseFragment implements SearchView {
     }
 
     public Observable<CharacterModel> characterObservable() {
-        return notifyCharacter.asObservable();
+        return notifyCharacter.hide();
     }
 
     public Observable<String> messageObservable() {
-        return notifyMessage.asObservable();
+        return notifyMessage.hide();
     }
 
     public Observable<Boolean> offlineObservable() {
-        return notifyOffline.asObservable();
+        return notifyOffline.hide();
     }
 
 }
